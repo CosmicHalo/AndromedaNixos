@@ -7,12 +7,12 @@
   ...
 }:
 with lib;
-with lib.andromeda; let
-  cfg = config.andromeda.system.configuration;
+with lib.milkyway; let
+  cfg = config.milkyway.system.configuration;
 
   usLocale = "en_US.UTF-8";
 in {
-  options.andromeda.system.configuration = with types; {
+  options.milkyway.system.configuration = with types; {
     enable = mkBoolOpt true "Whether or not to enable common system features.";
     nodocs = mkBoolOpt true "Whether or not to disable documentation.";
 

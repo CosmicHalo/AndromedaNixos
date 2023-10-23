@@ -5,13 +5,12 @@
   ...
 }:
 with lib;
-with lib.andromeda; let
-  cfg = config.andromeda.system.env;
+with lib.milkyway; let
+  cfg = config.milkyway.system.env;
 in {
-  options.andromeda.system.env = with types;
+  options.milkyway.system.env = with types;
     mkOption {
       default = {};
-
       type = attrsOf (oneOf [str path (listOf (either str path))]);
       apply = mapAttrs (_n: v:
         if isList v
@@ -55,9 +54,9 @@ in {
       ];
     };
 
-    # galaxy.home.extraOptions.home.sessionPath = [
-    #   "$HOME/.local/bin"
-    #   "/usr/local/bin"
-    # ];
+    andromeda.home.extraOptions.home.sessionPath = [
+      "$HOME/.local/bin"
+      "/usr/local/bin"
+    ];
   };
 }

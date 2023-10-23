@@ -2,53 +2,71 @@
   description = "A highly awesome system configuration.";
 
   outputs = inputs @ {andromeda-lib, ...}: let
-    snowfall = {
-      namespace = "andromeda";
-      meta = {
-        name = "andromeda";
-        title = "Andromeda Galaxy";
-      };
-    };
-  in
-    andromeda-lib.mkFlake {
-      inherit inputs snowfall;
+    milkyway-lib = {
+      inherit inputs;
       src = ./.;
 
-      channels-config = {
-        allowUnfree = true;
-        input-fonts.acceptLicense = true;
-      };
-
-      overlays = with inputs; [
-        devshell.overlays.default
-        neovim-nightly-overlay.overlay
-      ];
-
-      systems = {
-        modules.nixos = with inputs; [
-          # rust-overlay.overlays.default
-          nix-index-database.nixosModules.nix-index
-        ];
-      };
-
-      outputs-builder = channels: {
-        formatter = channels.nixpkgs.alejandra;
-
-        checks.pre-commit-check = inputs.pre-commit-hooks.lib.${channels.unstable.system}.run {
-          src = ./.;
-          hooks = {
-            alejandra.enable = true;
-            deadnix.enable = true;
-            gptcommit.enable = true;
-            nil.enable = true;
-            pre-commit-hook-ensure-sops.enable = true;
-            prettier.enable = true;
-            statix.enable = true;
-            yamllint.enable = true;
-          };
+      andromeda = {
+        namespace = "milkyway";
+        meta = {
+          name = "milkyway";
+          title = "MilkyWay Galaxy";
         };
       };
     };
+  in
+    andromeda-lib.mkFlake (milkyway-lib
+      // {
+        channels-config = {
+          allowUnfree = true;
+          input-fonts.acceptLicense = true;
+        };
+
+        ###########
+        # OVERLAYS
+        ###########
+        overlays = with inputs; [
+          devshell.overlays.default
+          neovim-nightly-overlay.overlay
+        ];
+
+        ##########
+        # SYSTEMS
+        ##########
+        systems = {
+          modules.nixos = with inputs; [
+            nix-index-database.nixosModules.nix-index
+          ];
+        };
+
+        ##########
+        # ALIAS
+        ##########
+        alias = {
+          shells.default = "universe";
+        };
+
+        ##########
+        # Outputs
+        ##########
+        outputs-builder = channels: {
+          formatter = channels.nixpkgs.alejandra;
+
+          checks.pre-commit-check = inputs.pre-commit-hooks.lib.${channels.nixpkgs.system}.run {
+            src = ./.;
+            hooks = {
+              alejandra.enable = true;
+              deadnix.enable = true;
+              gptcommit.enable = true;
+              nil.enable = true;
+              pre-commit-hook-ensure-sops.enable = true;
+              prettier.enable = true;
+              statix.enable = true;
+              yamllint.enable = true;
+            };
+          };
+        };
+      });
 
   #**********
   #* CORE
@@ -109,26 +127,9 @@
   #* SHELL
   #*********
   inputs = {
-    # Replacement for ls
-    eza = {
-      url = "github:eza-community/eza";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
     };
   };
 

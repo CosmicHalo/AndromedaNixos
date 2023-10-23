@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}:
+with lib.milkyway; {
   home.packages = with pkgs; [
     neovim
     firefox
@@ -13,4 +18,10 @@
   };
 
   home.stateVersion = "23.11";
+
+  milkyway = {
+    shell = {
+      zsh = enabled;
+    };
+  };
 }

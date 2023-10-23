@@ -4,7 +4,7 @@
   ...
 }:
 with lib;
-with lib.andromeda; {
+with lib.milkyway; {
   imports = with inputs; [
     nixos-hardware.nixosModules.common-gpu-amd
     nixos-hardware.nixosModules.common-cpu-amd
@@ -19,33 +19,46 @@ with lib.andromeda; {
   system.stateVersion = mkDefault "23.11";
   nixpkgs.hostPlatform = mkDefault "x86_64-linux";
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   ### CONFIG    #############################################
 
-  andromeda = {
+  milkyway = {
     ### HARDWARE    ###############################################
 
+    hardware = {
+      amd = enabled;
+      bluetooth = enabled;
+      btrfs = enabled;
+
+      audio = {
+        enable = true;
+        pipewire = disabled;
+      };
+
+      # Hostname & hostId for ZFS
+      networking = {
+        enable = true;
+        hostName = "supernova";
+      };
+
+      # performance-tweaks = {
+      #   enable = true;
+      #   zramSwap = enabled;
+      #   cachyos-kernel = enabled;
+      # };
+    };
+
     ### SECURITY    ###############################################
+
     ### SERVICES    ###############################################
+
+    services = {
+      btrfs-maintenance = enabled;
+      openssh = enabled;
+    };
 
     ### SYSTEM    ###############################################
     system = {
       boot.systemd-boot = enabled;
     };
   };
-
-  # snowfallorg.user = {
-  #   "n16hth4wk" = {
-  #     create = true;
-  #     admin = true;
-  #     home.config = {
-  #       snowfallorg.user = {
-  #         enable = true;
-  #         name = "n16hth4wk";
-  #       };
-  #     };
-  #   };
-  # };
 }

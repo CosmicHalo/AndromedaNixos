@@ -2,12 +2,11 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 with lib;
-with lib.andromeda; let
-  cfg = config.andromeda.system.configuration;
+with lib.milkyway; let
+  cfg = config.milkyway.system.configuration;
 in {
   /*
    ************************
@@ -18,12 +17,12 @@ in {
   config = mkIf cfg.enable {
     # Default applications
     environment.systemPackages = with pkgs; [
+      # milkyway.lsd
+
       autorandr
       bat
       btop
       curl
-      # eza
-      inputs.eza.packages.${pkgs.system}.default
       fzf
       fd
       gh

@@ -5,8 +5,8 @@
   ...
 }:
 with lib;
-with lib.snowfall.module; let
-  cfg = config.andromeda.system.boot;
+with lib.milkyway; let
+  cfg = config.milkyway.system.boot;
 
   cfgQuiet = cfg.quietboot;
   cfgLanza = cfg.lanzaboote;
@@ -15,7 +15,7 @@ with lib.snowfall.module; let
   activateSecureBoot = cfgSystemd.enable && !cfgLanza.enable;
   activateLanzaboote = cfgLanza.enable && !cfgSystemd.enable;
 in {
-  options.andromeda.system.boot = with types; {
+  options.milkyway.system.boot = with types; {
     quietboot.enable = mkEnableOption "Quietboot.";
     lanzaboote.enable = mkEnableOption "Lanzaboote.";
     systemd-boot.enable = mkEnableOption "systemd-boot.";
@@ -27,7 +27,7 @@ in {
     #   extraConfig = mkOpt lines "" "Extra plymouth configuration";
 
     #   additionThemePackages = mkOpt (listOf package) [
-    #     (pkgs.andromeda.catppuccin-plymouth.override {variant = "mocha";})
+    #     (pkgs.milkyway.catppuccin-plymouth.override {variant = "mocha";})
     #   ] "Extra theme packages for plymouth.";
     # };
 
