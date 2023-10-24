@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "andromeda-lib": {
+    "andromeda": {
       "inputs": {
         "devshell": "devshell",
         "flake-compat": "flake-compat",
@@ -12,10 +12,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "dirtyRev": "90f2663c2848285b5e2f787ead4f23a1f62d06a3-dirty",
-        "dirtyShortRev": "90f2663-dirty",
-        "lastModified": 1698092081,
-        "narHash": "sha256-WobxCpUMWhuiWPKCI4mACV4CE4Z6GLA9iXonHCyNoyg=",
+        "lastModified": 1698110015,
+        "narHash": "sha256-7TIBPtVXJqIU0JgbJMmFM6wroW417hygPtf4Wlqk56I=",
+        "ref": "refs/heads/main",
+        "rev": "1d65702419354f4fc08ffb5b67d1a66526e46cfe",
+        "revCount": 53,
         "type": "git",
         "url": "file:///home/n16hth4wk/dev/nixos/lib"
       },
@@ -26,7 +27,7 @@
     },
     "devshell": {
       "inputs": {
-        "nixpkgs": ["andromeda-lib", "nixpkgs"],
+        "nixpkgs": ["andromeda", "nixpkgs"],
         "systems": "systems"
       },
       "locked": {
@@ -188,7 +189,7 @@
     },
     "flake-utils-plus": {
       "inputs": {
-        "flake-utils": ["andromeda-lib", "flake-utils"]
+        "flake-utils": ["andromeda", "flake-utils"]
       },
       "locked": {
         "lastModified": 1696331477,
@@ -260,7 +261,7 @@
     },
     "gitignore": {
       "inputs": {
-        "nixpkgs": ["andromeda-lib", "nixpkgs"]
+        "nixpkgs": ["andromeda", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1694102001,
@@ -374,11 +375,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1697984014,
-        "narHash": "sha256-fMlw0rw3sO5GsjQVowSo79fSnZQAMT+w1gAkuKuNxw0=",
+        "lastModified": 1698090486,
+        "narHash": "sha256-MEtswTlBJ4DTXmAflsyN9B3saGnBoMM/YDsC+roAEGA=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "bc850ba2a090a9a4733a82a7555a5a70264ce1ac",
+        "rev": "25cfe3fd432d77689446fe5a0bb972479298387c",
         "type": "github"
       },
       "original": {
@@ -397,11 +398,11 @@
         "nixpkgs": ["nixpkgs"]
       },
       "locked": {
-        "lastModified": 1698019298,
-        "narHash": "sha256-0mI7Hmmy4i66FJur5oVS3JA/mh05Y9Uhd7dd3poHJm8=",
+        "lastModified": 1698105671,
+        "narHash": "sha256-7GekPCKYmVb6jK0IuYVg4R6jDzUbyO9gzVundQC+AHc=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "16f7aa104addab4db2772072ca3428b0e941d8ce",
+        "rev": "1202e09b19e0c48e747ea204a4c915f7d005ac13",
         "type": "github"
       },
       "original": {
@@ -547,11 +548,11 @@
     },
     "pre-commit-hooks": {
       "inputs": {
-        "flake-compat": ["andromeda-lib", "flake-compat"],
-        "flake-utils": ["andromeda-lib", "flake-utils"],
-        "gitignore": ["andromeda-lib", "gitignore"],
-        "nixpkgs": ["andromeda-lib", "nixpkgs"],
-        "nixpkgs-stable": ["andromeda-lib", "nixpkgs-stable"]
+        "flake-compat": ["andromeda", "flake-compat"],
+        "flake-utils": ["andromeda", "flake-utils"],
+        "gitignore": ["andromeda", "gitignore"],
+        "nixpkgs": ["andromeda", "nixpkgs"],
+        "nixpkgs-stable": ["andromeda", "nixpkgs-stable"]
       },
       "locked": {
         "lastModified": 1697746376,
@@ -591,7 +592,7 @@
     },
     "root": {
       "inputs": {
-        "andromeda-lib": "andromeda-lib",
+        "andromeda": "andromeda",
         "devshell": "devshell_2",
         "flake-compat": "flake-compat_2",
         "flake-utils": "flake-utils_2",

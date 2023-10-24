@@ -1,7 +1,7 @@
 {
   description = "A highly awesome system configuration.";
 
-  outputs = inputs @ {andromeda-lib, ...}: let
+  outputs = inputs @ {andromeda, ...}: let
     milkyway-lib = {
       inherit inputs;
       src = ./.;
@@ -15,7 +15,7 @@
       };
     };
   in
-    andromeda-lib.mkFlake (milkyway-lib
+    andromeda.lib.mkFlake (milkyway-lib
       // {
         channels-config = {
           allowUnfree = true;
@@ -43,7 +43,7 @@
         # ALIAS
         ##########
         alias = {
-          shells.default = "universe";
+          shells.default = "milkyway-shell";
         };
 
         ##########
@@ -81,7 +81,7 @@
     };
 
     # Andromeda
-    andromeda-lib = {
+    andromeda = {
       url = "git+file:///home/n16hth4wk/dev/nixos/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };

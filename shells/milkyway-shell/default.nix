@@ -7,8 +7,8 @@
   rootDir = "$PRJ_ROOT";
 in
   pkgs.devshell.mkShell {
-    devshell.name = "universe";
-    devshell.motd = ''$(type -p menu &>/dev/null && menu)'';
+    devshell.name = "MilkyWay Shell";
+    # devshell.motd = ''$(type -p menu &>/dev/null && menu)'';
     devshell.startup.preCommitHooks.text = inputs.self.checks.${system}.pre-commit-check.shellHook;
 
     packages = with pkgs; [
@@ -20,11 +20,6 @@ in
       {package = "nix-melt";}
       {package = "pre-commit";}
 
-      {
-        command = "git rm --ignore-unmatch -f ${rootDir}/{tests,examples}/*/flake.lock";
-        help = "Remove all lock files";
-        name = "rm-locks";
-      }
       {
         name = "fmt";
         help = "Check Nix formatting";
