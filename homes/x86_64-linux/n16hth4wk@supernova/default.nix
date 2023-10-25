@@ -1,11 +1,6 @@
-{
-  lib,
-  inputs,
-  ...
-}:
+{lib, ...}:
 with lib.milkyway; {
   imports = [
-    inputs.chaotic.homeManagerModules.default
     ./zsh.nix
   ];
 

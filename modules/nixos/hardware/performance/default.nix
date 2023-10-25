@@ -10,31 +10,24 @@ with lib.milkyway; let
 in {
   options.milkyway.hardware.performance-tweaks = with types; {
     enable = mkBoolOpt false "Whether or not to enable common system features.";
-
-    cachyos-kernel = {
-      enable = mkBoolOpt false "Whether or not to use the cachyos kernel.";
-      package = mkOpt raw pkgs.linuxPackages_cachyos "The cachyos kernel package to use.";
-    };
-
     zramSwap = mkEnableOpt "ZRAM swap.";
+    cachyos-kernel = mkEnableOpt "Use the Linux_cachyos kernel.";
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
       # Supply fitting rules for ananicy-cpp
-      environment.systemPackages = with pkgs; [
-        ananicy-cpp-rules
-      ];
+      environment.systemPackages = [pkgs.ananicy-cpp-rules];
 
       services = {
+        # BPF-based auto-tuning of Linux system parameters
+        bpftune.enable = mkDefault true;
+
         # Automatically tune nice levels
         ananicy = {
           enable = mkDefault true;
           package = pkgs.ananicy-cpp;
         };
-
-        # BPF-based auto-tuning of Linux system parameters
-        bpftune.enable = mkDefault true;
       };
 
       boot = {
@@ -48,7 +41,9 @@ in {
         };
 
         # Use the Linux_cachyos kernel
-        kernelPackages = mkIf cfg.cachyos-kernel.enable (mkForce cfg.cachyos-kernel.package);
+        kernelPackages =
+          mkIf (cfg.cachyos-kernel.enable && isNyxEnabled config)
+          (mkForce pkgs.linuxPackages_cachyos);
       };
 
       # Fedora defaults for systemd-oomd

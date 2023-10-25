@@ -55,11 +55,11 @@ with lib.milkyway; {
         hostName = "supernova";
       };
 
-      # performance-tweaks = {
-      #   enable = true;
-      #   zramSwap = enabled;
-      #   cachyos-kernel = enabled;
-      # };
+      performance-tweaks = {
+        enable = true;
+        zramSwap = enabled;
+        cachyos-kernel = enabled;
+      };
     };
 
     ### SECURITY    ###############################################

@@ -26,6 +26,7 @@
         # OVERLAYS
         ###########
         overlays = with inputs; [
+          chaotic.overlays.default
           devshell.overlays.default
           neovim-nightly-overlay.overlay
         ];
@@ -43,9 +44,11 @@
         ##########
         # HOMES
         ##########
-        homes.modules = with inputs; [
-          # chaotic.homeManagerModules.default
-        ];
+        homes.users = {
+          "n16hth4wk@supernova".modules = [
+            inputs.chaotic.homeManagerModules.default
+          ];
+        };
 
         ##########
         # ALIAS

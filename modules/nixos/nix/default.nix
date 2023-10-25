@@ -60,7 +60,7 @@ in {
     };
 
     chaotic-nyx = {
-      enable = mkBoolOpt false "Whether or not to enable chaotic-nyx.";
+      enable = mkBoolOpt true "Whether or not to enable chaotic-nyx.";
       cache = mkEnableOpt' "chaotic-nyx cache";
       overlay = mkEnableOpt' "chaotic.nyx overlay";
     };
@@ -73,10 +73,6 @@ in {
     (mkIf cfg.chaotic-nyx.enable {
       chaotic.nyx.cache.enable = choticCfg.cache.enable;
       chaotic.nyx.overlay.enable = choticCfg.overlay.enable;
-
-      environment.systemPackages = with pkgs; [
-        nix-flake-schemas_git
-      ];
     })
 
     ##########

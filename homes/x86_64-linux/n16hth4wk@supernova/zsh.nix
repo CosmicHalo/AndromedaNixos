@@ -101,7 +101,7 @@
             "sudo"
             "zoxide, defer:2"
           ]
-          ++ lib.optionals config.milkyway.nix.tools.direnv.enable ["direnv"];
+          ++ lib.optionals (lib.milkyway.isMilkyWayEnabled "nix.tools.direnv" config) ["direnv"];
       };
     };
   };
