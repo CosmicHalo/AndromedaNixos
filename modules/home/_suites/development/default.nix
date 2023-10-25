@@ -26,6 +26,7 @@ in {
         # comma = enabled;
         # direnv = enabled;
         git = enabled;
+        neovim = enabled;
         # ssh = enabled;
         # starship = enabled;
         zsh = enabled;
