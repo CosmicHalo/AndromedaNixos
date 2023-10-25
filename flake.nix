@@ -35,9 +35,17 @@
         ##########
         systems = {
           modules.nixos = with inputs; [
+            chaotic.nixosModules.default
             nix-index-database.nixosModules.nix-index
           ];
         };
+
+        ##########
+        # HOMES
+        ##########
+        homes.modules = with inputs; [
+          # chaotic.homeManagerModules.default
+        ];
 
         ##########
         # ALIAS
@@ -91,6 +99,12 @@
   #* NIX
   #**********
   inputs = {
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     # Hardware Configuration
     nixos-hardware.url = "github:nixos/nixos-hardware";
 

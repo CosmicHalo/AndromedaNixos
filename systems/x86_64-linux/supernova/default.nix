@@ -14,6 +14,15 @@ with lib.milkyway; {
     ./hardware.nix
   ];
 
+  services.xserver.enable = true;
+  # Enable the Plasma 5 Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+  };
+
   ### MISC    ###############################################
 
   system.stateVersion = mkDefault "23.11";
@@ -22,6 +31,12 @@ with lib.milkyway; {
   ### CONFIG    #############################################
 
   milkyway = {
+    ### DESKTOP    ###############################################
+
+    desktop = {
+      kde = enabled;
+    };
+
     ### HARDWARE    ###############################################
 
     hardware = {
@@ -49,6 +64,12 @@ with lib.milkyway; {
 
     ### SECURITY    ###############################################
 
+    security = {
+      acme = enabled;
+      gpg = enabled;
+      keyring = enabled;
+    };
+
     ### SERVICES    ###############################################
 
     services = {
@@ -59,6 +80,7 @@ with lib.milkyway; {
     ### SYSTEM    ###############################################
     system = {
       boot.systemd-boot = enabled;
+      fonts = enabled;
     };
   };
 }

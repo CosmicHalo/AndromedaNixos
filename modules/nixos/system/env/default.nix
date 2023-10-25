@@ -54,11 +54,9 @@ in {
       ];
     };
 
-    andromeda.home.extraOptions = {
-      home.sessionPath = [
-        "$HOME/.local/bin"
-        "/usr/local/bin"
-      ];
-    };
+    andromeda.home.extraOptions.home.sessionPath = [
+      "$HOME/.local/bin"
+      "/usr/local/bin"
+    ];
   };
 }

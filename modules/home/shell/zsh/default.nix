@@ -10,13 +10,12 @@ with lib.milkyway; let
   inherit (config.milkyway.shell) commonShellAliases;
 in {
   imports = [
-    # ./init.nix
-    # ./plugins.nix
+    ./init.nix
+    ./plugins.nix
   ];
 
   options.milkyway.shell.zsh = with types; {
     enable = mkBoolOpt false "Whether to enable zsh shell environement.";
-
     profileExtra = mkOpt lines "" "Extra commands that should be added to {file}`.zprofile`.";
     extraShellAliases = mkOpt (attrsOf (nullOr (either str path))) {} "Extra shell aliases to add.";
   };

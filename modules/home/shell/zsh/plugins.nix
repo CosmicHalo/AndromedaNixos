@@ -1,12 +1,11 @@
 {
   lib,
   pkgs,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   cfg = config.milkyway.shell.zsh;
 
   pluginModule = with types;
@@ -34,7 +33,6 @@ in {
 
     zplug = {
       enable = mkBoolOpt true "zplug - a zsh plugin manager";
-
       plugins = mkOpt (listOf str) [] "List of regular zplug plugins.";
       theme-plugins = mkOpt (listOf str) [] "List of zplug theme plugins.";
       oh-my-zsh-plugins = mkOpt (listOf str) [] "List of zplug OMZSH plugins.";

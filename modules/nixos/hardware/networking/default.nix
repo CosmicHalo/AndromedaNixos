@@ -24,13 +24,22 @@ in {
       mkOpt attrs {}
       (mdDoc "An attribute set to merge with `networking.hosts`");
 
-    useDHCP = mkOpt bool true "Whether or not to use DHCP";
+    useDHCP = mkOpt bool false "Whether or not to use DHCP";
     useNetworkd = mkOpt bool false "Whether or not to use systemd-networkd";
     enableWireless = mkOpt bool false "Whether or not to enable wireless networking";
   };
 
   config = mkIf cfg.enable {
     milkyway.user.extraGroups = ["networkmanager"];
+
+    # Enable Mosh, a replacement for OpenSSH
+    programs.mosh.enable = true;
+
+    # Enable bandwidth usage tracking
+    services = {
+      vnstat.enable = true;
+      openntpd.enable = true;
+    };
 
     networking = {
       inherit (cfg) hostId hostName;
@@ -41,15 +50,42 @@ in {
       useDHCP = mkDefault cfg.useDHCP;
       useNetworkd = mkDefault cfg.useNetworkd;
 
+      hosts =
+        {
+          "127.0.0.1" = ["local.test"] ++ (cfg.hosts."127.0.0.1" or []);
+        }
+        // cfg.hosts;
+
+      firewall = {
+        allowedTCPPorts = [
+          22
+          80
+          443
+          8080
+        ];
+      };
+
+      # Network Manager
       networkmanager = {
         enable = true;
+        unmanaged = ["lo" "docker0" "virbr0"];
 
         wifi = {
           backend = "iwd";
           powersave = mkDefault false;
         };
       };
+
+      wireless.iwd = mkIf cfg.enableWireless {
+        enable = mkDefault true;
+        settings = {
+          General.AddressRandomization = mkDefault "once";
+          General.AddressRandomizationRange = mkDefault "full";
+        };
+      };
     };
+
+    hardware.wirelessRegulatoryDatabase = mkDefault true;
 
     # Enable BBR & cake
     boot.kernelModules = ["tcp_bbr"];

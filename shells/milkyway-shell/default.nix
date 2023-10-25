@@ -31,18 +31,37 @@ in
         command = "fd --extension nix --exec nix-instantiate --parse --quiet {} >/dev/null";
       }
 
+      #########
       # Nixos
+      #########
+
+      #Build
       {
         category = "build";
         name = "build-nixos";
-        command = "nixos-rebuild build --flake ${rootDir}#supernova --fast --show-trace";
+        command = "nixos-rebuild build --flake ${rootDir}# --fast --show-trace --max-jobs 1";
       }
       {
-        category = "dry-build";
-        name = "build-nixos-dry";
-        command = "nixos-rebuild dry-build --flake ${rootDir}#supernova --fast --show-trace";
+        category = "build";
+        name = "dry-build-nixos";
+        command = "nixos-rebuild dry-build --flake ${rootDir}# --fast --show-trace";
       }
-
-      # Home-manager
+      #Activate
+      {
+        category = "activate";
+        name = "activate-nixos";
+        command = "sudo nixos-rebuild test --flake ${rootDir}# --fast --show-trace --max-jobs 1";
+      }
+      {
+        category = "activate";
+        name = "dry-activate-nixos";
+        command = "sudo nixos-rebuild dry-activate --flake ${rootDir}# --fast --show-trace";
+      }
+      #Switch
+      {
+        category = "switch";
+        name = "switch-nixos";
+        command = "sudo nixos-rebuild switch --flake ${rootDir}# --fast --show-trace --max-jobs 1";
+      }
     ];
   }

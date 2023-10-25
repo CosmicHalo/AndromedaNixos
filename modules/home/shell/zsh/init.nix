@@ -1,11 +1,10 @@
 {
   lib,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   cfg = config.milkyway.shell.zsh;
 in {
   options.milkyway.shell.zsh = with types; {

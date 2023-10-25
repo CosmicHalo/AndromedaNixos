@@ -32,6 +32,10 @@ with lib.milkyway; let
       cp ${cfg.icon} "$target/${cfg.icon.fileName}"
     '';
 in {
+  imports = [
+    ./home.nix
+  ];
+
   options.milkyway.user = with types; {
     name =
       mkOpt str "n16hth4wk"
@@ -70,14 +74,9 @@ in {
       propagatedIcon
     ];
 
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-    };
-
     users.users.${cfg.name} =
       {
-        inherit (cfg) name initialHashedPassword;
+        inherit (cfg) name extraGroups initialHashedPassword;
 
         # Arbitrary user ID to use for the user. Since I only
         # have a single user on my machines this won't ever collide.
@@ -90,7 +89,6 @@ in {
         shell = pkgs.${cfg.shell};
 
         group = "users";
-        inherit (cfg) extraGroups;
         home = "/home/${cfg.name}";
       }
       // cfg.extraOptions;
