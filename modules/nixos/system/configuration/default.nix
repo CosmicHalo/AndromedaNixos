@@ -65,7 +65,7 @@ in {
     *********
     */
     i18n = {
-      inherit (cfg.locale.i18n) defaultLocale;
+      # inherit (cfg.locale.i18n) defaultLocale;
 
       # supportedLocales =
       #   options.i18n.supportedLocales.default

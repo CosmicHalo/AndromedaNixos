@@ -23,7 +23,11 @@ in {
   config = mkIf cfg.enable {
     programs = {
       skim.enable = false;
-      zoxide.enableZshIntegration = true;
+
+      zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+      };
 
       atuin = {
         enable = true;

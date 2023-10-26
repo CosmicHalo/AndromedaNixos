@@ -70,6 +70,10 @@
       zexportsExtra = ''
         # Fix an issue with tmux.
         export KEYTIMEOUT=1
+
+        export LC_CTYPE=en_US.UTF-8
+        export LC_ALL=en_US.UTF-8
+        export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
       '';
 
       shellFunctionsExtra = '''';
@@ -85,23 +89,21 @@
           "romkatv/powerlevel10k, depth:1"
         ];
 
-        oh-my-zsh-plugins =
-          [
-            "aliases, defer:2"
-            "autoenv, defer:2"
-            "command-not-found, defer:2"
-            "dotenv"
-            "git-extras, defer:2"
-            "gitfast, defer:2"
-            "github, defer:2"
-            # "gpg-agent"
-            "git, defer:2"
-            "rbw, defer:2"
-            "ripgrep"
-            "sudo"
-            "zoxide, defer:2"
-          ]
-          ++ lib.optionals (lib.milkyway.isMilkyWayEnabled "nix.tools.direnv" config) ["direnv"];
+        oh-my-zsh-plugins = [
+          "aliases, defer:2"
+          "autoenv, defer:2"
+          "command-not-found, defer:2"
+          "dotenv"
+          "git-extras, defer:2"
+          "gitfast, defer:2"
+          "github, defer:2"
+          # "gpg-agent"
+          "git, defer:2"
+          "rbw, defer:2"
+          "ripgrep"
+          "sudo"
+          "zoxide, defer:2"
+        ];
       };
     };
   };

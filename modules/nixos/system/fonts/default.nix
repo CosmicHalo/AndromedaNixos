@@ -8,6 +8,10 @@ with lib;
 with lib.milkyway; let
   cfg = config.milkyway.system.fonts;
 in {
+  imports = [
+    ./fonts.nix
+  ];
+
   options.milkyway.system.fonts = with types; {
     enable = mkBoolOpt false "Whether or not to manage fonts.";
     fonts = mkOpt (listOf package) [] "Custom font packages to install.";
@@ -34,7 +38,6 @@ in {
           noto-fonts-cjk-sans
           noto-fonts-cjk-serif
           noto-fonts-emoji
-          open-dyslexic
 
           # icon fonts
           material-symbols

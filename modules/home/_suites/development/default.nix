@@ -19,6 +19,13 @@ in {
         # IDES
         vscode = enabled;
         jetbrains = enabled;
+
+        kitty = {
+          enable = true;
+          font = {
+            name = "OpenDyslexic";
+          };
+        };
       };
 
       security = {
