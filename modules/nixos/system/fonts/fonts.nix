@@ -11,9 +11,9 @@ with lib.milkyway; let
 in {
   config = mkIf cfg.enable {
     milkyway.home.file = {
-      "${localDir}/BerkleyMono".source = ./berkley;
-      "${localDir}/PragmataPro".source = ./pragmata;
-      "${localDir}/OpenDyslexic".source = ./open-dyslexic;
+      "${localDir}/BerkleyMono".source = ./config/berkley;
+      "${localDir}/PragmataPro".source = ./config/pragmata;
+      "${localDir}/OpenDyslexic".source = ./config/open-dyslexic;
     };
   };
 }

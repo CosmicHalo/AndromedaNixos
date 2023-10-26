@@ -23,6 +23,7 @@ in {
         kitty = {
           enable = true;
           font = {
+            size = 11;
             name = "OpenDyslexic";
           };
         };

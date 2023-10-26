@@ -12,18 +12,29 @@ with lib.milkyway; let
     if config.home-manager.users.${config.milkyway.user.name}.gtk.enable
     then {
       name = "gnome3";
+      package = pkgs.pinentry-gnome3;
       packages = with pkgs; [
         gcr
-        pinentry-gnome
+        pinentry-qt
         pinentry-rofi
+        pinentry-gnome3
       ];
     }
     else {
       name = "curses";
+      package = pkgs.pinentry-curses;
       packages = with pkgs; [
         pinentry-curses
       ];
     };
+
+  gpgConf = "${getSource "gpg-base-conf"}/gpg.conf";
+  gpgAgentConf = ''
+    enable-ssh-support
+    default-cache-ttl 60
+    max-cache-ttl 120
+    pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
+  '';
 in {
   options.milkyway.security.gpg = with types; {
     enable = mkBoolOpt false "Whether or not to enable GPG.";

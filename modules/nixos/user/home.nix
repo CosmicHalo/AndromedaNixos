@@ -5,8 +5,17 @@
   ...
 }:
 with lib;
-with lib.milkyway; {
+with lib.milkyway; let
+  cfg = config.milkyway.home;
+in {
   options.milkyway.home = with types; {
+    useGlobalPkgs =
+      mkBoolOpt true
+      "Whether to use global packages with home-manager.";
+    useUserPackages =
+      mkBoolOpt true
+      "Whether to use global packages with home-manager.";
+
     modules =
       mkOpt (listOf path) []
       "Modules to import into home-manager.";
@@ -31,16 +40,11 @@ with lib.milkyway; {
       xdg.configFile = mkAliasDefinitions options.milkyway.home.configFile;
     };
 
-    # andromeda.home.extraOptions = mkAliasDefinitions options.milkyway.home.extraOptions;
-    # // {imports = options.milkyway.home.modules;};
+    andromeda.home.extraOptions =
+      mkAliasDefinitions options.milkyway.home.extraOptions;
 
     home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-
-      # users.${config.milkyway.user.name} =
-      #   mkAliasDefinitions options.milkyway.home.extraOptions
-      #   // {imports = options.milkyway.home.modules;};
+      inherit (cfg) useGlobalPkgs useUserPackages;
     };
   };
 }
