@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -13,6 +14,30 @@ in {
   };
 
   config = {
+    home.packages = with pkgs; [
+      autorandr
+      bat
+      btop
+      curl
+      eza
+      fzf
+      fd
+      gh
+      git
+      killall
+      lsd
+      micro
+      nvd
+      ripgrep
+      rsync
+      screen
+      sysz
+      tldr
+      ugrep
+      wget
+      xorg.xrandr
+    ];
+
     milkyway.shell.commonShellAliases = {
       # Nix
       "run" = "nix run nixpkgs#";

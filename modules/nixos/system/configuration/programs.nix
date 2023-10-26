@@ -17,23 +17,10 @@ in {
   config = mkIf cfg.enable {
     # Default applications
     environment.systemPackages = with pkgs; [
-      # milkyway.lsd
-
       autorandr
-      bat
-      btop
-      curl
-      fzf
-      fd
-      gh
-      git
       killall
-      micro
-      neovim
       nvd
-      ripgrep
       rsync
-      screen
       sysz
       tldr
       ugrep

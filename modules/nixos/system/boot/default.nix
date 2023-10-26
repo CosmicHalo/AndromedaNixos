@@ -20,16 +20,16 @@ in {
     lanzaboote.enable = mkEnableOption "Lanzaboote.";
     systemd-boot.enable = mkEnableOption "systemd-boot.";
 
-    # plymouth = {
-    #   enable = mkBoolOpt true "Enable Plymouth";
-    #   theme = mkOpt str "catppuccin-mocha" "Plymouth theme";
+    plymouth = {
+      enable = mkBoolOpt true "Enable Plymouth";
+      theme = mkOpt str "catppuccin-mocha" "Plymouth theme";
 
-    #   extraConfig = mkOpt lines "" "Extra plymouth configuration";
+      extraConfig = mkOpt lines "" "Extra plymouth configuration";
 
-    #   additionThemePackages = mkOpt (listOf package) [
-    #     (pkgs.milkyway.catppuccin-plymouth.override {variant = "mocha";})
-    #   ] "Extra theme packages for plymouth.";
-    # };
+      additionThemePackages = mkOpt (listOf package) [
+        (pkgs.milkyway.catppuccin-plymouth.override {variant = "mocha";})
+      ] "Extra theme packages for plymouth.";
+    };
 
     tmp = {
       tmpfsSize = mkOpt str "50%" "Size of tmpfs";
@@ -67,12 +67,12 @@ in {
           ];
 
           # Enables Plymouth with the bgrt theme (UEFI splash screen)
-          # plymouth = mkIf cfg.plymouth.enable {
-          #   enable = true;
+          plymouth = mkIf cfg.plymouth.enable {
+            enable = true;
 
-          #   inherit (cfg.plymouth) theme extraConfig;
-          #   themePackages = cfg.plymouth.additionThemePackages;
-          # };
+            inherit (cfg.plymouth) theme extraConfig;
+            themePackages = cfg.plymouth.additionThemePackages;
+          };
 
           tmp = {
             inherit (cfg.tmp) useTmpfs tmpfsSize;
