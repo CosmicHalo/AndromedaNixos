@@ -3,6 +3,7 @@
   config,
   host ? "",
   inputs ? {},
+  my_ssh_keys,
   ...
 }:
 with lib;
@@ -27,8 +28,12 @@ in {
       "The port to listen on (in addition to 22).";
 
     authorizedKeys =
-      mkOpt (listOf str) []
+      mkOpt (listOf str) ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2Bsi9bMuZwl2onIiFL544lWpOmIGc4VDihC7GoqcxI jlecoq@dnanexus.com"]
       "The public keys to apply.";
+
+    authorizedKeyFiles =
+      mkOpt (listOf path) [my_ssh_keys]
+      "The public key files to apply.";
   };
 
   config = mkIf cfg.enable {
@@ -42,10 +47,12 @@ in {
       settings = {
         PermitRootLogin = "yes";
         PasswordAuthentication = true;
+        KbdInteractiveAuthentication = true;
       };
     };
 
     milkyway.user.extraOptions.openssh.authorizedKeys.keys = cfg.authorizedKeys;
+    milkyway.user.extraOptions.openssh.authorizedKeys.keyFiles = cfg.authorizedKeyFiles;
 
     andromeda.home.extraOptions = {
       programs.zsh.shellAliases =

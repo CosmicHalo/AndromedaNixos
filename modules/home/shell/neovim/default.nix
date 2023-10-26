@@ -28,7 +28,11 @@ in {
         gnumake
         luajitPackages.luarocks-nix
         nodejs_18
-        sqlite
+        unzip
+
+        #Rust
+        toolchain
+        rust-analyzer-nightly
       ];
 
       sessionVariables = {

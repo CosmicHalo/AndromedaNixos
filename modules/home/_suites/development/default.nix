@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -22,35 +21,20 @@ in {
         jetbrains = enabled;
       };
 
+      security = {
+        gpg = {
+          enable = true;
+          gpg-agent = enabled;
+        };
+      };
+
       shell = {
-        # comma = enabled;
-        # direnv = enabled;
         git = enabled;
         neovim = enabled;
-        # ssh = enabled;
+        ssh = enabled;
         # starship = enabled;
         zsh = enabled;
       };
     };
-
-    home.packages = with pkgs; [
-      bat
-      curl
-      devbox
-      eza
-      fastfetch
-      fd
-      fzf
-      grc
-      jq
-      killall
-      libva-utils
-      nvd
-      ripgrep
-      tldr
-      usbutils
-      vulkan-tools
-      wget
-    ];
   };
 }

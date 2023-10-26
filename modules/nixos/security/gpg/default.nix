@@ -29,24 +29,21 @@ in {
     enable = mkBoolOpt false "Whether or not to enable GPG.";
     agentTimeout = mkOpt int 5 "The amount of time to wait before continuing with shell init.";
 
-    enableScDaemon =
-      mkBoolOpt true
-      "Whether or not to enable the scdaemon.";
-    enableExtraSocket =
-      mkBoolOpt true
-      "Whether or not to enable the extra socket.";
+    gpg-agent = {
+      enable = mkBoolOpt true "Whether or not to enable GPG Agent.";
+      enableSSHSupport = mkBoolOpt true "Whether or not to enable SSH Support.";
+      enableExtraSocket = mkBoolOpt false "Whether or not to enable the extra socket.";
+    };
   };
 
   config = mkIf cfg.enable {
     programs = {
       ssh.startAgent = false;
 
-      gnupg.agent = {
+      gnupg.agent = mkIf cfg.gpg-agent.enable {
         enable = true;
-
         pinentryFlavor = pinentry.name;
-        enableSSHSupport = cfg.enableScDaemon;
-        inherit (cfg) enableExtraSocket;
+        inherit (cfg.gpg-agent) enableExtraSocket enableSSHSupport;
       };
     };
 
@@ -71,6 +68,12 @@ in {
           echo 'Run "gpgconf --launch gpg-agent" to try and launch it again.'
         fi
       '';
+    };
+
+    milkyway.home.file = {
+      ".gnupg/.keep".text = "";
+      ".gnupg/gpg.conf".source = gpgConf;
+      ".gnupg/gpg-agent.conf".text = gpgAgentConf;
     };
   };
 }

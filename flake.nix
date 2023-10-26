@@ -14,6 +14,12 @@
         };
       };
     };
+
+    sources = import ./nix/sources.nix;
+    specialArgs = {
+      inherit sources;
+      inherit (sources) my_ssh_keys gpg-base-conf;
+    };
   in
     andromeda.lib.mkFlake (milkyway-lib
       // {
@@ -26,6 +32,7 @@
         # OVERLAYS
         ###########
         overlays = with inputs; [
+          fenix.overlays.default
           chaotic.overlays.default
           devshell.overlays.default
           neovim-nightly-overlay.overlay
@@ -35,6 +42,8 @@
         # SYSTEMS
         ##########
         systems = {
+          inherit specialArgs;
+
           modules.nixos = with inputs; [
             chaotic.nixosModules.default
             nix-index-database.nixosModules.nix-index
@@ -44,17 +53,15 @@
         ##########
         # HOMES
         ##########
-        homes.users = {
-          "n16hth4wk@supernova".modules = [
-            inputs.chaotic.homeManagerModules.default
-          ];
-        };
+        homes.users."n16hth4wk@supernova". modules = [
+          inputs.chaotic.homeManagerModules.default
+        ];
 
         ##########
         # ALIAS
         ##########
         alias = {
-          shells.default = "milkyway-shell";
+          # shells.default = "milkyway-shell";
         };
 
         ##########
@@ -144,10 +151,22 @@
   #* SHELL
   #*********
   inputs = {
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+  };
+
+  #*********
+  #* MISC
+  #*********
+
+  inputs = {
   };
 
   #***********************

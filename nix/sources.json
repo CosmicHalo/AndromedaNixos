@@ -1,0 +1,44 @@
+{
+    "flake-compat": {
+        "branch": "master",
+        "description": null,
+        "homepage": null,
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "sha256": "0m9grvfsbwmvgwaxvdzv6cmyvjnlww004gfxjvcl806ndqaxzy4j",
+        "type": "tarball",
+        "url": "https://github.com/edolstra/flake-compat/archive/0f9255e01c2351cc7d116c072cb317785dd33b33.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "gpg-base-conf": {
+        "branch": "master",
+        "description": "Various program configuration files and scripts",
+        "homepage": "",
+        "owner": "drduh",
+        "repo": "config",
+        "rev": "8c21617100795fea2313656abdf25f93b98fdc30",
+        "sha256": "103z41y5qzjbn7k69c1ylzbaldkf0dfg6yvbhi4lkkzpggylp3j7",
+        "type": "tarball",
+        "url": "https://github.com/drduh/config/archive/8c21617100795fea2313656abdf25f93b98fdc30.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "my_ssh_keys": {
+        "sha256": "0ripg44mz0zlh29n6nai0srxsass8bqn5ldwp69g2jfgxxi5ny55",
+        "type": "file",
+        "url": "https://github.com/lecoqjacob.keys",
+        "url_template": "https://github.com/lecoqjacob.keys"
+    },
+    "nixpkgs": {
+        "branch": "nixos-unstable",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7c9cc5a6e5d38010801741ac830a3f8fd667a7a0",
+        "sha256": "1f7nsfz327habs623k5sviafxvvvsjnarsvz3m99qsrw88zdd929",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/7c9cc5a6e5d38010801741ac830a3f8fd667a7a0.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

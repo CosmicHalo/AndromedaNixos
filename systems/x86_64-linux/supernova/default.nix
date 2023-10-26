@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   inputs,
   ...
 }:
@@ -27,6 +28,10 @@ with lib.milkyway; {
 
   system.stateVersion = mkDefault "23.11";
   nixpkgs.hostPlatform = mkDefault "x86_64-linux";
+
+  environment.systemPackages = with pkgs; [
+    sqlite
+  ];
 
   ### CONFIG    #############################################
 

@@ -41,14 +41,27 @@ in {
       openntpd.enable = true;
     };
 
+    systemd.services."systemd-networkd".environment.SYSTEMD_LOG_LEVEL = "debug";
+
+    systemd.network.enable = true;
+    systemd.network.networks."10-wan" = {
+      matchConfig.Name = "enp16s0";
+      networkConfig = {
+        # start a DHCP Client for IPv4 Addressing/Routing
+        DHCP = "ipv4";
+        # accept Router Advertisements for Stateless IPv6 Autoconfiguraton (SLAAC)
+        IPv6AcceptRA = true;
+      };
+      # make routing on this interface a dependency for network-online.target
+      linkConfig.RequiredForOnline = "routable";
+    };
+
     networking = {
-      inherit (cfg) hostId hostName;
+      inherit (cfg) hostId hostName useNetworkd;
 
       # Enable nftables instead of iptables
-      nftables.enable = true;
-
+      # nftables.enable = true;
       useDHCP = mkDefault cfg.useDHCP;
-      useNetworkd = mkDefault cfg.useNetworkd;
 
       hosts =
         {
@@ -98,5 +111,6 @@ in {
     # Fixes an issue that normally causes nixos-rebuild to fail.
     # https://github.com/NixOS/nixpkgs/issues/180175
     systemd.services.NetworkManager-wait-online.enable = false;
+    systemd.services.systemd-networkd-wait-online.enable = mkForce false;
   };
 }

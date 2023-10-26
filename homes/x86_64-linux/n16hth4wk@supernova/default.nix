@@ -14,25 +14,14 @@ with lib.milkyway; {
     */
     user = enabled;
 
-    /*
-     ******
-    * nix *
-    ******
-    */
-    nix = {
-      home-manager = enabled;
-
-      tools = {
-        alejandra = enabled;
-        cachix = enabled;
-        deadnix = enabled;
-        direnv = enabled;
-        statix = enabled;
-      };
+    suites = {
+      desktop = enabled;
+      development = enabled;
+      nix = enabled;
     };
 
-    suites = {
-      development = enabled;
+    apps = {
+      bitwarden = enabled;
     };
   };
 }
