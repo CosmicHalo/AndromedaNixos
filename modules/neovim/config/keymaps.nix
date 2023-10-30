@@ -1,0 +1,7 @@
+_: {
+  config = {
+    globals = {
+      mapleader = " ";
+    };
+  };
+}

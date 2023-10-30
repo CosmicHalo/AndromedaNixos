@@ -20,8 +20,8 @@ in {
 
     home = {
       packages = with pkgs; [
-        neovim
         vim
+        milkyway.nixvim
 
         # Needed for neovim
         gcc
@@ -44,6 +44,10 @@ in {
       shellAliases = {
         vimdiff = "nvim -d";
       };
+    };
+
+    programs.nixvim = {
+      plugins.lightline.enable = true;
     };
   };
 }

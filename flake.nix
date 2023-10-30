@@ -45,6 +45,7 @@
           inherit specialArgs;
 
           modules.nixos = with inputs; [
+            nixvim.nixosModules.nixvim
             chaotic.nixosModules.default
             nix-index-database.nixosModules.nix-index
           ];
@@ -53,15 +54,17 @@
         ##########
         # HOMES
         ##########
-        homes.users."n16hth4wk@supernova". modules = [
-          inputs.chaotic.homeManagerModules.default
+        homes.users."n16hth4wk@supernova".modules = with inputs; [
+          nixvim.homeManagerModules.nixvim
+          chaotic.homeManagerModules.default
         ];
 
         ##########
         # ALIAS
         ##########
         alias = {
-          # shells.default = "milkyway-shell";
+          packages.default = "nixvim";
+          shells.default = "milkyway-shell";
         };
 
         ##########
@@ -91,6 +94,8 @@
   #**********
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
 
     home-manager = {
@@ -158,6 +163,12 @@
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      # url = "github:nix-community/nixvim";
+      url = "git+file:///home/n16hth4wk/dev/nixos/__libs__/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

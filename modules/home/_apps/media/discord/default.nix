@@ -24,11 +24,11 @@ in {
       "Whether or not to enable the Firefox version of Discord.";
   };
 
-  config = mkIf (cfg.enable or cfg.chromium.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs;
       [
-        betterdiscordctl
         discordo
+        betterdiscordctl
         discord-gamesdk
       ]
       ++ lib.optional cfg.enable cfg.package

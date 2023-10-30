@@ -90,10 +90,7 @@
         ];
 
         oh-my-zsh-plugins = [
-          "aliases, defer:2"
-          "autoenv, defer:2"
           "command-not-found, defer:2"
-          "dotenv"
           "git-extras, defer:2"
           "gitfast, defer:2"
           "github, defer:2"
