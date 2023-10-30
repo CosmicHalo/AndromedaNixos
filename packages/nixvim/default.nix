@@ -1,13 +1,14 @@
 {
   lib,
   pkgs,
-  inputs,
   neovim-config ? {},
   neovim-settings ? {},
   ...
 }: let
   inherit (pkgs.nixvim-lib) helpers;
-  raw-modules = lib.andromeda.fs.get-default-nix-files-recursive (lib.andromeda.fs.get-file "/modules/neovim");
+  raw-modules =
+    lib.andromeda.fs.get-default-nix-files-recursive
+    (lib.andromeda.fs.get-file "/modules/neovim");
 
   wrapped-modules =
     builtins.map
@@ -17,7 +18,7 @@
           // {
             # NOTE: nixvim doesn't allow for these to be customized so we must work around the
             # module system here...
-            inherit lib pkgs helpers inputs;
+            inherit lib pkgs helpers;
           });
       in
         result
@@ -34,9 +35,8 @@
       config = lib.mkMerge [
         {
           _module.args = {
+            lib = lib.mkForce lib;
             settings = neovim-settings;
-            helpers = lib.mkForce helpers;
-            lib = lib.mkForce lib // {inherit helpers;};
           };
         }
 
