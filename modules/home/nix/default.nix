@@ -1,20 +1,16 @@
 {
   lib,
   pkgs,
-  inputs,
   config,
   ...
 }:
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.nix;
-  cfgChaotic = cfg.chaotic;
-  cfgHome = cfg.home-manager;
+  # cfgChaotic = cfg.chaotic;
   cfgTools = cfg.tools;
 in {
   options.milkyway.nix = {
-    home-manager = mkEnableOpt' "home-manager";
-
     chaotic = {
       enable = mkBoolOpt false "chaotic-nyx";
       cache = mkEnableOpt "chaotic-nyx cache";
@@ -46,10 +42,10 @@ in {
     * NYX *
     ******
     */
-    chaotic.nyx = mkIf cfgChaotic.enable {
-      cache.enable = cfgChaotic.cache.enable;
-      overlay.enable = cfgChaotic.overlay.enable;
-    };
+    # chaotic.nyx = mkIf cfgChaotic.enable {
+    #   cache.enable = cfgChaotic.cache.enable;
+    #   overlay.enable = cfgChaotic.overlay.enable;
+    # };
 
     /*
      ***********
@@ -58,10 +54,7 @@ in {
     */
     programs = {
       nix-index.enable = true;
-      home-manager = {
-        inherit (cfgHome) enable;
-        path = "${inputs.home-manager}";
-      };
+      home-manager.enable = true;
 
       direnv = mkIf cfgTools.direnv.enable {
         enable = true;

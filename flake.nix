@@ -1,5 +1,5 @@
 {
-  description = "A highly awesome system configuration.";
+  description = "A highly /nix/store/m380jmz5j05c3y3l2j05c97mmpbzbp6c-init.luaesome system configuration.";
 
   outputs = inputs @ {andromeda, ...}: let
     milkyway-lib = {
@@ -45,7 +45,6 @@
           inherit specialArgs;
 
           modules.nixos = with inputs; [
-            nixvim.nixosModules.nixvim
             chaotic.nixosModules.default
             nix-index-database.nixosModules.nix-index
           ];
@@ -54,16 +53,14 @@
         ##########
         # HOMES
         ##########
-        homes.users."n16hth4wk@supernova".modules = with inputs; [
-          nixvim.homeManagerModules.nixvim
-          chaotic.homeManagerModules.default
-        ];
+        # homes.users."n16hth4wk@supernova".modules = with inputs; [
+        #   chaotic.homeManagerModules.default
+        # ];
 
         ##########
         # ALIAS
         ##########
         alias = {
-          packages.default = "nixvim";
           shells.default = "milkyway-shell";
         };
 
@@ -95,7 +92,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
 
     home-manager = {

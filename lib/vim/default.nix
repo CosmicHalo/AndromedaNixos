@@ -25,12 +25,18 @@ _: rec {
     };
     mkKeymap' = key: action: desc: (mkKeymap key action desc {});
 
-    mkLuaKeymap = key: action: desc: options: {
-      inherit key action;
-      lua = true;
-      options = options // {inherit desc;};
-    };
-    mkLuaKeymap' = key: action: desc: (mkLuaKeymap key action desc {});
+    # LUA
+    mkLuaKeymap = key: action: desc: extraKeymapConfig: options:
+      {
+        inherit key action;
+        lua = true;
+        options = options // {inherit desc;};
+      }
+      // extraKeymapConfig;
+    mkLuaKeymap' = key: action: desc: (mkLuaKeymap key action desc {} {});
+
+    mkNLuaKeymap = key: action: desc: options: (mkLuaKeymap key action desc {mode = "n";} options);
+    mkNLuaKeymap' = key: action: desc: (mkNLuaKeymap key action desc {});
 
     ###########
     # Key maps
@@ -53,6 +59,7 @@ _: rec {
     in
       nixvim.mkKeymaps {} raw-bindings;
 
+    mkLuaKeymaps' = bindings: (mkLuaKeymaps {} bindings);
     mkLuaKeymaps = defaults: bindings: let
       raw-bindings = builtins.map (binding:
         builtins.foldl' (f: f)

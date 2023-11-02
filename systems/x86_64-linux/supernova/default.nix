@@ -20,20 +20,16 @@ with lib.milkyway; {
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-  };
-
   ### MISC    ###############################################
 
   system.stateVersion = mkDefault "23.11";
   nixpkgs.hostPlatform = mkDefault "x86_64-linux";
 
+  ### CONFIG    #############################################
+
   environment.systemPackages = with pkgs; [
     sqlite
   ];
-
-  ### CONFIG    #############################################
 
   milkyway = {
     ### DESKTOP    ###############################################

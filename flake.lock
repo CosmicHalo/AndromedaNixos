@@ -480,11 +480,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1698578059,
-        "narHash": "sha256-ag1gtyLgdz42ytzv3X+6T8ir1Ul1fiPTg5NCf8RWs/s=",
+        "lastModified": 1698833855,
+        "narHash": "sha256-J7Nvy+RmhBKx+d2XOzePVmVo6qXARoxe730J4UV1RV0=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "8405649f92a8a8eb254944eca15e8b0169cbb6fb",
+        "rev": "20dd9f3a26e45a1b4c95ba33d6c9f300184fc361",
         "type": "github"
       },
       "original": {
@@ -503,11 +503,11 @@
         "nixpkgs": ["nixpkgs"]
       },
       "locked": {
-        "lastModified": 1698624085,
-        "narHash": "sha256-n3Qy+j0Y3Tiw/JtxnDdWLiReTodikcxzvAr2CgvqMwM=",
+        "lastModified": 1698849803,
+        "narHash": "sha256-6bBKsRbMpQzC4dxzgov1XnwzNYaUAMYFaU153oTk1eo=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "06a5aedc5a6da00f5340deff07a41dd9b4b6e31b",
+        "rev": "3e1be25cc29a7d2311d49d9b2cc116cc77c02a9e",
         "type": "github"
       },
       "original": {
@@ -633,22 +633,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-staging": {
-      "locked": {
-        "lastModified": 1698688898,
-        "narHash": "sha256-soWVM+dNAvsl526GK3EyaMwP+WMN6c7XqK4XLIHSEmA=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "131c49a7c6391be7e7b0527cc92494e3254590f5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "staging",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixvim": {
       "inputs": {
         "beautysh": "beautysh",
@@ -657,10 +641,10 @@
         "pre-commit-hooks": "pre-commit-hooks_2"
       },
       "locked": {
-        "dirtyRev": "9004ffe32f68bb9cc3e5907bdb55ceccddca44a0-dirty",
-        "dirtyShortRev": "9004ffe3-dirty",
-        "lastModified": 1698504351,
-        "narHash": "sha256-wFFWlaWkPg+8E5kztUw537zYL/S8I5t5+TDMUg4PSvE=",
+        "dirtyRev": "b5414a38415f084d889fa99f890ed6a61aab8bb8-dirty",
+        "dirtyShortRev": "b5414a38-dirty",
+        "lastModified": 1698850065,
+        "narHash": "sha256-y91mNDW81I/mTZdj/sRguASHvFtj9PshheuZiCJfhJ4=",
         "type": "git",
         "url": "file:///home/n16hth4wk/dev/nixos/__libs__/nixvim"
       },
@@ -770,7 +754,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable_2",
-        "nixpkgs-staging": "nixpkgs-staging",
         "nixvim": "nixvim",
         "pre-commit-hooks": "pre-commit-hooks_3",
         "systems": "systems_9",

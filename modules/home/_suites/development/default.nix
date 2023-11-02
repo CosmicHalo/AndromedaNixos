@@ -27,6 +27,14 @@ in {
             name = "OpenDyslexic";
           };
         };
+
+        wezterm = {
+          enable = true;
+          font = {
+            size = 11;
+            name = "OpenDyslexic";
+          };
+        };
       };
 
       security = {

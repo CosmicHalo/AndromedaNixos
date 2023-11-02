@@ -7,13 +7,14 @@ with lib.milkyway; {
   home.stateVersion = "23.11";
 
   milkyway = {
-    /*
-     *******
-    * user *
-    *******
-    */
+    #*********
+    #* User
+    #*********
     user = enabled;
 
+    #*********
+    #* Suites
+    #*********
     suites = {
       desktop = enabled;
       development = enabled;

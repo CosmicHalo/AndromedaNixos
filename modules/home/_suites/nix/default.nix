@@ -16,8 +16,6 @@ in {
   config = mkIf cfg.enable {
     milkyway = {
       nix = {
-        home-manager = enabled;
-
         tools = {
           alejandra = enabled;
           cachix = enabled;
