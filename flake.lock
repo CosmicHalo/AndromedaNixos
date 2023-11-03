@@ -633,6 +633,20 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1682134069,
+        "narHash": "sha256-TnI/ZXSmRxQDt2sjRYK/8j8iha4B4zP2cnQCZZ3vp7k=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fd901ef4bf93499374c5af385b2943f5801c0833",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "nixvim": {
       "inputs": {
         "beautysh": "beautysh",
@@ -644,7 +658,7 @@
         "dirtyRev": "b5414a38415f084d889fa99f890ed6a61aab8bb8-dirty",
         "dirtyShortRev": "b5414a38-dirty",
         "lastModified": 1698850065,
-        "narHash": "sha256-y91mNDW81I/mTZdj/sRguASHvFtj9PshheuZiCJfhJ4=",
+        "narHash": "sha256-FPm0mJJCfoZah9VLteIDPxNYCpfhnQnyTwC2zusbBr0=",
         "type": "git",
         "url": "file:///home/n16hth4wk/dev/nixos/__libs__/nixvim"
       },
@@ -757,7 +771,8 @@
         "nixvim": "nixvim",
         "pre-commit-hooks": "pre-commit-hooks_3",
         "systems": "systems_9",
-        "unstable": "unstable"
+        "unstable": "unstable",
+        "vscode-server": "vscode-server"
       }
     },
     "rust-analyzer-src": {
@@ -959,6 +974,25 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "vscode-server": {
+      "inputs": {
+        "flake-utils": ["flake-utils"],
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1684517665,
+        "narHash": "sha256-SaAr66uCQ8CF75jIr23FZjk1+9Kfwm5sQnwV25206Gs=",
+        "owner": "nix-community",
+        "repo": "nixos-vscode-server",
+        "rev": "1e1358493df6529d4c7bc4cc3066f76fd16d4ae6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-vscode-server",
         "type": "github"
       }
     },

@@ -46,6 +46,7 @@
 
           modules.nixos = with inputs; [
             chaotic.nixosModules.default
+            vscode-server.nixosModules.default
             nix-index-database.nixosModules.nix-index
           ];
         };
@@ -174,6 +175,10 @@
   #*********
 
   inputs = {
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   #***********************

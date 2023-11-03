@@ -20,8 +20,8 @@ in {
 
     home = {
       packages = with pkgs; [
-        vim
-        neovim
+        # vim
+        # neovim
 
         # Needed for neovim
         gcc
