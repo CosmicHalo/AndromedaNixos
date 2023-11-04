@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.milkyway.apps.neovim;
 
-  coreImports = lib.andromeda.fs.get-default-nix-files ./core;
+  coreImports = lib.andromeda.fs.get-nix-files ./test;
 in {
   imports = coreImports;
 
@@ -57,7 +57,7 @@ in {
       "nvim/.neoconf.json".source = ./config/.neoconf.json;
 
       # Sources
-      "nvim/lua".source = ./config/lua;
+      # "nvim/lua".source = ./config/lua;
 
       # Our bread and butter
       "nvim/init.lua".text = ''

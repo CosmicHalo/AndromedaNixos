@@ -4,6 +4,7 @@ with lib.milkyway; {
     ./zsh.nix
   ];
 
+  nix.settings = lib.mkForce {};
   home.stateVersion = "23.11";
 
   milkyway = {

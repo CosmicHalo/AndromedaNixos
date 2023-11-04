@@ -163,12 +163,6 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixvim = {
-      # url = "github:nix-community/nixvim";
-      url = "git+file:///home/n16hth4wk/dev/nixos/__libs__/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   #*********

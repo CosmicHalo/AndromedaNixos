@@ -52,14 +52,14 @@ in {
     * PROGRAMS *
     ***********
     */
-    programs = {
-      nix-index.enable = true;
-      home-manager.enable = true;
+    # programs = {
+    #   nix-index.enable = true;
+    #   home-manager.enable = true;
 
-      direnv = mkIf cfgTools.direnv.enable {
-        enable = true;
-        nix-direnv = enabled;
-      };
-    };
+    #   direnv = mkIf cfgTools.direnv.enable {
+    #     enable = true;
+    #     nix-direnv = enabled;
+    #   };
+    # };
   };
 }

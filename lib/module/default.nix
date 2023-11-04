@@ -1,4 +1,6 @@
-{lib, ...}: rec {
+{lib, ...}: let
+  inherit (lib) mkIf;
+in rec {
   isEnabled = option: config: let
     options =
       (lib.splitString "." option)
@@ -12,4 +14,11 @@
 
   # Helper Functions
   isNyxEnabled = config: isMilkyWayEnabled "nix.chaotic-nyx" config;
+
+  mkIfNonNull' = x: y: (mkIf (x != null) y);
+  mkIfNonNull = x: (mkIfNonNull' x x);
+  ifNonNull' = x: y:
+    if (x == null)
+    then null
+    else y;
 }

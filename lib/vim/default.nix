@@ -1,78 +1,80 @@
-_: rec {
-  nixvim = rec {
-    # Correctly merge two attrs (partially) representing a mapping.
-    mergeKeymap = defaults: keymap: let
-      # First, merge the `options` attrs of both options.
-      mergedOpts = (defaults.options or {}) // (keymap.options or {});
-    in
-      # Then, merge the root attrs together and add the previously merged `options` attrs.
-      (defaults // keymap) // {options = mergedOpts;};
+{lib, ...}: let
+  inherit
+    (lib)
+    types
+    hasAttr
+    filterAttrs
+    boolToString
+    mkOptionType
+    mapAttrsToList
+    concatStringsSep
+    mergeEqualOption
+    concatMapStringsSep
+    ;
 
-    mkKeymaps = defaults:
-      map
-      (mergeKeymap defaults);
-  };
-
+  inherit (lib.milkyway) mkOpt ifNonNull';
+in {
   vim = rec {
-    ######################################################################
-
-    ##########
-    # Key map
-    ##########
-    mkKeymap = key: action: desc: options: {
-      inherit key action;
-      options = options // {inherit desc;};
+    mkRaw = r: {__raw = r;};
+    mkRawIfNonNull = v: ifNonNull' v (mkRaw v);
+    isRawType = v: lib.isAttrs v && lib.hasAttr "__raw" v && lib.isString v.__raw;
+    rawType = mkOptionType {
+      name = "rawType";
+      check = isRawType;
+      merge = mergeEqualOption;
+      descriptionClass = "noun";
+      description = "raw lua code";
     };
-    mkKeymap' = key: action: desc: (mkKeymap key action desc {});
 
-    # LUA
-    mkLuaKeymap = key: action: desc: extraKeymapConfig: options:
-      {
-        inherit key action;
-        lua = true;
-        options = options // {inherit desc;};
-      }
-      // extraKeymapConfig;
-    mkLuaKeymap' = key: action: desc: (mkLuaKeymap key action desc {} {});
+    extraOptionsOptions = {
+      extraOptions = mkOpt types.attrs {} ''
+        These attributes will be added to the table parameter for the setup function.
+        (Can override other attributes set by nixvim)
+      '';
+    };
 
-    mkNLuaKeymap = key: action: desc: options: (mkLuaKeymap key action desc {mode = "n";} options);
-    mkNLuaKeymap' = key: action: desc: (mkNLuaKeymap key action desc {});
-
-    ###########
-    # Key maps
-    ###########
-    mkKeymaps = defaults: bindings: let
-      raw-bindings = builtins.map (binding:
-        builtins.foldl' (f: f)
-        mkKeymap'
-        binding)
-      bindings;
-    in
-      nixvim.mkKeymaps defaults raw-bindings;
-
-    mkKeymaps' = bindings: let
-      raw-bindings = builtins.map (binding:
-        builtins.foldl' (f: f)
-        mkKeymap'
-        binding)
-      bindings;
-    in
-      nixvim.mkKeymaps {} raw-bindings;
-
-    mkLuaKeymaps' = bindings: (mkLuaKeymaps {} bindings);
-    mkLuaKeymaps = defaults: bindings: let
-      raw-bindings = builtins.map (binding:
-        builtins.foldl' (f: f)
-        mkLuaKeymap'
-        binding)
-      bindings;
-    in
-      nixvim.mkKeymaps defaults raw-bindings;
-
-    ##########
-    # Helpers
-    ##########
-    mkNKeymaps = bindings: (mkKeymaps {mode = "n";} bindings);
-    mkLuaNKeymaps = bindings: (mkLuaKeymaps {mode = "n";} bindings);
+    # Black functional magic that converts a bunch of different Nix types to their
+    # lua equivalents!
+    toLuaObject = args:
+      if builtins.isAttrs args
+      then
+        if hasAttr "__raw" args
+        then args.__raw
+        else if hasAttr "__empty" args
+        then "{ }"
+        else
+          "{"
+          + (concatStringsSep ","
+            (mapAttrsToList
+              (n: v:
+                if (builtins.match "__unkeyed.*" n) != null
+                then toLuaObject v
+                else if n == "__emptyString"
+                then "[''] = " + (toLuaObject v)
+                else "[${toLuaObject n}] = " + (toLuaObject v))
+              (filterAttrs
+                (
+                  _n: v:
+                    v != null && (toLuaObject v != "{}")
+                )
+                args)))
+          + "}"
+      else if builtins.isList args
+      then "{" + concatMapStringsSep "," toLuaObject args + "}"
+      else if builtins.isString args
+      then
+        # This should be enough!
+        builtins.toJSON args
+      else if builtins.isPath args
+      then builtins.toJSON (toString args)
+      else if builtins.isBool args
+      then "${boolToString args}"
+      else if builtins.isFloat args
+      then "${toString args}"
+      else if builtins.isInt args
+      then "${toString args}"
+      else if (args == null)
+      then "nil"
+      else "";
   };
 }
