@@ -17,6 +17,10 @@
     then "/Users/${cfg.name}"
     else "/home/${cfg.name}";
 in {
+  imports = [
+    ./home.nix
+  ];
+
   options.milkyway.user = {
     enable = mkOpt types.bool false "Whether to configure the user account.";
     host = mkOpt (types.nullOr types.str) null "The host name.";

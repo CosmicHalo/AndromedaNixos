@@ -3,13 +3,13 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
-  inherit (lib.milkyway) mkEnableOpt;
-
+}:
+with lib; let
   cfg = config.milkyway.shell.neovim;
 in {
-  options.milkyway.shell.neovim = mkEnableOpt "Neovim";
+  options.milkyway.shell.neovim = {
+    enable = mkEnableOption "Neovim";
+  };
 
   config = mkIf cfg.enable {
     # Use Neovim for Git diffs.
@@ -20,8 +20,8 @@ in {
 
     home = {
       packages = with pkgs; [
-        # vim
-        # neovim
+        vim
+        neovim
 
         # Needed for neovim
         gcc
@@ -44,6 +44,25 @@ in {
       shellAliases = {
         vimdiff = "nvim -d";
       };
+    };
+
+    xdg.configFile = {
+      # Configurations
+      "nvim/.luacheckrc".source = ./config/.luacheckrc;
+      "nvim/.stylua.toml".source = ./config/.stylua.toml;
+      "nvim/.neoconf.json".source = ./config/.neoconf.json;
+
+      # Sources
+      "nvim/lua".source = ./config/lua;
+
+      # Our bread and butter
+      "nvim/init.lua".text = ''
+        -- bootstrap lazy.nvim, AstroNvim, and user plugins
+        require("config.lazy")
+
+        -- run polish file at the very end
+        pcall(require, "config.polish")
+      '';
     };
   };
 }

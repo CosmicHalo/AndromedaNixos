@@ -473,6 +473,24 @@
         "type": "github"
       }
     },
+    "neovim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1698262788,
+        "narHash": "sha256-4Y79BCE1jRf4XZpIBifaHRKBZTVvvMZQ6nLDqVlDJs8=",
+        "ref": "refs/heads/main",
+        "rev": "de945d4a82d2e9ea3fcc563c22823ba292838f65",
+        "revCount": 7,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/lecoqjacob/neovim"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/lecoqjacob/neovim"
+      }
+    },
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -762,6 +780,7 @@
         "flake-utils": "flake-utils_2",
         "gitignore": "gitignore_2",
         "home-manager": "home-manager",
+        "neovim": "neovim",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nil": "nil",
         "nix-index-database": "nix-index-database",
