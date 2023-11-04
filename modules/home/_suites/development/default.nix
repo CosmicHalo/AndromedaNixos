@@ -16,10 +16,13 @@ in {
   config = mkIf cfg.enable {
     milkyway = {
       apps = {
+        neovim = enabled;
+
         # IDES
         vscode = enabled;
         jetbrains = enabled;
 
+        # Terminal Emulators
         kitty = {
           enable = true;
           font = {
@@ -27,7 +30,6 @@ in {
             name = "OpenDyslexic";
           };
         };
-
         wezterm = {
           enable = true;
           font = {
@@ -46,7 +48,6 @@ in {
 
       shell = {
         git = enabled;
-        neovim = enabled;
         ssh = enabled;
         # starship = enabled;
         zsh = enabled;

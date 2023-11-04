@@ -5,9 +5,13 @@
   ...
 }:
 with lib; let
-  cfg = config.milkyway.shell.neovim;
+  cfg = config.milkyway.apps.neovim;
+
+  coreImports = lib.andromeda.fs.get-default-nix-files ./core;
 in {
-  options.milkyway.shell.neovim = {
+  imports = coreImports;
+
+  options.milkyway.apps.neovim = {
     enable = mkEnableOption "Neovim";
   };
 

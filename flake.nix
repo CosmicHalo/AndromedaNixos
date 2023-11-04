@@ -180,11 +180,6 @@
       url = "github:nix-community/nixos-vscode-server";
       inputs.flake-utils.follows = "flake-utils";
     };
-
-    neovim = {
-      flake = false;
-      url = "git+https://github.com/lecoqjacob/neovim?submodules=1";
-    };
   };
 
   #***********************
