@@ -1,6 +1,7 @@
 {lib, ...}: let
   inherit
     (lib)
+    head
     types
     hasAttr
     filterAttrs
@@ -76,5 +77,45 @@ in {
       else if (args == null)
       then "nil"
       else "";
+
+    # Creates an option with a nullable type that defaults to null.
+    mkNullOrOption = type: desc:
+      mkOpt (types.nullOr type) null desc;
+
+    defaultNullOpts = rec {
+      mkNullable = type: default: desc:
+        mkNullOrOption type (
+          let
+            defaultDesc = "default: `${default}`";
+          in
+            if desc == ""
+            then defaultDesc
+            else ''
+              ${desc}
+
+              ${defaultDesc}
+            ''
+        );
+
+      mkInt = default: mkNullable lib.types.int (toString default);
+      mkNum = default: mkNullable lib.types.number (toString default);
+      # Positive: >0
+      mkPositiveInt = default: mkNullable lib.types.ints.positive (toString default);
+      # Unsigned: >=0
+      mkUnsignedInt = default: mkNullable lib.types.ints.unsigned (toString default);
+
+      mkBool = default:
+        mkNullable lib.types.bool (
+          if default
+          then "true"
+          else "false"
+        );
+
+      mkStr = default: mkNullable lib.types.str ''${builtins.toString default}'';
+
+      mkEnumFirstDefault = enum: mkEnum enum (head enum);
+      mkAttributeSet = default: mkNullable lib.types.attrs ''${default}'';
+      mkEnum = enum: default: mkNullable (lib.types.enum enum) ''"${default}"'';
+    };
   };
 }

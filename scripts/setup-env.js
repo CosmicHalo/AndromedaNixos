@@ -4,7 +4,7 @@ const path = require("path");
 const cp = require("child_process");
 
 const userHomeDir = os.homedir();
-const DIRS = [`${userHomeDir}/.config/home-manager`];
+const DIRS = [`/etc/nixos`, `${userHomeDir}/.config/home-manager`];
 
 function rmDir(dirPath) {
   cp.execSync(`sudo rm -rf ${dirPath}`, { stdio: "inherit" });

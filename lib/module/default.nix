@@ -1,5 +1,6 @@
 {lib, ...}: let
-  inherit (lib) mkIf;
+  inherit (lib) types mkIf;
+  inherit (lib.andromeda.module) mkOpt;
 in rec {
   isEnabled = option: config: let
     options =
@@ -14,6 +15,18 @@ in rec {
 
   # Helper Functions
   isNyxEnabled = config: isMilkyWayEnabled "nix.chaotic-nyx" config;
+
+  #************
+  #* Options
+  #************
+
+  mkCompositeOption = default: desc: options:
+    mkOpt (types.submodule {inherit options;}) default desc;
+
+  mkCompositeOption' = desc: options: mkCompositeOption null desc options;
+
+  mkOptWithExample = type: default: desc: example:
+    (mkOpt type default desc) // {inherit example;};
 
   mkIfNonNull' = x: y: (mkIf (x != null) y);
   mkIfNonNull = x: (mkIfNonNull' x x);

@@ -83,6 +83,7 @@ in {
           libsForQt5.kdeconnect-kde
           libsForQt5.kdegraphics-thumbnailers
           libsForQt5.kimageformats
+          libsForQt5.krdc
           libsForQt5.ksshaskpass
           libsForQt5.kwalletmanager
           libsForQt5.plasma-workspace

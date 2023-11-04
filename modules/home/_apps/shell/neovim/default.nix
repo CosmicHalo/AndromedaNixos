@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.milkyway.apps.neovim;
 
-  coreImports = lib.andromeda.fs.get-nix-files ./test;
+  coreImports = lib.andromeda.fs.get-nix-files ./core;
 in {
   imports = coreImports;
 
@@ -40,9 +40,7 @@ in {
       ];
 
       sessionVariables = {
-        PAGER = "bat";
         EDITOR = "nvim";
-        MANPAGER = "bat";
       };
 
       shellAliases = {
@@ -55,9 +53,6 @@ in {
       "nvim/.luacheckrc".source = ./config/.luacheckrc;
       "nvim/.stylua.toml".source = ./config/.stylua.toml;
       "nvim/.neoconf.json".source = ./config/.neoconf.json;
-
-      # Sources
-      # "nvim/lua".source = ./config/lua;
 
       # Our bread and butter
       "nvim/init.lua".text = ''

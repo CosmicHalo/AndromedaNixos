@@ -31,6 +31,35 @@ in
         command = "fd --extension nix --exec nix-instantiate --parse --quiet {} >/dev/null";
       }
 
+      # Nixos
+      {
+        name = "build-nix";
+        help = "Build the current configuration";
+        command = "nixos-rebuild build --fast --max-jobs auto";
+      }
+      {
+        name = "test-nix";
+        help = "Activate the current configuration";
+        command = "sudo nixos-rebuild test --fast --max-jobs auto --cores 0";
+      }
+      {
+        name = "switch-nix";
+        help = "Switch to the current configuration";
+        command = "sudo nixos-rebuild switch --fast --max-jobs auto --cores 0";
+      }
+
+      # HM
+      {
+        name = "build-hm";
+        help = "Build the current hm configuration";
+        command = "home-manager build --max-jobs auto --cores 0";
+      }
+      {
+        name = "switch-hm";
+        help = "Switch to the current hm configuration";
+        command = "home-manager switch --max-jobs auto --cores 0";
+      }
+
       #########
       # Nixos
       #########

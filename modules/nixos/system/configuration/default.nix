@@ -9,6 +9,8 @@
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.system.configuration;
+
+  usLocale = "en_US.UTF-8";
 in {
   options.milkyway.system.configuration = with types; {
     enable = mkBoolOpt true "Whether or not to enable common system features.";
@@ -72,31 +74,23 @@ in {
         "en_GB.UTF-8/UTF-8"
         "en_US.UTF-8/UTF-8"
       ];
+
+      extraLocaleSettings = {
+        LANG = mkForce usLocale;
+        LC_ADDRESS = mkForce usLocale;
+        LC_COLLATE = mkForce usLocale;
+        LC_CTYPE = mkForce usLocale;
+        LC_IDENTIFICATION = mkForce usLocale;
+        LC_MEASUREMENT = mkForce usLocale;
+        LC_MESSAGES = mkForce usLocale;
+        LC_MONETARY = mkForce usLocale;
+        LC_NAME = mkForce usLocale;
+        LC_NUMERIC = mkForce usLocale;
+        LC_PAPER = mkForce usLocale;
+        LC_TELEPHONE = mkForce usLocale;
+        LC_TIME = mkForce usLocale;
+      };
     };
-
-    # i18n = {
-    #   # inherit (cfg.locale.i18n) defaultLocale;
-
-    #   # supportedLocales =
-    #   #   options.i18n.supportedLocales.default
-    #   #   ++ cfg.locale.i18n.extraSupportedLocales;
-
-    #   # extraLocaleSettings = {
-    #   #   LANG = mkForce usLocale;
-    #   #   LC_ADDRESS = mkForce usLocale;
-    #   #   LC_COLLATE = mkForce usLocale;
-    #   #   LC_CTYPE = mkForce usLocale;
-    #   #   LC_IDENTIFICATION = mkForce usLocale;
-    #   #   LC_MEASUREMENT = mkForce usLocale;
-    #   #   LC_MESSAGES = mkForce usLocale;
-    #   #   LC_MONETARY = mkForce usLocale;
-    #   #   LC_NAME = mkForce usLocale;
-    #   #   LC_NUMERIC = mkForce usLocale;
-    #   #   LC_PAPER = mkForce usLocale;
-    #   #   LC_TELEPHONE = mkForce usLocale;
-    #   #   LC_TIME = mkForce usLocale;
-    #   # };
-    # };
 
     /*
      **********

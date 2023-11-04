@@ -15,7 +15,7 @@ options.json
 
 # Running `nixos-rebuild build` or `nix build` generates a result directory.
 result*
-core
+./core
 
 secrets/*.key
 keys/

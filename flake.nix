@@ -1,8 +1,8 @@
 {
   description = "A highly /nix/store/m380jmz5j05c3y3l2j05c97mmpbzbp6c-init.luaesome system configuration.";
 
-  outputs = inputs @ {andromeda, ...}: let
-    milkyway-lib = {
+  outputs = inputs @ {andromeda, ...}:
+    andromeda.lib.mkFlake {
       inherit inputs;
       src = ./.;
 
@@ -13,80 +13,75 @@
           title = "MilkyWay Galaxy";
         };
       };
-    };
+      channels-config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+        input-fonts.acceptLicense = true;
+      };
 
-    sources = import ./nix/sources.nix;
-    specialArgs = {
-      inherit sources;
-      inherit (sources) my_ssh_keys gpg-base-conf;
-    };
-  in
-    andromeda.lib.mkFlake (milkyway-lib
-      // {
-        channels-config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-          input-fonts.acceptLicense = true;
+      ###########
+      # OVERLAYS
+      ###########
+      overlays = with inputs; [
+        fenix.overlays.default
+        chaotic.overlays.default
+        devshell.overlays.default
+        neovim-nightly-overlay.overlay
+      ];
+
+      ##########
+      # SYSTEMS
+      ##########
+      systems = {
+        specialArgs = let
+          sources = import ./nix/sources.nix;
+        in {
+          inherit sources;
+          inherit (sources) my_ssh_keys gpg-base-conf;
         };
 
-        ###########
-        # OVERLAYS
-        ###########
-        overlays = with inputs; [
-          fenix.overlays.default
-          chaotic.overlays.default
-          devshell.overlays.default
-          neovim-nightly-overlay.overlay
+        modules.nixos = with inputs; [
+          chaotic.nixosModules.default
+          vscode-server.nixosModules.default
+          nix-index-database.nixosModules.nix-index
         ];
+      };
 
-        ##########
-        # SYSTEMS
-        ##########
-        systems = {
-          inherit specialArgs;
+      ##########
+      # HOMES
+      ##########
+      # homes.users."n16hth4wk@supernova".modules = with inputs; [
+      #   chaotic.homeManagerModules.default
+      # ];
 
-          modules.nixos = with inputs; [
-            chaotic.nixosModules.default
-            vscode-server.nixosModules.default
-            nix-index-database.nixosModules.nix-index
-          ];
-        };
+      ##########
+      # ALIAS
+      ##########
+      alias = {
+        shells.default = "milkyway-shell";
+      };
 
-        ##########
-        # HOMES
-        ##########
-        # homes.users."n16hth4wk@supernova".modules = with inputs; [
-        #   chaotic.homeManagerModules.default
-        # ];
+      ##########
+      # Outputs
+      ##########
+      outputs-builder = channels: {
+        formatter = channels.nixpkgs.alejandra;
 
-        ##########
-        # ALIAS
-        ##########
-        alias = {
-          shells.default = "milkyway-shell";
-        };
-
-        ##########
-        # Outputs
-        ##########
-        outputs-builder = channels: {
-          formatter = channels.nixpkgs.alejandra;
-
-          checks.pre-commit-check = inputs.pre-commit-hooks.lib.${channels.nixpkgs.system}.run {
-            src = ./.;
-            hooks = {
-              alejandra.enable = true;
-              deadnix.enable = true;
-              gptcommit.enable = true;
-              nil.enable = true;
-              pre-commit-hook-ensure-sops.enable = true;
-              prettier.enable = true;
-              statix.enable = true;
-              yamllint.enable = true;
-            };
+        checks.pre-commit-check = inputs.pre-commit-hooks.lib.${channels.nixpkgs.system}.run {
+          src = ./.;
+          hooks = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            gptcommit.enable = true;
+            nil.enable = true;
+            pre-commit-hook-ensure-sops.enable = true;
+            prettier.enable = true;
+            statix.enable = true;
+            yamllint.enable = true;
           };
         };
-      });
+      };
+    };
 
   #**********
   #* CORE
