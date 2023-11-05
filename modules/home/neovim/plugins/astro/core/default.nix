@@ -44,7 +44,8 @@ in {
       mkOpt (attrsOf autocmdOpt) {} "Easily configure auto commands"
       // {
         apply = autoCommands:
-          mapAttrs (_: autocmd: autocmd // {callback = vim.mkRaw autocmd.callback;}) autoCommands;
+          mapAttrs (_: autocmd: autocmd // {callback = vim.mkRaw autocmd.callback;})
+          autoCommands;
       };
 
     commands =
@@ -79,7 +80,9 @@ in {
     on_keys =
       mkOpt (attrsOf (listOf lines)) {} "Easily configure functions on key press"
       // {
-        apply = keys: mapAttrs (_: keyFn: map vim.mkRaw keyFn) keys;
+        apply = keys:
+          mapAttrs (_: keyFn: map vim.mkRaw keyFn)
+          keys;
       };
 
     features = mkCompositeOption' "Configuration table of AstroNvim features" {
@@ -94,11 +97,15 @@ in {
       };
     };
 
-    git_worktrees = defaultNullOpts.mkOptWithExample (listOf attrs) null "Enable git integration for detached worktrees" ''
-      [
-        { toplevel = vim.env.HOME, gitdir = vim.env.HOME .. "/.dotfiles" },
-      ]
-    '';
+    git_worktrees =
+      defaultNullOpts.mkOptWithExample (listOf attrs) null "Enable git integration for detached worktrees" ''
+        [
+          { toplevel = vim.env.HOME, gitdir = vim.env.HOME .. "/.dotfiles" },
+        ]
+      ''
+      // {
+        apply = worktrees: map (tree: lib.mapAttrs (_: v: vim.mkRaw v) tree) worktrees;
+      };
 
     sessions = mkCompositeOption' "Configuration table of session options for AstroNvim's session management powered by Resession" {
       autosave = mkCompositeOption' "Configure auto saving" {

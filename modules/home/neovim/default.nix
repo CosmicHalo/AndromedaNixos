@@ -112,6 +112,13 @@ in {
               ''
             ];
           };
+
+          git_worktrees = [
+            {
+              toplevel = ''vim.env.HOME'';
+              gitdir = ''vim.env.HOME .. " /.dotfiles "'';
+            }
+          ];
         };
       };
     };
