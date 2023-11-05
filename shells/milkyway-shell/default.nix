@@ -12,21 +12,13 @@ in
     devshell.startup.preCommitHooks.text = inputs.self.checks.${system}.pre-commit-check.shellHook;
 
     packages = with pkgs; [
-      alejandra
+      milkyway.alejandra
       fd
     ];
 
     commands = [
       {package = "nix-melt";}
       {package = "pre-commit";}
-
-      {
-        name = "clear-hm";
-        category = "andromeda";
-        help = "Clear home-manager";
-        command = "${pkgs.milkyway.clear-hm}/bin/clear-hm";
-      }
-
       {
         name = "fmt";
         help = "Check Nix formatting";
@@ -38,9 +30,18 @@ in
         command = "fd --extension nix --exec nix-instantiate --parse --quiet {} >/dev/null";
       }
 
+      # Milkyway
+      {
+        name = "clear-hm";
+        category = "milkyway";
+        help = "Clear home-manager";
+        command = "${pkgs.milkyway.clear-hm}/bin/clear-hm";
+      }
+
       # Nixos
       {
         name = "build-nix";
+        category = "milkyway-build";
         help = "Build the current configuration";
         command = "nixos-rebuild build --fast --max-jobs auto";
       }
@@ -51,6 +52,7 @@ in
       }
       {
         name = "switch-nix";
+        category = "milkyway-switch";
         help = "Switch to the current configuration";
         command = "sudo nixos-rebuild switch --fast --max-jobs auto --cores 0";
       }
@@ -58,11 +60,13 @@ in
       # HM
       {
         name = "build-hm";
+        category = "milkyway-build";
         help = "Build the current hm configuration";
         command = "home-manager build --max-jobs auto --cores 0";
       }
       {
         name = "switch-hm";
+        category = "milkyway-switch";
         help = "Switch to the current hm configuration";
         command = "home-manager switch --max-jobs auto --cores 0";
       }

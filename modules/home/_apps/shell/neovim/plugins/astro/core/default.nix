@@ -29,18 +29,6 @@ with lib.milkyway; let
     };
   };
 
-  onKeyOpt = types.submodule {
-    options = {
-      action =
-        mkOpt types.lines ""
-        "Action to run on command";
-
-      desc =
-        mkOpt types.str ""
-        "Description of command";
-    };
-  };
-
   mappingOpts = types.submodule {
     options = {
       key = mkOpt types.str "" "Key to map";
@@ -75,7 +63,7 @@ in {
         (builtins.foldl' (acc: key: acc // mappingCfg key) {} mappingOptions))
       // {
         apply = maps:
-          mapAttrs (n: v:
+          mapAttrs (_n: v:
             foldl (acc: mapping:
               acc
               // {
@@ -89,10 +77,10 @@ in {
       };
 
     on_keys =
-      mkOpt (attrsOf (listOf lines)) {} "Easily configure functions on key press";
-    # // {
-    #   apply = keys: mapAttrs (keyFn: vim.mkRaw keyFn) keys;
-    # };
+      mkOpt (attrsOf (listOf lines)) {} "Easily configure functions on key press"
+      // {
+        apply = keys: mapAttrs (_: keyFn: map vim.mkRaw keyFn) keys;
+      };
 
     features = mkCompositeOption' "Configuration table of AstroNvim features" {
       cmp = mkBoolOpt true "Enable completion";

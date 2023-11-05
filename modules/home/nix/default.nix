@@ -37,8 +37,8 @@ in {
       ++ lib.optional cfgTools.direnv.enable direnv
       ++ lib.optional cfgTools.statix.enable statix
       ++ lib.optional cfgTools.deadnix.enable deadnix
-      ++ lib.optional cfgTools.alejandra.enable alejandra
-      ++ lib.optional cfgTools.flake.enable snowfallorg.flake;
+      ++ lib.optional cfgTools.flake.enable snowfallorg.flake
+      ++ lib.optional cfgTools.alejandra.enable milkyway.alejandra;
 
     /*
      ******
@@ -62,6 +62,7 @@ in {
       direnv = mkIf cfgTools.direnv.enable {
         enable = true;
         nix-direnv = enabled;
+        enableBashIntegration = true; # see note on other shells below
       };
     };
   };

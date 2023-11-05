@@ -1,5 +1,4 @@
 {lib, ...}: let
-  inherit (builtins) isNull;
   inherit (lib) types mkIf head optionalString;
   inherit (lib.andromeda.module) mkOpt;
 in rec {
@@ -37,7 +36,7 @@ in rec {
     mkOpt (types.nullOr type) null desc;
 
   # Creates an option with a composite type that defaults to empty set.
-  mkCompositeOption = default: desc: options:
+  mkCompositeOption = _default: desc: options:
     mkOpt (types.submodule {inherit options;}) {} desc;
 
   # Default is null

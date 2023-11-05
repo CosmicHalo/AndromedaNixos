@@ -65,7 +65,7 @@
       # Outputs
       ##########
       outputs-builder = channels: {
-        formatter = channels.nixpkgs.alejandra;
+        formatter = inputs.self.packages.${channels.nixpkgs.system}.alejandra;
 
         checks.pre-commit-check = inputs.pre-commit-hooks.lib.${channels.nixpkgs.system}.run {
           src = ./.;
