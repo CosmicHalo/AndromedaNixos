@@ -1,6 +1,7 @@
 {lib, ...}: let
-  inherit (lib) types mkIf head optionalString;
   inherit (lib.andromeda.module) mkOpt;
+  inherit (lib.milkyway.vim) highlightType;
+  inherit (lib) types mkIf head optionalString;
 in rec {
   isEnabled = option: config: let
     options =
@@ -26,10 +27,14 @@ in rec {
     if (x == null)
     then null
     else y;
-  mkStringIfNonNull = x: y:
+  mkStringIfNonNull = cond: str:
     optionalString
-    (x != null)
-    y;
+    (cond != null)
+    str;
+  mkStringIfNonNull' = cond:
+    optionalString
+    (cond != null)
+    cond;
 
   # Creates an option with a nullable type that defaults to null.
   mkNullOrOption = type: desc:
@@ -81,7 +86,18 @@ in rec {
     mkLines = default: mkNullable lib.types.lines ''${builtins.toString default}'';
 
     mkEnumFirstDefault = enum: mkEnum enum (head enum);
-    mkAttributeSet = default: mkNullable lib.types.attrs ''${default}'';
+    mkAttrs = default: mkNullable lib.types.attrs ''${default}'';
+    mkAttrsOf = of: default: mkNullable (lib.types.attrsOf of) ''${default}'';
     mkEnum = enum: default: mkNullable (lib.types.enum enum) ''"${default}"'';
+
+    mkHighlight = default: desc:
+      mkNullable
+      highlightType
+      default
+      (
+        if desc == ""
+        then "Highlight settings."
+        else desc
+      );
   };
 }

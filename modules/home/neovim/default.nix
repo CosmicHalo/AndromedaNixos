@@ -120,6 +120,49 @@ in {
             }
           ];
         };
+
+        astroui = {
+          colorscheme = "astrodark";
+
+          # highlights = {
+          #   init = {
+          #     Normal = {
+          #       bg = "#FF0000";
+          #     };
+          #   };
+          # };
+
+          icons = {
+            GitAdd = "";
+          };
+
+          text_icons = {
+            GitAdd = "[+]";
+          };
+
+          status = {
+            attributes = {
+              git_branch = {bold = true;};
+            };
+
+            colors = {
+              git_branch_fg = "#ABCDEF";
+            };
+
+            icon_highlights = {
+              breadcrumbs = false;
+
+              file_icon = {
+                statusline = true;
+                tabline = ''function(self) return self.is_active or self.is_visible end'';
+              };
+            };
+
+            separators = {
+              none = ["" ""];
+            };
+          };
+        };
       };
     };
   };

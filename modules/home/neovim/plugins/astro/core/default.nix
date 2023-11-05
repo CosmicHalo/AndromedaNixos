@@ -104,7 +104,9 @@ in {
         ]
       ''
       // {
-        apply = worktrees: map (tree: lib.mapAttrs (_: v: vim.mkRaw v) tree) worktrees;
+        apply = worktrees:
+          map (tree: lib.mapAttrs (_: v: vim.mkRaw v) tree)
+          worktrees;
       };
 
     sessions = mkCompositeOption' "Configuration table of session options for AstroNvim's session management powered by Resession" {
