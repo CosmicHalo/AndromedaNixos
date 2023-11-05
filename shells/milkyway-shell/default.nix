@@ -21,6 +21,13 @@ in
       {package = "pre-commit";}
 
       {
+        name = "clear-hm";
+        category = "andromeda";
+        help = "Clear home-manager";
+        command = "${pkgs.milkyway.clear-hm}/bin/clear-hm";
+      }
+
+      {
         name = "fmt";
         help = "Check Nix formatting";
         command = "nix fmt \${@} ${rootDir}";

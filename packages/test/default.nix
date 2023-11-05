@@ -28,14 +28,16 @@ with lib; let
       extraPackages
       ++ [pkgs.sqlite];
 
-    normalizedPlugins = map (x:
-      defaultPlugin
-      // (
-        if x ? plugin
-        then x
-        else {plugin = x;}
-      ))
-    plugins;
+    normalizedPlugins =
+      map
+      (x:
+        defaultPlugin
+        // (
+          if x ? plugin
+          then x
+          else {plugin = x;}
+        ))
+      plugins;
 
     neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
       inherit extraPython3Packages withPython3 withRuby withNodeJs viAlias vimAlias;

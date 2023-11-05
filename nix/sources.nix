@@ -8,7 +8,8 @@ let
   in
     if spec.builtin or true
     then
-      builtins_fetchurl {
+      builtins_fetchurl
+      {
         inherit (spec) url sha256;
         name = name';
       }
@@ -23,7 +24,8 @@ let
   in
     if spec.builtin or true
     then
-      builtins_fetchTarball {
+      builtins_fetchTarball
+      {
         name = name';
         inherit (spec) url sha256;
       }
@@ -88,7 +90,8 @@ let
 
   # https://github.com/NixOS/nixpkgs/pull/83241/files#diff-c6f540a4f3bfa4b0e8b6bafd4cd54e8bR695
   sanitizeName = name: (
-    concatMapStrings (s:
+    concatMapStrings
+    (s:
       if builtins.isList s
       then "-"
       else s)
@@ -137,11 +140,13 @@ let
   # If the environment variable NIV_OVERRIDE_${name} is set, then use
   # the path directly as opposed to the fetched source.
   replace = name: drv: let
-    saneName = stringAsChars (c:
-      if (builtins.match "[a-zA-Z0-9]" c) == null
-      then "_"
-      else c)
-    name;
+    saneName =
+      stringAsChars
+      (c:
+        if (builtins.match "[a-zA-Z0-9]" c) == null
+        then "_"
+        else c)
+      name;
     ersatz = builtins.getEnv "NIV_OVERRIDE_${saneName}";
   in
     if ersatz == ""
@@ -161,10 +166,12 @@ let
     or (
       f: set:
         with builtins;
-          listToAttrs (map (attr: {
-            name = attr;
-            value = f attr set.${attr};
-          }) (attrNames set))
+          listToAttrs (map
+            (attr: {
+              name = attr;
+              value = f attr set.${attr};
+            })
+            (attrNames set))
     );
 
   # https://github.com/NixOS/nixpkgs/blob/0258808f5744ca980b9a1f24fe0b1e6f0fecee9c/lib/lists.nix#L295

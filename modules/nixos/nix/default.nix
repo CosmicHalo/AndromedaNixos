@@ -44,12 +44,14 @@ in {
       key = mkOpt str "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "The trusted public key for the substituter.";
     };
 
-    extra-substituters = mkOpt (attrsOf substituters-submodule) {
-      "https://andromeda.cachix.org".key = "andromeda.cachix.org-1:NFRC6xT8LwjhkJ9/d7z6MrbqXrBbMgOucKGxBbXyQRg=";
-      "https://cache.garnix.io".key = "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=";
-      "https://viperml.cachix.org".key = "viperml.cachix.org-1:qZhKBMTfmcLL+OG6fj/hzsMEedgKvZVFRRAhq7j8Vh8=";
-      "https://nix-community.cachix.org".key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
-    } "Extra substituters to configure.";
+    extra-substituters =
+      mkOpt (attrsOf substituters-submodule)
+      {
+        "https://andromeda.cachix.org".key = "andromeda.cachix.org-1:NFRC6xT8LwjhkJ9/d7z6MrbqXrBbMgOucKGxBbXyQRg=";
+        "https://cache.garnix.io".key = "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=";
+        "https://viperml.cachix.org".key = "viperml.cachix.org-1:qZhKBMTfmcLL+OG6fj/hzsMEedgKvZVFRRAhq7j8Vh8=";
+        "https://nix-community.cachix.org".key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+      } "Extra substituters to configure.";
 
     gc = {
       enable = mkBoolOpt true "Whether or not to enable garbage collection.";

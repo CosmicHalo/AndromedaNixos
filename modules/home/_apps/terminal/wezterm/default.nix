@@ -19,7 +19,8 @@ in {
 
   config = mkIf cfg.enable {
     home.packages =
-      optionals (!builtins.isNull
+      optionals
+      (!builtins.isNull
       cfg.font.package) [cfg.font.package];
 
     programs.wezterm = {

@@ -30,9 +30,12 @@ in {
         # Needed for neovim
         gcc
         gnumake
-        luajitPackages.luarocks-nix
         nodejs_18
         unzip
+
+        lua54Packages.lua
+        lua54Packages.inspect
+        lua54Packages.luarocks
 
         #Rust
         toolchain
@@ -62,6 +65,55 @@ in {
         -- run polish file at the very end
         pcall(require, "config.polish")
       '';
+    };
+
+    milkyway.apps.neovim = {
+      plugins = {
+        astrocore = {
+          autocmds = {
+            highlighturl = {
+              desc = "URL Highlighting";
+              event = ["VimEnter" "FileType" "BufEnter" "WinEnter"];
+              callback = ''function() require("astrocore").set_url_match() end'';
+            };
+          };
+
+          commands = {
+            AstroReload = {
+              desc = "Reload AstroNvim (Experimental)";
+              action = ''function() require("astrocore").reload() end'';
+            };
+          };
+
+          mappings = {
+            n = [
+              {
+                key = "<C-s>";
+                action = ":w!<cr>";
+                desc = "Save File";
+              }
+              {
+                key = "<C-q>";
+                action = ":q!<cr>";
+                desc = "quit File";
+              }
+            ];
+          };
+
+          on_keys = {
+            auto_hlsearch = [
+              ''
+                function(char) -- example automatically disables `hlsearch` when not actively searching
+                  if vim.fn.mode() == "n" then
+                    local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
+                    if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
+                  end
+                end,
+              ''
+            ];
+          };
+        };
+      };
     };
   };
 }

@@ -30,7 +30,10 @@ in {
 
   config = {
     home.packages = with pkgs;
-      lib.optional cfgTools.cachix.enable cachix
+      [
+        nixpkgs-fmt
+      ]
+      ++ lib.optional cfgTools.cachix.enable cachix
       ++ lib.optional cfgTools.direnv.enable direnv
       ++ lib.optional cfgTools.statix.enable statix
       ++ lib.optional cfgTools.deadnix.enable deadnix
@@ -52,14 +55,14 @@ in {
     * PROGRAMS *
     ***********
     */
-    # programs = {
-    #   nix-index.enable = true;
-    #   home-manager.enable = true;
+    programs = {
+      nix-index.enable = true;
+      home-manager.enable = true;
 
-    #   direnv = mkIf cfgTools.direnv.enable {
-    #     enable = true;
-    #     nix-direnv = enabled;
-    #   };
-    # };
+      direnv = mkIf cfgTools.direnv.enable {
+        enable = true;
+        nix-direnv = enabled;
+      };
+    };
   };
 }

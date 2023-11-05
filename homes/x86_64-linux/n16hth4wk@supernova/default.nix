@@ -22,6 +22,7 @@ with lib.milkyway; {
 
     apps = {
       bitwarden = enabled;
+      floorp = enabled;
     };
   };
 }
