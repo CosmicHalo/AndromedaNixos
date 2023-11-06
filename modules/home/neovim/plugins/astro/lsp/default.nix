@@ -54,16 +54,15 @@ in {
         "Timeout in milliseconds for formatting requests";
 
       filter =
-        mkLinesOpt ''function(client) return true end''
-        "Fully override the default formatting function"
+        mkNullOrOption lines "Fully override the default formatting function"
         // {
-          apply = filter: vim.mkRaw filter;
+          apply = filter:
+            ifNonNull' filter (vim.mkRaw filter);
         };
     };
 
     handlers =
-      mkOpt (attrsOf (either bool lines)) {}
-      "Configure how language servers get set up"
+      mkNullOrOption (attrsOf (either bool lines)) "Configure how language servers get set up"
       // {
         example = ''
            handlers = {
@@ -87,7 +86,8 @@ in {
         '';
 
         apply = handlers:
-          lib.mapAttrs' (n: v: let
+          ifNonNull' handlers
+          (lib.mapAttrs' (n: v: let
             name =
               if n == "default"
               then "__unkeyed"
@@ -99,12 +99,65 @@ in {
               else v;
           in
             nameValuePair name value)
-          handlers;
+          handlers);
+      };
+
+    mappings =
+      vim.keymaps.mkKeymaps
+      "Configuration of mappings added when attaching a language server during the core `on_attach` function";
+
+    servers =
+      mkOpt (listOf str) []
+      "A list like table of servers that should be setup, useful for enabling language servers not installed with Mason.";
+
+    on_attach =
+      mkNullOpt lines null
+      "A custom `on_attach` function to be run after the default `on_attach` function, takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)"
+      // {
+        example = ''
+          on_attach = "
+            function(client, bufnr)
+              -- do something
+            end,
+          ",
+        '';
+
+        apply = on_attach: vim.mkRawIfNonNull on_attach;
       };
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile = {
+    xdg.configFile = let
+      opts =
+        ''
+          features = ${vim.toLuaObject cfgAstroUI.features},
+          formatting = ${vim.toLuaObject cfgAstroUI.formatting},
+        ''
+        + (mkStringIfNonEmpty cfgAstroUI.capabilities ''
+          capabilities = ${vim.toLuaObject cfgAstroUI.capabilities},
+        '')
+        + (mkStringIfNonEmpty cfgAstroUI.config ''
+          config = ${vim.toLuaObject cfgAstroUI.config},
+        '')
+        + (mkStringIfNonEmpty cfgAstroUI.diagnostics ''
+          diagnostics = ${vim.toLuaObject cfgAstroUI.diagnostics},
+        '')
+        + (mkStringIfNonEmpty cfgAstroUI.flags ''
+          flags = ${vim.toLuaObject cfgAstroUI.flags},
+        '')
+        + (mkStringIfNonNull cfgAstroUI.handlers ''
+          handlers = ${vim.toLuaObject cfgAstroUI.handlers},
+        '')
+        + (mkStringIfNonNull cfgAstroUI.mappings ''
+          mappings = ${vim.toLuaObject cfgAstroUI.mappings},
+        '')
+        + (mkStringIfNonEmpty cfgAstroUI.servers ''
+          servers = ${vim.toLuaObject cfgAstroUI.servers},
+        '')
+        + (mkStringIfNonNull cfgAstroUI.on_attach ''
+          on_attach = ${vim.toLuaObject cfgAstroUI.on_attach},
+        '');
+    in {
       "nvim/lua/plugins/astrolsp.lua".text = ''
         return {
           "AstroNvim/astrolsp",
@@ -112,15 +165,8 @@ in {
           priority = 10000, -- load AstroCore first
           ---@type AstroUIConfig
           opts = {
-            -- easily configure auto commands
-            features = ${vim.toLuaObject cfgAstroUI.features},
-            capabilities = ${vim.toLuaObject cfgAstroUI.capabilities},
-            config = ${vim.toLuaObject cfgAstroUI.config},
-            diagnostics = ${vim.toLuaObject cfgAstroUI.diagnostics},
-            flags = ${vim.toLuaObject cfgAstroUI.flags},
-            formatting = ${vim.toLuaObject cfgAstroUI.formatting},
-            handlers = ${vim.toLuaObject cfgAstroUI.handlers},
-          },
+            ${opts}
+          }
         }
       '';
     };

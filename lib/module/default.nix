@@ -1,6 +1,6 @@
 {lib, ...}: let
   inherit (lib.andromeda.module) mkOpt;
-  inherit (lib) types mkIf head optionalString;
+  inherit (lib) types mkIf head optionalString isString isAttrs isList;
 in rec {
   isEnabled = option: config: let
     options =
@@ -20,32 +20,48 @@ in rec {
   #* Options
   #************
 
-  mkIfNonNull' = x: y: (mkIf (!x != null) y);
-  mkIfNonNull = x: (mkIfNonNull' x x);
+  isEmpty = x:
+    if isString x
+    then x == ""
+    else if isAttrs x
+    then x == {}
+    else if isList x
+    then x == []
+    else null;
+
+  isNotEmpty = x: ! (isEmpty x);
   ifNonNull' = x: y:
     if (x == null)
     then null
     else y;
-  mkStringIfNonNull = cond: str:
+
+  mkIfNonNull = x: y: (mkIf (x != null) y);
+  mkIfNonNull' = x: (mkIfNonNull x x);
+  mkIfNonEmpty = x: y: (mkIf (isNotEmpty x) y);
+
+  mkStringIf = cond: str:
     optionalString
-    (cond != null)
+    cond
     str;
-  mkStringIfNonNull' = cond:
-    optionalString
-    (cond != null)
-    cond;
+  mkStringIfNonNull = cond: str: mkStringIf (cond != null) str;
+  mkStringIfNonEmpty = cond: str: mkStringIf (isNotEmpty cond) str;
 
   ###############
   # Composite Options
   ###############
 
   # Creates an option with a composite type that defaults to empty set.
-  mkCompositeOption = _default: desc: options:
-    mkOpt (types.submodule {inherit options;}) {} desc;
+  mkCompositeOption = default: desc: options:
+    mkOpt (types.submodule {inherit options;}) default desc;
+
   # Default is empty set
   mkCompositeOption' = desc: options: mkCompositeOption {} desc options;
+
+  mkNullCompositeOption = default: desc: options:
+    mkOpt (types.nullOr types.submodule {inherit options;}) default desc;
   # Default is null
-  mkNullCompositeOption' = desc: mkCompositeOption null desc;
+  mkNullCompositeOption' = desc: options:
+    mkOpt (types.nullOr (types.submodule {inherit options;})) null desc;
 
   ###########
   # Null Options

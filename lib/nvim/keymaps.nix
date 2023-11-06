@@ -4,6 +4,7 @@
     foldl'
     types
     isString
+    hasInfix
     mapAttrs
     attrValues
     ;
@@ -12,11 +13,12 @@
     (lib.milkyway)
     vim
     mkOpt
+    ifNonNull'
     mkStrOpt
     mkBoolOpt
     mkNullOrOption
     defaultNullOpts
-    mkCompositeOption'
+    mkNullCompositeOption'
     ;
 in rec {
   # These are the configuration options that change the behavior of each mapping.
@@ -155,27 +157,27 @@ in rec {
   mkKeymaps = desc: let
     mappingCfg = key: {
       "${key}" =
-        mkOpt (types.listOf keymapOptionSubmodule) []
-        "Mappings for [${key}] maps";
+        mkOpt (types.attrsOf vim.keymaps.keymapOptionSubmodule) {}
+        "Mappings for [${key}] mode";
     };
   in
-    (mkCompositeOption' desc
-      (builtins.foldl' (acc: key: acc // mappingCfg key) {} modeList))
+    (mkNullCompositeOption' desc
+      (builtins.foldl' (acc: key: acc // mappingCfg key) {} vim.keymaps.modeList))
     // {
-      apply = keyMaps:
-        mapAttrs (_n: v:
-          foldl' (acc: keyMapping:
-            acc
-            // {
-              "${keyMapping.key}" = {
-                inherit (keyMapping) desc;
-                "__unkeyed" =
-                  if keyMapping.lua
-                  then vim.mkRaw keyMapping.action
-                  else keyMapping.action;
-              };
-            }) {}
-          v)
-        keyMaps;
+      apply = keyMappings:
+        ifNonNull' keyMappings
+        (mapAttrs (_: keyMap:
+          mapAttrs (_n: keyMapping: let
+            isLua = keyMapping.lua || hasInfix "function" keyMapping.action;
+            __unkeyed =
+              if isLua
+              then vim.mkRaw keyMapping.action
+              else keyMapping.action;
+          in {
+            inherit __unkeyed;
+            inherit (keyMapping) desc;
+          })
+          keyMap)
+        keyMappings);
     };
 }

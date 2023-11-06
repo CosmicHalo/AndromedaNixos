@@ -63,6 +63,7 @@ in {
 
     mkRaw = r: {__raw = r;};
     mkRawIfNonNull = v: ifNonNull' v (mkRaw v);
+
     isRawType = v: lib.isAttrs v && lib.hasAttr "__raw" v && lib.isString v.__raw;
     rawType = mkOptionType {
       name = "rawType";

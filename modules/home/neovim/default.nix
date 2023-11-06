@@ -85,25 +85,22 @@ in {
           };
 
           mappings = {
-            n = [
-              {
-                key = "<C-s>";
+            n = {
+              "<C-s>" = {
                 action = ":w!<cr>";
                 desc = "Save File";
-              }
-              {
-                key = "<C-q>";
+              };
+
+              "<C-q>" = {
                 action = ":q!<cr>";
                 desc = "quit File";
-              }
+              };
 
-              {
-                key = "L";
-                lua = true;
+              "L" = {
                 desc = "Next buffer";
                 action = ''function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end'';
-              }
-            ];
+              };
+            };
           };
 
           on_keys = {
@@ -172,87 +169,107 @@ in {
         };
 
         astrolsp = {
-          features = {
-            codelens = true;
-            autoformat = true;
-            inlay_hints = false;
-            lsp_handlers = true;
-            diagnostics_mode = 3;
-            semantic_tokens = true;
-          };
+          # features = {
+          #   codelens = true;
+          #   autoformat = true;
+          #   inlay_hints = false;
+          #   lsp_handlers = true;
+          #   diagnostics_mode = 3;
+          #   semantic_tokens = true;
+          # };
 
-          capabilities = {
-            textDocument = {
-              foldingRange = {dynamicRegistration = false;};
-            };
-          };
+          # capabilities = {
+          #   textDocument = {
+          #     foldingRange = {dynamicRegistration = false;};
+          #   };
+          # };
 
-          config = {
-            lua_ls = {
-              settings = {
-                Lua = {
-                  hint = {
-                    enable = true;
-                    arrayIndex = "Disable";
-                  };
-                };
+          # config = {
+          #   lua_ls = {
+          #     settings = {
+          #       Lua = {
+          #         hint = {
+          #           enable = true;
+          #           arrayIndex = "Disable";
+          #         };
+          #       };
+          #     };
+          #   };
+          #   clangd = {
+          #     capabilities = {
+          #       offsetEncoding = "utf-8";
+          #     };
+          #   };
+          # };
+
+          # diagnostics = {
+          #   update_in_insert = false;
+          # };
+
+          # flags = {
+          #   exit_timeout = 5000;
+          # };
+
+          # formatting = {
+          #   format_on_save = {
+          #     enabled = true;
+
+          #     allow_filetypes = [
+          #       "go"
+          #     ];
+
+          #     ignore_filetypes = [
+          #       "python"
+          #     ];
+          #   };
+
+          #   disabled = [
+          #     "lua_ls"
+          #   ];
+
+          #   timeout_ms = 1000;
+
+          #   filter = ''
+          #     function(client)
+          #       return true
+          #     end
+          #   '';
+          # };
+
+          # handlers = {
+          #   default = ''
+          #     function(server, opts)
+          #       require("lspconfig")[server].setup(opts)
+          #     end
+          #   '';
+
+          #   pyright = ''
+          #     function(_, opts)
+          #       require("lspconfig").pyright.setup(opts)
+          #     end
+          #   '';
+
+          #   rust_analyzer = false;
+          # };
+
+          # mappings = {
+          #   n = [
+          #     {
+          #       key = "gl";
+          #       action = "function() vim.diagnostic.open_float() end";
+          #       desc = "Hover diagnostics";
+          #     }
+          #   ];
+          # };
+
+          mappings = {
+            n = {
+              gl = {
+                lua = true;
+                action = "function() vim.diagnostic.open_float() end";
+                desc = "Hover diagnostics";
               };
             };
-            clangd = {
-              capabilities = {
-                offsetEncoding = "utf-8";
-              };
-            };
-          };
-
-          diagnostics = {
-            update_in_insert = false;
-          };
-
-          flags = {
-            exit_timeout = 5000;
-          };
-
-          formatting = {
-            format_on_save = {
-              enabled = true;
-
-              allow_filetypes = [
-                "go"
-              ];
-
-              ignore_filetypes = [
-                "python"
-              ];
-            };
-
-            disabled = [
-              "lua_ls"
-            ];
-
-            timeout_ms = 1000;
-
-            filter = ''
-              function(client)
-                return true
-              end
-            '';
-          };
-
-          handlers = {
-            default = ''
-              function(server, opts)
-                require("lspconfig")[server].setup(opts)
-              end
-            '';
-
-            pyright = ''
-              function(_, opts)
-                require("lspconfig").pyright.setup(opts)
-              end
-            '';
-
-            rust_analyzer = false;
           };
         };
       };
