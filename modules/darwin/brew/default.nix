@@ -77,8 +77,8 @@ in {
 
       # Optional: Declarative tap management
       # taps = {
-      #   "homebrew/homebrew-core" = flake.inputs.homebrew-core;
-      #   "homebrew/homebrew-cask" = flake.inputs.homebrew-cask;
+      #   "homebrew/homebrew-core" = inputs.homebrew-core;
+      #   "homebrew/homebrew-cask" = inputs.homebrew-cask;
       # };
     };
   };

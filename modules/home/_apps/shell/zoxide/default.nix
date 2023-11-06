@@ -1,12 +1,11 @@
 {
   lib,
   pkgs,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   cfg = config.milkyway.shell.zoxide;
 in {
   options.milkyway.shell.zoxide = with types; {

@@ -1,12 +1,11 @@
 {
   lib,
   pkgs,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   cfg = config.milkyway.development.nodejs;
   cfgRush = config.milkyway.development.nodejs.rush;
 in {

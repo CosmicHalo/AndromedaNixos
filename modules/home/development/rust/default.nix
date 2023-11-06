@@ -1,12 +1,11 @@
 {
   lib,
   pkgs,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   cfg = config.milkyway.development.rust;
 in {
   options.milkyway.development.rust = with types; {

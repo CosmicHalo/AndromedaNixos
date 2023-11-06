@@ -1,12 +1,11 @@
 {
   lib,
   pkgs,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   cfg = config.milkyway.apps.go-task;
 in {
   options.milkyway.apps.go-task = with types; {

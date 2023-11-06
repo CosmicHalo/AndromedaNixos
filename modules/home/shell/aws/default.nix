@@ -1,12 +1,11 @@
 {
   lib,
   pkgs,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   cfg = config.milkyway.shell.aws;
 in {
   options.milkyway.shell.aws = with types; {

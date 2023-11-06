@@ -6,7 +6,7 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim;
+  cfg = config.milkyway.apps.neovim.astronvim;
   cfgAstroUI = cfg.plugins.astroui;
 in {
   options.milkyway.apps.neovim.plugins.astroui = with types; {

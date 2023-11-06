@@ -15,7 +15,7 @@
         "dirtyRev": "0da2c2bb2b07832cc147ea79fbf38ce138ec0da5-dirty",
         "dirtyShortRev": "0da2c2b-dirty",
         "lastModified": 1699302098,
-        "narHash": "sha256-z14P9xG6A5ryU9Ogr3V36f0pbkv9wU30zA5xmNk3uD8=",
+        "narHash": "sha256-vJD00WJ0LE2y/lXP8FIi4S6LcObI8YSu7gpt7DysXQU=",
         "type": "git",
         "url": "file:///Users/jlecoq@dnanexus.com/dev/nix/lib"
       },

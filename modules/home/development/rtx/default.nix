@@ -1,12 +1,11 @@
 {
   lib,
   pkgs,
-  flake,
   config,
   ...
 }:
 with lib;
-with flake.lib.milkyway; let
+with lib.milkyway; let
   tomlFormat = pkgs.formats.toml {};
   cfg = config.milkyway.development.rtx;
 in {

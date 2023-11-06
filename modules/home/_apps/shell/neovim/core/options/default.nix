@@ -6,7 +6,7 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim;
+  cfg = config.milkyway.apps.neovim.astronvim;
 in {
   options.milkyway.apps.neovim.optionscfg = with types;
     mkOpt lines ''''
@@ -32,7 +32,6 @@ in {
           -- Default options that are always set: https://github.com/AstroNvim/AstroNvim/blob/main/lua/astronvim/options.lua
           -- Add any additional options here
         ''
-
         cfg.optionscfg
       ];
     };

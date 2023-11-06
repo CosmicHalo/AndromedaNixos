@@ -6,7 +6,7 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim;
+  cfg = config.milkyway.apps.neovim.astronvim;
   cfgAstroCore = cfg.plugins.astrocore;
 
   autocmdOpt = types.submodule {

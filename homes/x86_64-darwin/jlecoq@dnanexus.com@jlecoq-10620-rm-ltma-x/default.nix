@@ -1,35 +1,25 @@
 {lib, ...}:
-with lib.galaxy; {
+with lib.lib.milkyway; {
   imports = [
     ./zsh.nix
   ];
 
+  home.stateVersion = "23.11";
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
 
-  galaxy = {
-    /*
-     *******
-    * user *
-    *******
-    */
+  lib.milkyway = {
     user = enabled;
+    fonts = enabled;
 
-    /*
-     ******
-    * nix *
-    ******
-    */
-    nix = {
-      home-manager = enabled;
-      tools = {
-        alejandra = enabled;
-        cachix = enabled;
-        deadnix = enabled;
-        direnv = enabled;
-        statix = enabled;
-      };
+    #*********
+    #* Suites
+    #*********
+    suites = {
+      desktop = enabled;
+      development = enabled;
+      nix = enabled;
     };
 
     development = {
@@ -55,6 +45,11 @@ with lib.galaxy; {
           };
         };
       };
+    };
+
+    apps = {
+      bitwarden = enabled;
+      floorp = enabled;
     };
 
     shell = {

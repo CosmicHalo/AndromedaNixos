@@ -6,7 +6,7 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim;
+  cfg = config.milkyway.apps.neovim.astronvim;
 in {
   options.milkyway.apps.neovim.polishcfg = with types;
     mkOpt lines ''''
@@ -40,7 +40,6 @@ in {
           -- augroups/autocommands and custom filetypes also this just pure lua so
           -- anything that doesn't fit in the normal config locations above can go here
         ''
-
         cfg.polishcfg
       ];
     };

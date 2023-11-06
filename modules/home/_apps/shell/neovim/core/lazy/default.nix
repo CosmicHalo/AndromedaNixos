@@ -6,7 +6,7 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim;
+  cfg = config.milkyway.apps.neovim.astronvim;
   lazyCfg = config.milkyway.apps.neovim.lazycfg;
 in {
   options.milkyway.apps.neovim.lazycfg = with types; {
