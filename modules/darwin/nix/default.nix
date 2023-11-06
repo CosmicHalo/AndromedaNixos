@@ -7,7 +7,6 @@
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.nix;
-  choticCfg = cfg.chaotic-nyx;
 
   substituters-submodule = types.submodule (_: {
     options = with types; {
@@ -22,18 +21,13 @@ in {
   options.milkyway.nix = with types; {
     package = mkOpt package pkgs.nixUnstable "Which nix package to use.";
 
-    optimise = {
-      enable = mkBoolOpt true "Whether or not to enable automatic nix store optimiser.";
-      dates = mkOpt (listOf str) ["12.00"] "Specification of the time at which the optimiser will run";
-    };
+    daemonIOLowPriority =
+      mkBoolOpt false
+      "Whether the Nix daemon process should considered to be low priority when doing file system I/O.";
 
-    daemonCPUSchedPolicy =
-      mkOpt (enum ["other" "batch" "idle"])
-      "batch" "Nix daemon process CPU scheduling policy.";
-
-    daemonIOSchedClass =
-      mkOpt (enum ["best-effort" "idle"])
-      "best-effort" "Nix daemon process I/O scheduling class.";
+    daemonProcessType =
+      mkEnumOpt ["Background" "Standard" "Adaptive" "Interactive"] "Standard"
+      "Nix daemon process I/O scheduling class.";
 
     extraNixPackages =
       mkOpt (listOf package) []
@@ -57,25 +51,14 @@ in {
       enable = mkBoolOpt true "Whether or not to enable garbage collection.";
       automatic = mkBoolOpt true "Whether or not to enable automatic garbage collection.";
       options = mkOpt str "--delete-older-than 3d" "The options to pass to nix-collect-garbage.";
-      dates = mkOpt (enum ["daily" "weekly" "monthly"]) "daily" "The frequency of garbage collection.";
-    };
-
-    chaotic-nyx = {
-      enable = mkBoolOpt true "Whether or not to enable chaotic-nyx.";
-      cache = mkEnableOpt' "chaotic-nyx cache";
-      overlay = mkEnableOpt' "chaotic.nyx overlay";
+      interval = mkOpt attrs {
+        Hour = 3;
+        Minute = 15;
+      } "The time interval at which the garbage collector will run.";
     };
   };
 
   config = mkMerge [
-    ##########
-    #Chaotic
-    ##########
-    (mkIf cfg.chaotic-nyx.enable {
-      chaotic.nyx.cache.enable = choticCfg.cache.enable;
-      chaotic.nyx.overlay.enable = choticCfg.overlay.enable;
-    })
-
     ##########
     #  NIX
     ##########
@@ -89,20 +72,17 @@ in {
         cfg.extra-substituters;
 
       environment.systemPackages = with pkgs;
-        [nil]
+        [
+          nil
+        ]
         ++ cfg.extraNixPackages;
 
       nix = {
         inherit (cfg) package;
 
-        optimise = mkIf cfg.optimise.enable {
-          automatic = true;
-          inherit (cfg.optimise) dates;
-        };
-
         # Garbage collection
         gc = mkIf cfg.gc.enable {
-          inherit (cfg.gc) dates options automatic;
+          inherit (cfg.gc) interval options automatic;
         };
 
         # flake-utils-plus
@@ -110,9 +90,7 @@ in {
         generateNixPathFromInputs = true;
         generateRegistryFromInputs = true;
 
-        #  Make builds run with low priority so my system stays responsive
-        inherit (cfg) daemonIOSchedClass;
-        inherit (cfg) daemonCPUSchedPolicy;
+        inherit (cfg) daemonIOLowPriority daemonProcessType;
       };
     }
   ];

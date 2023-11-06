@@ -45,6 +45,10 @@
           vscode-server.nixosModules.default
           nix-index-database.nixosModules.nix-index
         ];
+
+        modules.darwin = with inputs; [
+          nix-homebrew.darwinModules.nix-homebrew
+        ];
       };
 
       ##########
@@ -91,6 +95,11 @@
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
 
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -98,7 +107,7 @@
 
     # Andromeda
     andromeda = {
-      url = "git+file:///home/n16hth4wk/dev/nixos/lib";
+      url = "git+file:///Users/jlecoq@dnanexus.com/dev/nix/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -167,6 +176,29 @@
   inputs = {
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+  };
+
+  ##########  HOMEBREW #########################################
+  inputs = {
+    brew-src = {
+      url = "github:Homebrew/brew";
+      flake = false;
+    };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nix-darwin.follows = "darwin";
+      inputs.brew-src.follows = "brew-src";
       inputs.flake-utils.follows = "flake-utils";
     };
   };

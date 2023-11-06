@@ -1,0 +1,42 @@
+version: "3"
+
+tasks:
+  build:
+    cmds:
+      - darwin-rebuild build --flake .# --show-trace
+  activate:
+    cmds:
+      - darwin-rebuild activate --flake .# --show-trace
+  switch:
+    cmds:
+      - darwin-rebuild switch --flake .# --show-trace
+
+  history:
+    cmds:
+      - echo 'System Profile History'
+      - nix profile history --profile /nix/var/nix/profiles/system
+      - echo 'User Profile History'
+      - nix profile history
+  update:
+    cmds:
+      - nix flake update
+  gc:
+    cmds:
+      # remove all generations older than 2 days
+      - sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 2d
+      - nix profile wipe-history --older-than 2d
+      - nix store gc --debug
+  gc-aggressive:
+    cmds:
+      # remove all old generations
+      - sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
+      - nix profile wipe-history
+      # Destroy all the dead symlinks in the nix store
+      - nix-collect-garbage -d
+      - nix store gc --debug
+  fmt:
+    cmds:
+      - nix fmt
+  clean:
+    cmds:
+      - rm -rf result
