@@ -1,6 +1,5 @@
 {lib, ...}: let
   inherit (lib.andromeda.module) mkOpt;
-  inherit (lib.milkyway.vim) highlightType;
   inherit (lib) types mkIf head optionalString;
 in rec {
   isEnabled = option: config: let
@@ -36,18 +35,25 @@ in rec {
     (cond != null)
     cond;
 
-  # Creates an option with a nullable type that defaults to null.
-  mkNullOrOption = type: desc:
-    mkOpt (types.nullOr type) null desc;
+  ###############
+  # Composite Options
+  ###############
 
   # Creates an option with a composite type that defaults to empty set.
   mkCompositeOption = _default: desc: options:
     mkOpt (types.submodule {inherit options;}) {} desc;
-
-  # Default is null
-  mkNullCompositeOption' = desc: mkCompositeOption null desc;
   # Default is empty set
   mkCompositeOption' = desc: options: mkCompositeOption {} desc options;
+  # Default is null
+  mkNullCompositeOption' = desc: mkCompositeOption null desc;
+
+  ###########
+  # Null Options
+  ###########
+
+  # Creates an option with a nullable type that defaults to null.
+  mkNullOrOption = type: desc:
+    mkOpt (types.nullOr type) null desc;
 
   defaultNullOpts = rec {
     mkNullable = type: default: desc:
@@ -63,10 +69,6 @@ in rec {
             ${defaultDesc}
           ''
       );
-
-    # Creates an option with an example
-    mkOptWithExample = type: default: desc: example:
-      (mkNullable type default desc) // {inherit example;};
 
     mkInt = default: mkNullable lib.types.int (toString default);
     mkNum = default: mkNullable lib.types.number (toString default);
@@ -89,15 +91,5 @@ in rec {
     mkAttrs = default: mkNullable lib.types.attrs ''${default}'';
     mkAttrsOf = of: default: mkNullable (lib.types.attrsOf of) ''${default}'';
     mkEnum = enum: default: mkNullable (lib.types.enum enum) ''"${default}"'';
-
-    mkHighlight = default: desc:
-      mkNullable
-      highlightType
-      default
-      (
-        if desc == ""
-        then "Highlight settings."
-        else desc
-      );
   };
 }

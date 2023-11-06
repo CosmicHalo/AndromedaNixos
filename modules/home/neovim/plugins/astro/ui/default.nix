@@ -10,7 +10,7 @@ with lib.milkyway; let
   cfgAstroUI = cfg.plugins.astroui;
 in {
   options.milkyway.apps.neovim.plugins.astroui = with types; {
-    colorscheme = mkOpt str "onedark" "Colorscheme to use";
+    colorscheme = mkOpt str "astrodark" "Colorscheme to use";
 
     highlights =
       mkOpt (attrsOf vim.highlightType) {}
@@ -66,15 +66,18 @@ in {
         };
       };
 
-      separators = mkCompositeOption' "Configure characters used as separators for various elements" {
-        tab = mkOpt (listOf str) [] "Configure separators for tab elements";
-        left = mkOpt (listOf str) [] "Configure separators for left elements";
-        path = mkOpt (listOf str) [] "Configure separators for path elements";
-        right = mkOpt (listOf str) [] "Configure separators for right elements";
-        center = mkOpt (listOf str) [] "Configure separators for center elements";
-        breadcrumbs = mkOpt (listOf str) [] "Configure separators for breadcrumbs elements";
-        none = mkOpt (listOf str) [] "Configure separators for elements that have no separators";
-      };
+      separators = let
+        mkSeperatorOpt = desc: mkOpt (either str (listOf str)) [] desc;
+      in
+        mkCompositeOption' "Configure characters used as separators for various elements" {
+          tab = mkSeperatorOpt "Configure separators for tab elements";
+          left = mkSeperatorOpt "Configure separators for left elements";
+          path = mkSeperatorOpt "Configure separators for path elements";
+          right = mkSeperatorOpt "Configure separators for right elements";
+          center = mkSeperatorOpt "Configure separators for center elements";
+          breadcrumbs = mkSeperatorOpt "Configure separators for breadcrumbs elements";
+          none = mkSeperatorOpt "Configure separators for elements that have no separators";
+        };
     };
   };
 
@@ -95,10 +98,8 @@ in {
             --   `init`: table of highlights to apply to all colorschemes
             --   `<colorscheme_name>` override highlights in the colorscheme with name: `<colorscheme_name>`
             highlights = ${vim.toLuaObject cfgAstroUI.highlights},
-
             icons = ${vim.toLuaObject cfgAstroUI.icons},
             textIcons = ${vim.toLuaObject cfgAstroUI.text_icons},
-
             status = ${vim.toLuaObject cfgAstroUI.status},
           },
         }

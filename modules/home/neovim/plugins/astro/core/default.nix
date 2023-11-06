@@ -28,16 +28,6 @@ with lib.milkyway; let
         "Description of command";
     };
   };
-
-  mappingOpts = types.submodule {
-    options = {
-      key = mkOpt types.str "" "Key to map";
-      desc = mkOpt types.str "" "Description of command";
-      action = defaultNullOpts.mkLines "" "Action to run on command";
-    };
-  };
-  mappingOptions = ["" "n" "v" "x" "s" "o" "!" "i" "l" "c" "t"];
-  mappingCfg = key: {"${key}" = mkOpt (types.listOf mappingOpts) [] "Mappings for [${key}] maps";};
 in {
   options.milkyway.apps.neovim.plugins.astrocore = with types; {
     autocmds =
@@ -60,22 +50,8 @@ in {
       };
 
     mappings =
-      (mkCompositeOption' "Configuration table of AstroNvim features"
-        (builtins.foldl' (acc: key: acc // mappingCfg key) {} mappingOptions))
-      // {
-        apply = maps:
-          mapAttrs (_n: v:
-            foldl (acc: mapping:
-              acc
-              // {
-                "${mapping.key}" = {
-                  inherit (mapping) desc;
-                  "__unkeyed" = mapping.action;
-                };
-              }) {}
-            v)
-          maps;
-      };
+      vim.keymaps.mkKeymaps
+      "Configuration table of AstroNvim features";
 
     on_keys =
       mkOpt (attrsOf (listOf lines)) {} "Easily configure functions on key press"
@@ -98,15 +74,17 @@ in {
     };
 
     git_worktrees =
-      defaultNullOpts.mkOptWithExample (listOf attrs) null "Enable git integration for detached worktrees" ''
-        [
-          { toplevel = vim.env.HOME, gitdir = vim.env.HOME .. "/.dotfiles" },
-        ]
-      ''
+      mkNullOpt (listOf attrs) null "Enable git integration for detached worktrees"
       // {
         apply = worktrees:
           map (tree: lib.mapAttrs (_: v: vim.mkRaw v) tree)
           worktrees;
+
+        example = ''
+          [
+            { toplevel = vim.env.HOME, gitdir = vim.env.HOME .. "/.dotfiles" },
+          ]
+        '';
       };
 
     sessions = mkCompositeOption' "Configuration table of session options for AstroNvim's session management powered by Resession" {

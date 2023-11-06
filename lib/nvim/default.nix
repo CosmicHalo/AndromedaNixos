@@ -15,6 +15,8 @@
   inherit (lib.milkyway) mkOpt ifNonNull' mkNullOrOption;
 in {
   vim = rec {
+    keymaps = import ./keymaps.nix {inherit lib;};
+
     # Black functional magic that converts a bunch of different Nix types to their
     # lua equivalents!
     toLuaObject = args:

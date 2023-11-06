@@ -5,21 +5,25 @@
   ...
 }: let
   inherit (lib) types mkIf;
-  inherit (lib.milkyway) hasPackage mkOpt;
+  inherit (lib.milkyway) hasPackage mkOpt enabled disabled;
 
-  hasExa = hasPackage "eza" config.home.packages;
+  hasLSD = hasPackage "lsd" config.home.packages;
+  hasEza = hasPackage "eza" config.home.packages;
 in {
   options.milkyway.shell = with types; {
     commonShellAliases = mkOpt (attrsOf str) {} "Common shell aliases";
   };
 
   config = {
+    # Default to using lsd
+    milkyway.shell.lsd = enabled;
+    milkyway.shell.eza = disabled;
+
     home.packages = with pkgs; [
       autorandr
       bat
       btop
       curl
-      eza
       fzf
       fd
       gh
@@ -57,6 +61,7 @@ in {
       "diffnix" = "nvd diff $(sh -c 'ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2')";
       "dir" = "dir --color=auto";
       "egrep" = "egrep --color=auto";
+      "exa" = mkIf hasEza "eza";
       "fastfetch" = "fastfetch -l nixos";
       "fgrep" = "fgrep --color=auto";
       "g" = "git";
@@ -66,12 +71,12 @@ in {
       "ip" = "ip --color=auto";
       "jctl" = "journalctl -p 3 -xb";
 
-      exa = mkIf hasExa "eza";
-      ls = mkIf hasExa "eza -a --color=always --group-directories-first --icons";
-      ll = mkIf hasExa "ls -ll"; # long format
-      la = mkIf hasExa "ls -la"; # long format
-      lt = mkIf hasExa "ls -T"; # tree listing
-      "l." = mkIf hasExa "ll .*"; # show only dotfiles
+      ls =
+        if hasEza
+        then "${pkgs.eza}/bin/eza"
+        else if hasLSD
+        then "${pkgs.lsd}/bin/lsd -gF --sort=extension --color=auto"
+        else "ls -F --color=auto";
 
       "md" = "mkdir -p";
       "micro" = "micro -colorscheme geany -autosu true -mkparents true";

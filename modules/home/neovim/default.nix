@@ -6,10 +6,9 @@
 }:
 with lib; let
   cfg = config.milkyway.apps.neovim;
-
-  coreImports = lib.andromeda.fs.get-nix-files ./core;
+  # coreImports = lib.andromeda.fs.get-nix-files ./core;
 in {
-  imports = coreImports;
+  # imports = coreImports;
 
   options.milkyway.apps.neovim = {
     enable = mkEnableOption "Neovim";
@@ -59,7 +58,7 @@ in {
 
       # Our bread and butter
       "nvim/init.lua".text = ''
-        -- bootstrap lazy.nvim, AstroNvim, and user plugins
+        -- bootstrap lazy.nvim; AstroNvim; and user plugins
         require("config.lazy")
 
         -- run polish file at the very end
@@ -97,6 +96,13 @@ in {
                 action = ":q!<cr>";
                 desc = "quit File";
               }
+
+              {
+                key = "L";
+                lua = true;
+                desc = "Next buffer";
+                action = ''function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end'';
+              }
             ];
           };
 
@@ -105,10 +111,10 @@ in {
               ''
                 function(char) -- example automatically disables `hlsearch` when not actively searching
                   if vim.fn.mode() == "n" then
-                    local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
+                    local new_hlsearch = vim.tbl_contains({ "<CR>"; "n"; "N"; "*"; "#"; "?"; "/" }, vim.fn.keytrans(char))
                     if vim.opt.hlsearch:get() ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
                   end
-                end,
+                end;
               ''
             ];
           };
@@ -133,9 +139,8 @@ in {
           # };
 
           icons = {
-            GitAdd = "";
+            GitAdd = "";
           };
-
           text_icons = {
             GitAdd = "[+]";
           };
@@ -160,7 +165,94 @@ in {
 
             separators = {
               none = ["" ""];
+              tab = ["" ""];
+              breadcrumbs = "  ";
             };
+          };
+        };
+
+        astrolsp = {
+          features = {
+            codelens = true;
+            autoformat = true;
+            inlay_hints = false;
+            lsp_handlers = true;
+            diagnostics_mode = 3;
+            semantic_tokens = true;
+          };
+
+          capabilities = {
+            textDocument = {
+              foldingRange = {dynamicRegistration = false;};
+            };
+          };
+
+          config = {
+            lua_ls = {
+              settings = {
+                Lua = {
+                  hint = {
+                    enable = true;
+                    arrayIndex = "Disable";
+                  };
+                };
+              };
+            };
+            clangd = {
+              capabilities = {
+                offsetEncoding = "utf-8";
+              };
+            };
+          };
+
+          diagnostics = {
+            update_in_insert = false;
+          };
+
+          flags = {
+            exit_timeout = 5000;
+          };
+
+          formatting = {
+            format_on_save = {
+              enabled = true;
+
+              allow_filetypes = [
+                "go"
+              ];
+
+              ignore_filetypes = [
+                "python"
+              ];
+            };
+
+            disabled = [
+              "lua_ls"
+            ];
+
+            timeout_ms = 1000;
+
+            filter = ''
+              function(client)
+                return true
+              end
+            '';
+          };
+
+          handlers = {
+            default = ''
+              function(server, opts)
+                require("lspconfig")[server].setup(opts)
+              end
+            '';
+
+            pyright = ''
+              function(_, opts)
+                require("lspconfig").pyright.setup(opts)
+              end
+            '';
+
+            rust_analyzer = false;
           };
         };
       };

@@ -51,8 +51,8 @@ in {
       syntaxHighlighting.enable = true;
 
       shellAliases =
-        commonShellAliases
-        // cfg.extraShellAliases
+        mapAttrs (_n: v: lib.mkForce v) commonShellAliases
+        // mapAttrs (_n: v: lib.mkForce v) cfg.extraShellAliases
         // {
           # General useful things & theming
           "cls" = "clear";
