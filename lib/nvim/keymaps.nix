@@ -1,7 +1,6 @@
 {lib, ...}: let
   inherit
     (lib)
-    foldl'
     types
     isString
     hasInfix

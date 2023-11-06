@@ -158,7 +158,7 @@ in {
           on_attach = ${vim.toLuaObject cfgAstroUI.on_attach},
         '');
     in {
-      "nvim/lua/plugins/astrolsp.lua".text = ''
+      "nvim/lua/plugins/core/astrolsp.lua".text = ''
         return {
           "AstroNvim/astrolsp",
           lazy = false, -- disable lazy loading

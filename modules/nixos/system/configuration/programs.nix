@@ -21,6 +21,7 @@ in {
       killall
       nvd
       rsync
+      stow
       sysz
       tldr
       ugrep

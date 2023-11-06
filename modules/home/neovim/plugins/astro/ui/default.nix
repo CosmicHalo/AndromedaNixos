@@ -53,16 +53,18 @@ in {
         ";
 
       icon_highlights = mkCompositeOption' "Configure which icons that are highlighted based on context" {
-        breadcrumbs = mkBoolOpt false "Enable or disable breadcrumb icon highlighting";
+        breadcrumbs = mkBoolOpt true "Enable or disable breadcrumb icon highlighting";
 
-        file_icon = mkCompositeOption' "Enable or disable the highlighting of filetype icons both in the statusline and tabline" {
-          tabline =
-            mkOpt lines "" "Tabline function to use for filetype icons"
-            // {apply = lines: vim.mkRaw lines;};
-
+        file_icon = mkNullCompositeOption' "Enable or disable the highlighting of filetype icons both in the statusline and tabline" {
           statusline =
             mkBoolOpt true
             "Enable or disable filetype icon highlighting in the statusline";
+
+          tabline =
+            defaultNullOpts.mkLines "" "Tabline function to use for filetype icons"
+            // {
+              apply = lines: ifNonNull' vim.mkRaw lines;
+            };
         };
       };
 
@@ -82,25 +84,36 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile = {
-      "nvim/lua/plugins/astroui.lua".text = ''
+    xdg.configFile = let
+      opts =
+        ''
+          colorscheme = ${vim.toLuaObject cfgAstroUI.colorscheme},
+        ''
+        + (mkStringIfNonEmpty cfgAstroUI.highlights ''
+          -- Override highlights in any colorscheme
+          -- Keys can be:
+          --   `init`: table of highlights to apply to all colorschemes
+          --   `<colorscheme_name>` override highlights in the colorscheme with name: `<colorscheme_name>`
+          highlights = ${vim.toLuaObject cfgAstroUI.highlights},
+        '')
+        + (mkStringIfNonEmpty cfgAstroUI.icons ''
+          icons = ${vim.toLuaObject cfgAstroUI.icons},
+        '')
+        + (mkStringIfNonEmpty cfgAstroUI.text_icons ''
+          text_icons = ${vim.toLuaObject cfgAstroUI.text_icons},
+        '')
+        + (mkStringIfNonEmpty cfgAstroUI.status ''
+          status = ${vim.toLuaObject cfgAstroUI.status},
+        '');
+    in {
+      "nvim/lua/plugins/core/astroui.lua".text = ''
         return {
           "AstroNvim/astroui",
           lazy = false, -- disable lazy loading
           priority = 10000, -- load AstroCore first
           ---@type AstroUIConfig
           opts = {
-            -- easily configure auto commands
-            colorscheme = ${vim.toLuaObject cfgAstroUI.colorscheme},
-
-            -- Override highlights in any colorscheme
-            -- Keys can be:
-            --   `init`: table of highlights to apply to all colorschemes
-            --   `<colorscheme_name>` override highlights in the colorscheme with name: `<colorscheme_name>`
-            highlights = ${vim.toLuaObject cfgAstroUI.highlights},
-            icons = ${vim.toLuaObject cfgAstroUI.icons},
-            textIcons = ${vim.toLuaObject cfgAstroUI.text_icons},
-            status = ${vim.toLuaObject cfgAstroUI.status},
+            ${opts}
           },
         }
       '';

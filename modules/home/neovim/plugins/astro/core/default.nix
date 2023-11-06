@@ -77,8 +77,9 @@ in {
       mkNullOpt (listOf attrs) null "Enable git integration for detached worktrees"
       // {
         apply = worktrees:
-          map (tree: lib.mapAttrs (_: v: vim.mkRaw v) tree)
-          worktrees;
+          ifNonNull' worktrees
+          (map (tree: lib.mapAttrs (_: v: vim.mkRaw v) tree)
+            worktrees);
 
         example = ''
           [
@@ -102,8 +103,38 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile = {
-      "nvim/lua/plugins/astrocore.lua".text = ''
+    xdg.configFile = let
+      opts =
+        ''
+          -- configure AstroNvim features
+          features = ${vim.toLuaObject cfgAstroCore.features},
+        ''
+        + (mkStringIfNonEmpty cfgAstroCore.autocmds ''
+          -- easily configure auto commands
+          autocmds = ${vim.toLuaObject cfgAstroCore.autocmds},
+        '')
+        + (mkStringIfNonEmpty cfgAstroCore.commands ''
+          -- easily configure user commands
+          commands = ${vim.toLuaObject cfgAstroCore.commands},
+        '')
+        + (mkStringIfNonEmpty cfgAstroCore.on_keys ''
+          -- Configuration of vim mappings to create
+          mappings = ${vim.toLuaObject cfgAstroCore.mappings},
+        '')
+        + (mkStringIfNonEmpty cfgAstroCore.on_keys ''
+          -- easily configure functions on key press
+          on_keys = ${vim.toLuaObject cfgAstroCore.on_keys},
+        '')
+        + (mkStringIfNonNull cfgAstroCore.git_worktrees ''
+          -- Enable git integration for detached worktrees
+          git_worktrees = ${vim.toLuaObject cfgAstroCore.git_worktrees},
+        '')
+        + (mkStringIfNonEmpty cfgAstroCore.sessions ''
+          -- Configuration table of session options for AstroNvim's session management powered by Resession
+          sessions = ${vim.toLuaObject cfgAstroCore.sessions},
+        '');
+    in {
+      "nvim/lua/plugins/core/astrocore.lua".text = ''
         return {
           "AstroNvim/astrocore",
           dependencies = { "nvim-lua/plenary.nvim" },
@@ -111,26 +142,7 @@ in {
           priority = 10000, -- load AstroCore first
           ---@type AstroCoreOpts
           opts = {
-            -- easily configure auto commands
-            autocmds = ${vim.toLuaObject cfgAstroCore.autocmds},
-
-            -- easily configure user commands
-            commands = ${vim.toLuaObject cfgAstroCore.commands},
-
-            -- Configuration of vim mappings to create
-            mappings = ${vim.toLuaObject cfgAstroCore.mappings},
-
-            -- easily configure functions on key press
-            on_keys = ${vim.toLuaObject cfgAstroCore.on_keys},
-
-            -- configure AstroNvim features
-            features = ${vim.toLuaObject cfgAstroCore.features},
-
-            -- Enable git integration for detached worktrees
-            git_worktrees = ${vim.toLuaObject cfgAstroCore.git_worktrees},
-
-            -- Configuration table of session options for AstroNvim's session management powered by Resession
-            sessions = ${vim.toLuaObject cfgAstroCore.sessions},
+            ${opts}
           },
         }
       '';
