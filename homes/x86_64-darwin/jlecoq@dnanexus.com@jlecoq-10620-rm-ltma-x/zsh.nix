@@ -81,26 +81,26 @@
       zplug = {
         enable = true;
 
-        plugins = [
-          "b4b4r07/enhancd"
-        ];
+        # plugins = [
+        #   "b4b4r07/enhancd"
+        # ];
 
-        theme-plugins = [
-          "romkatv/powerlevel10k, depth:1"
-        ];
+        # theme-plugins = [
+        #   "romkatv/powerlevel10k, depth:1"
+        # ];
 
-        oh-my-zsh-plugins = [
-          "command-not-found, defer:2"
-          "git-extras, defer:2"
-          "gitfast, defer:2"
-          "github, defer:2"
-          # "gpg-agent"
-          "git, defer:2"
-          "rbw, defer:2"
-          "ripgrep"
-          "sudo"
-          "zoxide, defer:2"
-        ];
+        # oh-my-zsh-plugins = [
+        #   "command-not-found, defer:2"
+        #   "git-extras, defer:2"
+        #   "gitfast, defer:2"
+        #   "github, defer:2"
+        #   # "gpg-agent"
+        #   "git, defer:2"
+        #   "rbw, defer:2"
+        #   "ripgrep"
+        #   "sudo"
+        #   "zoxide, defer:2"
+        # ];
       };
     };
   };

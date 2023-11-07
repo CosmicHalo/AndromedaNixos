@@ -34,11 +34,11 @@ in {
       # this also allows us to use remote builders to reduce build times and batter usage
       builders-use-substitutes = true;
 
-      experimental-features = [
-        "flakes"
-        "repl-flake"
-        "nix-command"
-      ];
+      # experimental-features = [
+      #   "flakes"
+      #   "repl-flake"
+      #   "nix-command"
+      # ];
 
       # Enable certain system features
       system-features = ["big-parallel" "kvm" "recursive-nix"];
