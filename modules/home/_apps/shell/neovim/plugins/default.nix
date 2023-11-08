@@ -4,9 +4,17 @@
   ...
 }: let
   cfg = config.milkyway.apps.neovim.astronvim;
-in
-  lib.mkIf cfg.enable {
-    xdg.configFile."nvim/lua/plugins/user.lua".text = builtins.readFile ./user.lua;
-    xdg.configFile."nvim/lua/plugins/mappings.lua".text = builtins.readFile ./mappings.lua;
-    xdg.configFile."nvim/lua/plugins/colorscheme.lua".text = builtins.readFile ./colorscheme.lua;
-  }
+  luaFiles = lib.milkyway.get-lua-files ./lua;
+in {}
+# lib.mkIf cfg.enable {
+#   xdg.configFile = lib.foldl' (acc: luaFile: let
+#     fileName = builtins.baseNameOf luaFile;
+#     filePath = "nvim/lua/plugins/${builtins.unsafeDiscardStringContext fileName}";
+#   in
+#     acc
+#     // {
+#       "${filePath}".text = builtins.readFile luaFile;
+#     }) {}
+#   luaFiles;
+# }
+

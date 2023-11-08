@@ -2,7 +2,6 @@ return {
 	"AstroNvim/astrocore",
 	opts = {
 		mappings = {
-			-- first key is the mode
 			n = {
 				L = {
 					function()

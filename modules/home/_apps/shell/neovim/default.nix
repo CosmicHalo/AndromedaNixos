@@ -9,10 +9,7 @@ with lib; let
 in {
   options.milkyway.apps.neovim = {
     enable = mkEnableOption "Neovim";
-
-    astronvim = {
-      enable = mkEnableOption "Astronvim";
-    };
+    astronvim.enable = mkEnableOption "Astronvim";
   };
 
   config = mkMerge [
@@ -49,64 +46,6 @@ in {
 
         shellAliases = {
           vimdiff = "nvim -d";
-        };
-      };
-    })
-
-    (mkIf cfg.astronvim.enable {
-      xdg.configFile = {
-        # Configurations
-        "nvim/.luacheckrc".source = ./config/.luacheckrc;
-        "nvim/.stylua.toml".source = ./config/.stylua.toml;
-        "nvim/.neoconf.json".source = ./config/.neoconf.json;
-
-        # Our bread and butter
-        "nvim/init.lua".text = ''
-          -- bootstrap lazy.nvim; AstroNvim; and user plugins
-          require("config.lazy")
-
-          -- run polish file at the very end
-          pcall(require, "config.polish")
-        '';
-      };
-
-      milkyway.apps.neovim = mkIf cfg.astronvim.enable {
-        plugins = {
-          astrocore = {
-          };
-
-          astroui = {
-            colorscheme = "catppuccino";
-          };
-
-          astrolsp = {
-            diagnostics = {
-              underline = true;
-              virtual_text = true;
-            };
-
-            formatting = {
-              format_on_save = {
-                enabled = true;
-                allow_filetypes = [];
-                ignore_filetypes = [];
-              };
-              timeout_ms = 1000;
-            };
-
-            servers = [
-              "pyright"
-            ];
-
-            mappings = {
-              n = {
-                gl = {
-                  action = ''function() vim.diagnostic.open_float() end'';
-                  desc = "Hover diagnostics";
-                };
-              };
-            };
-          };
         };
       };
     })

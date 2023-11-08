@@ -2,12 +2,13 @@
 {
   lib,
   config,
+  nvimPath,
   ...
 }:
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.apps.neovim.astronvim;
-  cfgAstroCore = cfg.plugins.astrocore;
+  cfgAstroCore = cfg.astrocore;
 
   autocmdOpt = types.submodule {
     options = {
@@ -29,7 +30,7 @@ with lib.milkyway; let
     };
   };
 in {
-  options.milkyway.apps.neovim.plugins.astrocore = with types; {
+  options.milkyway.apps.neovim.astronvim.astrocore = with types; {
     autocmds =
       mkOpt (attrsOf autocmdOpt) {} "Easily configure auto commands"
       // {
@@ -134,7 +135,7 @@ in {
           sessions = ${vim.toLuaObject cfgAstroCore.sessions},
         '');
     in {
-      "nvim/lua/plugins/core/astrocore.lua".text = ''
+      "${nvimPath}/astrocore.lua".text = ''
         return {
           "AstroNvim/astrocore",
           dependencies = { "nvim-lua/plenary.nvim" },

@@ -5,14 +5,13 @@ return {
 		priority = 1000,
 		opts = {
 			integrations = {
-				sandwich = false,
-				noice = true,
+				cmp = true,
 				mini = true,
 				leap = true,
-				markdown = true,
+				noice = true,
 				neotest = true,
-				cmp = true,
-				overseer = true,
+				markdown = true,
+				illuminate = true,
 				lsp_trouble = true,
 				rainbow_delimiters = true,
 			},

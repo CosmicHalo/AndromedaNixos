@@ -2,14 +2,15 @@
 {
   lib,
   config,
+  nvimPath,
   ...
 }:
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.apps.neovim.astronvim;
-  cfgAstroUI = cfg.plugins.astrolsp;
+  cfgAstroLSP = cfg.astrolsp;
 in {
-  options.milkyway.apps.neovim.plugins.astrolsp = with types; {
+  options.milkyway.apps.neovim.astronvim.astrolsp = with types; {
     features = mkCompositeOption' "Configuration table of features provided by AstroLSP" {
       diagnostics_mode =
         mkOpt int 3
@@ -130,35 +131,35 @@ in {
     xdg.configFile = let
       opts =
         ''
-          features = ${vim.toLuaObject cfgAstroUI.features},
-          formatting = ${vim.toLuaObject cfgAstroUI.formatting},
+          features = ${vim.toLuaObject cfgAstroLSP.features},
+          formatting = ${vim.toLuaObject cfgAstroLSP.formatting},
         ''
-        + (mkStringIfNonEmpty cfgAstroUI.capabilities ''
-          capabilities = ${vim.toLuaObject cfgAstroUI.capabilities},
+        + (mkStringIfNonEmpty cfgAstroLSP.capabilities ''
+          capabilities = ${vim.toLuaObject cfgAstroLSP.capabilities},
         '')
-        + (mkStringIfNonEmpty cfgAstroUI.config ''
-          config = ${vim.toLuaObject cfgAstroUI.config},
+        + (mkStringIfNonEmpty cfgAstroLSP.config ''
+          config = ${vim.toLuaObject cfgAstroLSP.config},
         '')
-        + (mkStringIfNonEmpty cfgAstroUI.diagnostics ''
-          diagnostics = ${vim.toLuaObject cfgAstroUI.diagnostics},
+        + (mkStringIfNonEmpty cfgAstroLSP.diagnostics ''
+          diagnostics = ${vim.toLuaObject cfgAstroLSP.diagnostics},
         '')
-        + (mkStringIfNonEmpty cfgAstroUI.flags ''
-          flags = ${vim.toLuaObject cfgAstroUI.flags},
+        + (mkStringIfNonEmpty cfgAstroLSP.flags ''
+          flags = ${vim.toLuaObject cfgAstroLSP.flags},
         '')
-        + (mkStringIfNonNull cfgAstroUI.handlers ''
-          handlers = ${vim.toLuaObject cfgAstroUI.handlers},
+        + (mkStringIfNonNull cfgAstroLSP.handlers ''
+          handlers = ${vim.toLuaObject cfgAstroLSP.handlers},
         '')
-        + (mkStringIfNonNull cfgAstroUI.mappings ''
-          mappings = ${vim.toLuaObject cfgAstroUI.mappings},
+        + (mkStringIfNonNull cfgAstroLSP.mappings ''
+          mappings = ${vim.toLuaObject cfgAstroLSP.mappings},
         '')
-        + (mkStringIfNonEmpty cfgAstroUI.servers ''
-          servers = ${vim.toLuaObject cfgAstroUI.servers},
+        + (mkStringIfNonEmpty cfgAstroLSP.servers ''
+          servers = ${vim.toLuaObject cfgAstroLSP.servers},
         '')
-        + (mkStringIfNonNull cfgAstroUI.on_attach ''
-          on_attach = ${vim.toLuaObject cfgAstroUI.on_attach},
+        + (mkStringIfNonNull cfgAstroLSP.on_attach ''
+          on_attach = ${vim.toLuaObject cfgAstroLSP.on_attach},
         '');
     in {
-      "nvim/lua/plugins/core/astrolsp.lua".text = ''
+      "${nvimPath}/astrolsp.lua".text = ''
         return {
           "AstroNvim/astrolsp",
           lazy = false, -- disable lazy loading

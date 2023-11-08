@@ -7,4 +7,3 @@ lib.andromeda.module
       meta = (attrs.meta or {}) // meta;
     });
 }
-// {inherit (lib.andromeda) fs;}

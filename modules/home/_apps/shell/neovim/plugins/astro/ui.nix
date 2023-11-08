@@ -2,14 +2,15 @@
 {
   lib,
   config,
+  nvimPath,
   ...
 }:
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.apps.neovim.astronvim;
-  cfgAstroUI = cfg.plugins.astroui;
+  cfgAstroUI = cfg.astroui;
 in {
-  options.milkyway.apps.neovim.plugins.astroui = with types; {
+  options.milkyway.apps.neovim.astronvim.astroui = with types; {
     colorscheme = mkOpt str "astrodark" "Colorscheme to use";
 
     highlights =
@@ -106,7 +107,7 @@ in {
           status = ${vim.toLuaObject cfgAstroUI.status},
         '');
     in {
-      "nvim/lua/plugins/core/astroui.lua".text = ''
+      "${nvimPath}/astroui.lua".text = ''
         return {
           "AstroNvim/astroui",
           lazy = false, -- disable lazy loading

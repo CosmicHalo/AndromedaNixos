@@ -6,7 +6,7 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim.astronvim;
+  cfg = config.milkyway.apps.neovim;
 in {
   options.milkyway.apps.neovim.optionscfg = with types;
     mkOpt lines ''''

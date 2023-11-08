@@ -15,14 +15,31 @@ in {
     colorscheme =
       mkOpt (listOf str) ["astrodark" "habamax" "catppuccin"]
       "List of colorschemes to install";
+
+    spec =
+      mkNullOrOption lines "Lazy config specification"
+      // {
+        example = ''
+          { "AstroNvim/AstroNvim", branch = "v4", version = USE_STABLE and "^4" or nil, import = "astronvim.plugins" },
+          -- pin plugins to known working versions
+          { import = "astronvim.lazy_snapshot", cond = USE_STABLE },
+
+          -- import/override with your plugins
+          { import = "plugins" },
+        '';
+
+        apply = cfg:
+          ifNonNull' cfg
+          (vim.mkRaw cfg);
+      };
   };
 
   config = mkIf cfg.enable {
     xdg.configFile = {
       # Core Lazy Config
       "nvim/lua/config/lazy.lua".text =
-        replaceTextInFile ["lazy" "colorscheme"]
-        [(vim.toLuaObject lazyCfg.lazy) (vim.toLuaObject lazyCfg.colorscheme)]
+        replaceTextInFile ["lazy" "colorscheme" "spec"]
+        [(vim.toLuaObject lazyCfg.lazy) (vim.toLuaObject lazyCfg.colorscheme) (vim.toLuaObject lazyCfg.spec)]
         ./lazy.lua;
     };
   };
