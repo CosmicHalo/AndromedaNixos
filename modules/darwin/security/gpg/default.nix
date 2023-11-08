@@ -14,17 +14,8 @@ with lib.milkyway; let
     enable-ssh-support
     default-cache-ttl 60
     max-cache-ttl 120
-    pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
+    pinentry-program ${pkgs.pinentry-qt}/bin/pinentry-qt
   '';
-
-  pinentry = {
-    name = "gnome3";
-    package = pkgs.pinentry-gnome;
-    packages = with pkgs; [
-      pinentry-gnome
-      pinentry-curses
-    ];
-  };
 in {
   options.milkyway.security = {
     gpg = {
@@ -40,8 +31,11 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs;
-        [gnupg] ++ pinentry.packages;
+      environment.systemPackages = with pkgs; [
+        gnupg
+        pinentry-qt
+        pinentry-curses
+      ];
 
       milkyway.home.file = {
         ".gnupg/.keep".text = mkDefault "";
