@@ -16,7 +16,6 @@ in {
     milkyway = {
       apps = {
         discord = enabled;
-        gparted = enabled;
       };
     };
   };

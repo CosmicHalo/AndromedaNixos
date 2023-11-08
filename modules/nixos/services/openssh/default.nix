@@ -3,7 +3,6 @@
   config,
   host ? "",
   inputs ? {},
-  my_ssh_keys,
   ...
 }:
 with lib;
@@ -28,11 +27,11 @@ in {
       "The port to listen on (in addition to 22).";
 
     authorizedKeys =
-      mkOpt (listOf str) ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2Bsi9bMuZwl2onIiFL544lWpOmIGc4VDihC7GoqcxI jlecoq@dnanexus.com"]
+      mkOpt (listOf str) []
       "The public keys to apply.";
 
     authorizedKeyFiles =
-      mkOpt (listOf path) [my_ssh_keys]
+      mkOpt (listOf path) [getSource "my_ssh_keys"]
       "The public key files to apply.";
   };
 

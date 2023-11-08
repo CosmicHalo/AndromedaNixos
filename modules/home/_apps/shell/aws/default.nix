@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.shell.aws;
+  cfg = config.milkyway.apps.aws-cli;
 in {
-  options.milkyway.shell.aws = with types; {
+  options.milkyway.apps.aws-cli = with types; {
     enable = mkEnableOption "AWS shell";
   };
 

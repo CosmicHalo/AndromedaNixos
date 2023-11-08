@@ -1,6 +1,7 @@
 {lib, ...}:
-with lib.lib.milkyway; {
+with lib.milkyway; {
   imports = [
+    ./fonts.nix
     ./zsh.nix
   ];
 
@@ -9,9 +10,15 @@ with lib.lib.milkyway; {
     "$HOME/.local/bin"
   ];
 
-  lib.milkyway = {
-    user = enabled;
-    fonts = enabled;
+  milkyway = {
+    # *************
+    #* System Config
+    #***************
+
+    user = {
+      enable = true;
+      email = "jlecoq@dnanexus.com";
+    };
 
     #*********
     #* Suites
@@ -22,7 +29,14 @@ with lib.lib.milkyway; {
       nix = enabled;
     };
 
-    development = {
+    apps = {
+      # bitwarden = enabled;
+      # floorp = enabled;
+      aws-cli = enabled;
+      go-task = enabled;
+      zoxide = enabled;
+      vscode = enabled;
+
       nodejs = {
         enable = true;
         rush = enabled;
@@ -34,7 +48,7 @@ with lib.lib.milkyway; {
         settings = {
           tools = {
             node = "18";
-            python = ["2.7" "3.8" "3.11"];
+            python = ["2.7" "3.11"];
           };
 
           settings = {
@@ -47,17 +61,7 @@ with lib.lib.milkyway; {
       };
     };
 
-    apps = {
-      bitwarden = enabled;
-      floorp = enabled;
-    };
-
     shell = {
-      aws = enabled;
-      go-task = enabled;
-      neovim = enabled;
-      zoxide = enabled;
-
       git = {
         enable = true;
         signingKey = "C505 1E8B 06AC 1776 6875  1B60 93AF DAD0 10B3 CB8D";

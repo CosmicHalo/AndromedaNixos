@@ -16,11 +16,16 @@ in {
   config = mkIf cfg.enable {
     milkyway = {
       apps = {
-        neovim = enabled;
-
         # IDES
+        neovim = enabled;
         vscode = enabled;
-        jetbrains = enabled;
+        jetbrains = {
+          enable = true;
+          rider = enabled;
+        };
+
+        # programs
+        docker = enabled;
 
         # Terminal Emulators
         kitty = {
@@ -29,20 +34,6 @@ in {
             size = 11;
             name = "OpenDyslexic";
           };
-        };
-        wezterm = {
-          enable = true;
-          font = {
-            size = 11;
-            name = "OpenDyslexic";
-          };
-        };
-      };
-
-      security = {
-        gpg = {
-          enable = true;
-          gpg-agent = enabled;
         };
       };
 

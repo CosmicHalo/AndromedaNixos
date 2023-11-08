@@ -1,7 +1,8 @@
 {
   lib,
-  config,
   pkgs,
+  inputs,
+  config,
   ...
 }: let
   inherit (lib) types mkIf mkDefault;
@@ -23,7 +24,6 @@ in {
 
   options.milkyway.user = {
     enable = mkOpt types.bool false "Whether to configure the user account.";
-    host = mkOpt (types.nullOr types.str) null "The host name.";
 
     stateVersion = mkOpt types.str "23.11" "The state version to use for the user account.";
     name = mkOpt (types.nullOr types.str) config.andromeda.user.name "The user account.";
@@ -51,7 +51,7 @@ in {
       stateVersion = mkDefault cfg.stateVersion;
 
       sessionVariables = {
-        FLAKE = "$HOME/dev/nixos/snowlib-nixos";
+        FLAKE = "${inputs.self.outPath}";
       };
     };
 

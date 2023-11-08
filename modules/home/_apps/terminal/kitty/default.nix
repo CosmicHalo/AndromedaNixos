@@ -7,10 +7,6 @@
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.apps.kitty;
-
-  kitty-xterm = pkgs.writeShellScriptBin "xterm" ''
-    ${config.programs.kitty.package}/bin/kitty -1 "$@"
-  '';
 in {
   options.milkyway.apps.kitty = with types; {
     enable = mkEnableOption "kitty terminal emulator";
@@ -30,7 +26,7 @@ in {
 
   config = mkIf cfg.enable {
     home = {
-      packages = [kitty-xterm];
+      packages = with pkgs; [kitty kitty-themes];
       sessionVariables = {
         TERMINAL = "kitty -1";
       };

@@ -88,9 +88,7 @@ in {
         })
         cfg.extra-substituters;
 
-      environment.systemPackages = with pkgs;
-        [nil]
-        ++ cfg.extraNixPackages;
+      environment.systemPackages = cfg.extraNixPackages;
 
       nix = {
         inherit (cfg) package;

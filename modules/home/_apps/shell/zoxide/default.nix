@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.shell.zoxide;
+  cfg = config.milkyway.apps.zoxide;
 in {
-  options.milkyway.shell.zoxide = with types; {
+  options.milkyway.apps.zoxide = with types; {
     enable = mkEnableOption "Zoxide";
   };
 

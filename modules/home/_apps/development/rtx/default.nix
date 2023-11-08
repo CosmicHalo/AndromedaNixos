@@ -7,9 +7,9 @@
 with lib;
 with lib.milkyway; let
   tomlFormat = pkgs.formats.toml {};
-  cfg = config.milkyway.development.rtx;
+  cfg = config.milkyway.apps.rtx;
 in {
-  options.milkyway.development.rtx = with types; {
+  options.milkyway.apps.rtx = with types; {
     enable = mkEnableOption "RTX";
     package = mkOpt package pkgs.rtx "RTX package to install.";
 

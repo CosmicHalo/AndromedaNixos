@@ -4,37 +4,34 @@
   ...
 }:
 with lib.milkyway; {
-  environment.systemPath = [
-    "/usr/bin"
-    "/opt/homebrew/bin"
-  ];
+  environment = {
+    darwinConfig = "${inputs.self.outPath}";
 
-  environment.darwinConfig = "/nix/store/d7sadiks4c16pyiq6fxk5ynmzwhh9cyh-source";
+    systemPath = [
+      "/usr/bin"
+      "/opt/homebrew/bin"
+    ];
+  };
 
   milkyway = {
-    # user.home = "nebula";
-
     homebrew = {
       enable = true;
+
       extraBrews = [
-        "llvm"
+        # "llvm"
         "pkgxdev/made/pkgx"
       ];
     };
 
-    #   desktop.addons = {
-    #     skhd = enabled;
-    #   };
+    security = {
+      gpg = enabled;
+    };
 
-    #   security = {
-    #     gpg = enabled;
-    #   };
-
-    #   system = {
-    #     fonts = enabled;
-    #     input = enabled;
-    #     interface = enabled;
-    #   };
+    system = {
+      fonts = enabled;
+      input = enabled;
+      interface = enabled;
+    };
   };
 
   system = {
@@ -44,9 +41,7 @@ with lib.milkyway; {
 
     defaults = {
       menuExtraClock.Show24Hour = true; # show 24 hour clock
-
-      # other macOS's defaults configuration.
-      # ......
+      SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
     };
   };
 }

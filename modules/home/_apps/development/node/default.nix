@@ -6,10 +6,10 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.development.nodejs;
-  cfgRush = config.milkyway.development.nodejs.rush;
+  cfg = config.milkyway.apps.nodejs;
+  cfgRush = config.milkyway.apps.nodejs.rush;
 in {
-  options.milkyway.development.nodejs = with types; {
+  options.milkyway.apps.nodejs = with types; {
     enable = mkEnableOption "Nodejs";
 
     rush = {

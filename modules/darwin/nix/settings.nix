@@ -17,7 +17,7 @@ in {
 
       # Large builds apparently fail due to an issue with darwin:
       # https://github.com/NixOS/nix/issues/4119
-      sandbox = false;
+      # sandbox = false;
 
       # Max number of parallel jobs
       max-jobs = mkDefault "auto";
@@ -34,11 +34,11 @@ in {
       # this also allows us to use remote builders to reduce build times and batter usage
       builders-use-substitutes = true;
 
-      # experimental-features = [
-      #   "flakes"
-      #   "repl-flake"
-      #   "nix-command"
-      # ];
+      experimental-features = [
+        "flakes"
+        "repl-flake"
+        "nix-command"
+      ];
 
       # Enable certain system features
       system-features = ["big-parallel" "kvm" "recursive-nix"];

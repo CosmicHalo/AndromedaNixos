@@ -13,8 +13,8 @@ in {
     brewPrefix = mkOpt str "/usr/local/bin" "Homebrew prefix.";
 
     onActivation = {
-      upgrade = mkBoolOpt true "Upgrade homebrew";
-      autoUpdate = mkBoolOpt true "Auto update homebrew";
+      upgrade = mkBoolOpt false "Upgrade homebrew";
+      autoUpdate = mkBoolOpt false "Auto update homebrew";
       cleanup = mkOpt (enum ["none" "uninstall" "zap"]) "none" "Homebrew cleanup mode";
     };
 
@@ -26,6 +26,7 @@ in {
     ] "Homebrew taps";
 
     extraBrews = mkOpt (listOf str) [] "Homebrew formulae";
+    extraConfig = mkLinesOpt "" "Extra Homebrew configuration";
     extraCasks = mkOpt (listOf str) [] "Homebrew cask formulae";
 
     nix-homebrew = {
@@ -43,7 +44,7 @@ in {
         mkBoolOpt pkgs.stdenv.hostPlatform.isAarch64
         "Enable Homebrew for Rosetta 2";
 
-      mutableTaps = mkBoolOpt false ''
+      mutableTaps = mkBoolOpt true ''
         Whether to allow imperative management of taps.
 
         When enabled, taps can be managed via `brew tap` and
@@ -63,11 +64,11 @@ in {
 
   config = mkIf cfg.enable {
     homebrew = {
-      inherit (cfg) brewPrefix taps onActivation;
       enable = true;
 
       brews = cfg.extraBrews;
       casks = cfg.extraCasks;
+      inherit (cfg) brewPrefix taps onActivation extraConfig;
     };
 
     nix-homebrew = mkIf cfg.nix-homebrew.enable {
@@ -77,8 +78,8 @@ in {
 
       # Optional: Declarative tap management
       # taps = {
-      #   "homebrew/homebrew-core" = inputs.homebrew-core;
-      #   "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      #   "homebrew/homebrew-core" = flake.inputs.homebrew-core;
+      #   "homebrew/homebrew-cask" = flake.inputs.homebrew-cask;
       # };
     };
   };

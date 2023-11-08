@@ -7,18 +7,24 @@
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.user;
+
+  home-directory =
+    if cfg.name == null
+    then null
+    else "/Users/${cfg.name}";
 in {
   imports = [
     ./home.nix
   ];
 
-  options.milkyway.user = with types; rec {
+  options.milkyway.user = with types; {
     name =
       mkOpt str "jlecoq@dnanexus.com"
       "The name to use for the user account.";
+
     home =
-      mkOpt str name
-      "The home name to import for home-manager.";
+      mkOpt (types.nullOr types.str) home-directory
+      "The user's home directory.";
 
     fullName =
       mkOpt
@@ -45,9 +51,9 @@ in {
       {
         inherit (cfg) name uid;
 
-        description = cfg.name;
-        shell = pkgs.${cfg.shell};
-        home = "/Users/${cfg.name}";
+        home = mkForce cfg.home;
+        description = mkForce cfg.name;
+        shell = mkForce pkgs.${cfg.shell};
       }
       // cfg.extraOptions;
 

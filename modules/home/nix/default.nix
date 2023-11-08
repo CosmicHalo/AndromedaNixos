@@ -31,6 +31,7 @@ in {
   config = {
     home.packages = with pkgs;
       [
+        niv
         nixpkgs-fmt
       ]
       ++ lib.optional cfgTools.cachix.enable cachix

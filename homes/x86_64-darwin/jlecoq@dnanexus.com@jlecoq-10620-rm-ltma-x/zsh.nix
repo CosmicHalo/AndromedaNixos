@@ -81,13 +81,13 @@
       zplug = {
         enable = true;
 
-        # plugins = [
-        #   "b4b4r07/enhancd"
-        # ];
+        plugins = [
+          "b4b4r07/enhancd"
+        ];
 
-        # theme-plugins = [
-        #   "romkatv/powerlevel10k, depth:1"
-        # ];
+        theme-plugins = [
+          "romkatv/powerlevel10k, depth:1"
+        ];
 
         # oh-my-zsh-plugins = [
         #   "command-not-found, defer:2"

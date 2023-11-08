@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.development.asdf;
+  cfg = config.milkyway.apps.asdf;
 in {
-  options.milkyway.development.asdf = with types; {
+  options.milkyway.apps.asdf = with types; {
     enable = mkEnableOption "ASDF-VM";
   };
 

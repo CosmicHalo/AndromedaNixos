@@ -1,7 +1,13 @@
 {
   description = "A highly /nix/store/m380jmz5j05c3y3l2j05c97mmpbzbp6c-init.luaesome system configuration.";
 
-  outputs = inputs @ {andromeda, ...}:
+  outputs = inputs @ {
+    self,
+    andromeda,
+    ...
+  }: let
+    specialArgs = {sources = import ./nix/sources.nix;};
+  in
     andromeda.lib.mkFlake {
       inherit inputs;
       src = ./.;
@@ -13,9 +19,16 @@
           title = "MilkyWay Galaxy";
         };
       };
+
       channels-config = {
         allowUnfree = true;
-        allowUnfreePredicate = _: true;
+        allowUnsupportedSystem = true;
+
+        allowUnfreePredicate = pkg:
+          builtins.elem (self.lib.getName pkg) [
+            "jetbrains-toolbox"
+          ];
+
         input-fonts.acceptLicense = true;
       };
 
@@ -33,12 +46,7 @@
       # SYSTEMS
       ##########
       systems = {
-        specialArgs = let
-          sources = import ./nix/sources.nix;
-        in {
-          inherit sources;
-          inherit (sources) my_ssh_keys gpg-base-conf;
-        };
+        inherit specialArgs;
 
         modules.nixos = with inputs; [
           chaotic.nixosModules.default
@@ -54,15 +62,14 @@
       ##########
       # HOMES
       ##########
-      # homes.users."n16hth4wk@supernova".modules = with inputs; [
-      #   chaotic.homeManagerModules.default
-      # ];
+      homes = {inherit specialArgs;};
 
       ##########
       # ALIAS
       ##########
       alias = {
         shells.default = "milkyway-shell";
+        packages.setup = "setup-env";
       };
 
       ##########
@@ -101,7 +108,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      # url = "github:nix-community/home-manager";
+      url = "git+file:///Users/jlecoq@dnanexus.com/dev/nix/__libs__/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -182,23 +190,10 @@
 
   ##########  HOMEBREW #########################################
   inputs = {
-    brew-src = {
-      url = "github:Homebrew/brew";
-      flake = false;
-    };
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nix-darwin.follows = "darwin";
-      inputs.brew-src.follows = "brew-src";
       inputs.flake-utils.follows = "flake-utils";
     };
   };

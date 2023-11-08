@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   inputs,
   ...
@@ -8,7 +7,10 @@
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.milkyway.shell.ssh;
-  hostnames = builtins.attrNames inputs.self.outputs.nixosConfigurations;
+
+  hostnames =
+    (builtins.attrNames (inputs.self.outputs.nixosConfigurations or []))
+    ++ (builtins.attrNames (inputs.self.outputs.darwinConfigurations or []));
 in {
   options.milkyway.shell.ssh = {
     enable = mkEnableOption "SSH";
@@ -16,9 +18,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.ssh = {
-      extraConfig = ''
-        XAuthLocation ${pkgs.xorg.xauth}/bin/xauth
-      '';
+      enable = true;
 
       matchBlocks = {
         net = {

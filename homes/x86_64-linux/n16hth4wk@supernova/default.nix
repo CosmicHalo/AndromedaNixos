@@ -1,6 +1,7 @@
 {lib, ...}:
 with lib.milkyway; {
   imports = [
+    ./fonts.nix
     ./zsh.nix
   ];
 

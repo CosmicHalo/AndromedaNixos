@@ -12,10 +12,10 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "dirtyRev": "0da2c2bb2b07832cc147ea79fbf38ce138ec0da5-dirty",
-        "dirtyShortRev": "0da2c2b-dirty",
-        "lastModified": 1699302098,
-        "narHash": "sha256-vJD00WJ0LE2y/lXP8FIi4S6LcObI8YSu7gpt7DysXQU=",
+        "dirtyRev": "d310eb71a8a0c6ce95cdc2ec3872a28f82a1c68c-dirty",
+        "dirtyShortRev": "d310eb7-dirty",
+        "lastModified": 1699322111,
+        "narHash": "sha256-U2QWq9VyiW3pYg+lSobp9fm3v0TCj4bjGgjHTk10ivM=",
         "type": "git",
         "url": "file:///Users/jlecoq@dnanexus.com/dev/nix/lib"
       },
@@ -27,15 +27,16 @@
     "brew-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1699276261,
-        "narHash": "sha256-v45eq9C9djBa3wE2DjcRWclT0KLOBo5hAGxx0ljGBM8=",
+        "lastModified": 1694443293,
+        "narHash": "sha256-wBjbF2RRFyD4lN7ie98VnggmNBwAPv/dg2U+w5mUyuM=",
         "owner": "Homebrew",
         "repo": "brew",
-        "rev": "ff404fe5ab7491b074568b3e20ef001b5ca39595",
+        "rev": "4afb8e5602f3ecc9edf67a44257d8eceeaa8a108",
         "type": "github"
       },
       "original": {
         "owner": "Homebrew",
+        "ref": "4.1.11",
         "repo": "brew",
         "type": "github"
       }
@@ -50,11 +51,11 @@
         "yafas": "yafas"
       },
       "locked": {
-        "lastModified": 1699276362,
-        "narHash": "sha256-BklKlO68AWPaOtzDBGxFq64XK057gFwp30sUTliRKPw=",
+        "lastModified": 1699366404,
+        "narHash": "sha256-sxkFZK8coUQKWKIPbCbFoDFg4dUes39xzKafa3DYH8w=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "64e2fb8c16cd0274b4c26c8c256da3c61abb207a",
+        "rev": "23504b430452563bda007480f44c9c44dba8a5a1",
         "type": "github"
       },
       "original": {
@@ -140,11 +141,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1699251759,
-        "narHash": "sha256-OVxxfLmq1HsYF6t2TjHfX5Bfpqh2QgIUHmdUlA9Y4qo=",
+        "lastModified": 1699338102,
+        "narHash": "sha256-4+CqAW2KCLePnXHFk85QUUrVAe3uMfEda1HDB4s2kMA=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "bfee6157e580504fbe23e97887e68c293565ce7b",
+        "rev": "fcdb479ed8dbbe14aadd0b78d1ed59b110f71113",
         "type": "github"
       },
       "original": {
@@ -404,49 +405,16 @@
         "nixpkgs": ["nixpkgs"]
       },
       "locked": {
-        "lastModified": 1699290318,
-        "narHash": "sha256-weH8oEJo+g0yJtGGU+Zo2pg5kOxPUCAFl8v/5dEnH00=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "c067d57fc4552835987fd7611c3a6741ee32ebd5",
-        "type": "github"
+        "dirtyRev": "6a8444467c83c961e2f5ff64fb4f422e303c98d3-dirty",
+        "dirtyShortRev": "6a844446-dirty",
+        "lastModified": 1699368917,
+        "narHash": "sha256-YwAyIfb8nzaevim1/TVApyMJWbUnSFgyD0QQEWS9LpM=",
+        "type": "git",
+        "url": "file:///Users/jlecoq@dnanexus.com/dev/nix/__libs__/home-manager"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "homebrew-cask": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1699303687,
-        "narHash": "sha256-xjr7DkD0HZPnov+fuyFzlin9xpLh6hg1zeHK1qE9XKw=",
-        "owner": "homebrew",
-        "repo": "homebrew-cask",
-        "rev": "ebaea6a7a5be82f838de96ed27bde91fa10de2fe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "homebrew",
-        "repo": "homebrew-cask",
-        "type": "github"
-      }
-    },
-    "homebrew-core": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1699304240,
-        "narHash": "sha256-K9fmxB8xp5buApI7Ta8NYXoJ1kSpnpgCV9QzZ8LQe2w=",
-        "owner": "homebrew",
-        "repo": "homebrew-core",
-        "rev": "e2bba732d6a3f5289c7357ce5a3ffa8c909aa61a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "homebrew",
-        "repo": "homebrew-core",
-        "type": "github"
+        "type": "git",
+        "url": "file:///Users/jlecoq@dnanexus.com/dev/nix/__libs__/home-manager"
       }
     },
     "neovim-flake": {
@@ -456,11 +424,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1699268588,
-        "narHash": "sha256-qiJ0049VYw2rw6AeWDk22QDJYvMkWGfSq3dFyLKFZjQ=",
+        "lastModified": 1699308395,
+        "narHash": "sha256-0kX1y+3oc+vGUTS8qk7sycu2NFJAw+ZnB3i/oOWO2dI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "0774d0cfe1d5efb4bdd34cc8cf3799af5c947d2e",
+        "rev": "88ed9ffcd1c022811ebc8818e153fe94e4741671",
         "type": "github"
       },
       "original": {
@@ -479,11 +447,11 @@
         "nixpkgs": ["nixpkgs"]
       },
       "locked": {
-        "lastModified": 1699282964,
-        "narHash": "sha256-uIalDDBUjjX3HINnL+MB6Mf95JDakhfBLm+M1XNlL6w=",
+        "lastModified": 1699315446,
+        "narHash": "sha256-yG+bfOFcxFWsgxTCDogNmvcsmBbMVqsbGw7Nb/LSE+M=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "0036c74db3c3dc3026c275d4814debf9105106b2",
+        "rev": "032f69bd4199e65cff8f1fa9a7fffdaf0dc6717d",
         "type": "github"
       },
       "original": {
@@ -514,7 +482,7 @@
     },
     "nix-homebrew": {
       "inputs": {
-        "brew-src": ["brew-src"],
+        "brew-src": "brew-src",
         "flake-utils": ["flake-utils"],
         "nix-darwin": ["darwin"],
         "nixpkgs": ["nixpkgs"]
@@ -600,11 +568,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-        "lastModified": 1699169573,
-        "narHash": "sha256-cvUb1xZkvOp3W2SzylStrTirhVd9zCeo5utJl9nSIhw=",
+        "lastModified": 1699291058,
+        "narHash": "sha256-5ggduoaAMPHUy4riL+OrlAZE14Kh7JWX4oLEs22ZqfU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "aeefe2054617cae501809b82b44a8e8f7be7cc4b",
+        "rev": "41de143fda10e33be0f47eab2bfe08a50f234267",
         "type": "github"
       },
       "original": {
@@ -675,7 +643,6 @@
     "root": {
       "inputs": {
         "andromeda": "andromeda",
-        "brew-src": "brew-src",
         "chaotic": "chaotic",
         "darwin": "darwin",
         "devshell": "devshell_2",
@@ -684,8 +651,6 @@
         "flake-utils": "flake-utils_2",
         "gitignore": "gitignore_2",
         "home-manager": "home-manager",
-        "homebrew-cask": "homebrew-cask",
-        "homebrew-core": "homebrew-core",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nil": "nil",
         "nix-homebrew": "nix-homebrew",

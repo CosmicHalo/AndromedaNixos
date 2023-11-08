@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.development.rust;
+  cfg = config.milkyway.apps.rust;
 in {
-  options.milkyway.development.rust = with types; {
+  options.milkyway.apps.rust = with types; {
     enable = mkEnableOption "Rust programming language.";
   };
 
