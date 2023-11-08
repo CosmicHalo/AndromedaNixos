@@ -7,24 +7,21 @@
         "flake-utils": "flake-utils",
         "flake-utils-plus": "flake-utils-plus",
         "gitignore": "gitignore",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": ["nixpkgs"],
         "nixpkgs-stable": "nixpkgs-stable",
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
+        "dirtyRev": "d310eb71a8a0c6ce95cdc2ec3872a28f82a1c68c-dirty",
+        "dirtyShortRev": "d310eb7-dirty",
         "lastModified": 1699322111,
-        "narHash": "sha256-q0NyUVXdyzrrnFAQXqwjsY7osNz4t9A1Mnd2t9YEuDY=",
-        "ref": "refs/heads/main",
-        "rev": "d310eb71a8a0c6ce95cdc2ec3872a28f82a1c68c",
-        "revCount": 60,
+        "narHash": "sha256-XJbqorbj99LCyDy3G4U+Ti348vq4mLhoxIGIpW/8awA=",
         "type": "git",
-        "url": "file:///home/n16hth4wk/dev/nixos/lib"
+        "url": "file:///Users/jlecoq@dnanexus.com/dev/nix/lib"
       },
       "original": {
         "type": "git",
-        "url": "file:///home/n16hth4wk/dev/nixos/lib"
+        "url": "file:///Users/jlecoq@dnanexus.com/dev/nix/lib"
       }
     },
     "brew-src": {
@@ -48,12 +45,8 @@
       "inputs": {
         "compare-to": "compare-to",
         "flake-schemas": "flake-schemas",
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "home-manager": ["home-manager"],
+        "nixpkgs": ["nixpkgs"],
         "systems": "systems_3",
         "yafas": "yafas"
       },
@@ -88,9 +81,7 @@
     },
     "darwin": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1698429334,
@@ -108,10 +99,7 @@
     },
     "devshell": {
       "inputs": {
-        "nixpkgs": [
-          "andromeda",
-          "nixpkgs"
-        ],
+        "nixpkgs": ["andromeda", "nixpkgs"],
         "systems": "systems"
       },
       "locked": {
@@ -130,12 +118,8 @@
     },
     "devshell_2": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ]
+        "nixpkgs": ["nixpkgs"],
+        "systems": ["systems"]
       },
       "locked": {
         "lastModified": 1698410321,
@@ -153,9 +137,7 @@
     },
     "fenix": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": ["nixpkgs"],
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
@@ -222,10 +204,7 @@
     },
     "flake-parts": {
       "inputs": {
-        "nixpkgs-lib": [
-          "neovim-nightly-overlay",
-          "nixpkgs"
-        ]
+        "nixpkgs-lib": ["neovim-nightly-overlay", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1698882062,
@@ -296,10 +275,7 @@
     },
     "flake-utils-plus": {
       "inputs": {
-        "flake-utils": [
-          "andromeda",
-          "flake-utils"
-        ]
+        "flake-utils": ["andromeda", "flake-utils"]
       },
       "locked": {
         "lastModified": 1696331477,
@@ -371,10 +347,7 @@
     },
     "gitignore": {
       "inputs": {
-        "nixpkgs": [
-          "andromeda",
-          "nixpkgs"
-        ]
+        "nixpkgs": ["andromeda", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1694102001,
@@ -392,9 +365,7 @@
     },
     "gitignore_2": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1694102001,
@@ -413,10 +384,7 @@
     "hercules-ci-effects": {
       "inputs": {
         "flake-parts": "flake-parts_2",
-        "nixpkgs": [
-          "neovim-nightly-overlay",
-          "nixpkgs"
-        ]
+        "nixpkgs": ["neovim-nightly-overlay", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1699381651,
@@ -434,9 +402,7 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1699368917,
@@ -455,10 +421,7 @@
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_3",
-        "nixpkgs": [
-          "neovim-nightly-overlay",
-          "nixpkgs"
-        ]
+        "nixpkgs": ["neovim-nightly-overlay", "nixpkgs"]
       },
       "locked": {
         "dir": "contrib",
@@ -482,9 +445,7 @@
         "flake-parts": "flake-parts",
         "hercules-ci-effects": "hercules-ci-effects",
         "neovim-flake": "neovim-flake",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1699401982,
@@ -503,9 +464,7 @@
     "nil": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": ["nixpkgs"],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -525,15 +484,9 @@
     "nix-homebrew": {
       "inputs": {
         "brew-src": "brew-src",
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nix-darwin": [
-          "darwin"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "flake-utils": ["flake-utils"],
+        "nix-darwin": ["darwin"],
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1695057498,
@@ -551,9 +504,7 @@
     },
     "nix-index-database": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1699156599,
@@ -648,26 +599,11 @@
     },
     "pre-commit-hooks": {
       "inputs": {
-        "flake-compat": [
-          "andromeda",
-          "flake-compat"
-        ],
-        "flake-utils": [
-          "andromeda",
-          "flake-utils"
-        ],
-        "gitignore": [
-          "andromeda",
-          "gitignore"
-        ],
-        "nixpkgs": [
-          "andromeda",
-          "nixpkgs"
-        ],
-        "nixpkgs-stable": [
-          "andromeda",
-          "nixpkgs-stable"
-        ]
+        "flake-compat": ["andromeda", "flake-compat"],
+        "flake-utils": ["andromeda", "flake-utils"],
+        "gitignore": ["andromeda", "gitignore"],
+        "nixpkgs": ["andromeda", "nixpkgs"],
+        "nixpkgs-stable": ["andromeda", "nixpkgs-stable"]
       },
       "locked": {
         "lastModified": 1699271226,
@@ -685,21 +621,11 @@
     },
     "pre-commit-hooks_2": {
       "inputs": {
-        "flake-compat": [
-          "flake-compat"
-        ],
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "gitignore": [
-          "gitignore"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs-stable"
-        ]
+        "flake-compat": ["flake-compat"],
+        "flake-utils": ["flake-utils"],
+        "gitignore": ["gitignore"],
+        "nixpkgs": ["nixpkgs"],
+        "nixpkgs-stable": ["nixpkgs-stable"]
       },
       "locked": {
         "lastModified": 1699271226,
@@ -758,14 +684,8 @@
     },
     "rust-overlay": {
       "inputs": {
-        "flake-utils": [
-          "nil",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nil",
-          "nixpkgs"
-        ]
+        "flake-utils": ["nil", "flake-utils"],
+        "nixpkgs": ["nil", "nixpkgs"]
       },
       "locked": {
         "lastModified": 1696817516,
@@ -904,9 +824,7 @@
     },
     "vscode-server": {
       "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
+        "flake-utils": ["flake-utils"],
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
@@ -925,14 +843,8 @@
     },
     "yafas": {
       "inputs": {
-        "flake-schemas": [
-          "chaotic",
-          "flake-schemas"
-        ],
-        "systems": [
-          "chaotic",
-          "systems"
-        ]
+        "flake-schemas": ["chaotic", "flake-schemas"],
+        "systems": ["chaotic", "systems"]
       },
       "locked": {
         "lastModified": 1695926485,

@@ -27,6 +27,10 @@ with lib.milkyway; {
       gpg = enabled;
     };
 
+    services = {
+      openssh = enabled;
+    };
+
     system = {
       fonts = enabled;
       input = enabled;

@@ -9,7 +9,7 @@ with lib.milkyway; let
   cfg = config.milkyway.security.gpg;
   cfgAgent = config.milkyway.security.gpg-agent;
 
-  gpgConf = "${getSource "gpg-base-conf"}/gpg.conf";
+  gpgConf = "${get-source "gpg-base-conf"}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60
@@ -21,7 +21,7 @@ with lib.milkyway; let
     if config.home-manager.users.${config.milkyway.user.name}.gtk.enable
     then {
       name = "gnome3";
-      package = pkgs.pinentry-gnome3;
+      package = pkgs.pinentry-gnome;
       packages = with pkgs; [
         pinentry-gnome3
       ];
@@ -90,10 +90,9 @@ in {
             echo 'Run "gpgconf --launch gpg-agent" to try and launch it again.'
           fi
         '';
-
-        milkyway.home.file = {
-          ".gnupg/gpg-agent.conf".text = gpgAgentConf;
-        };
+      };
+      milkyway.home.file = {
+        ".gnupg/gpg-agent.conf".text = gpgAgentConf;
       };
     })
   ]);

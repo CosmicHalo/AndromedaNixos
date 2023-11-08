@@ -63,25 +63,14 @@ with lib.milkyway; let
     ${pkgs.gnupg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye
   '';
 
-  pinentry =
-    if config.gtk.enable
-    then {
-      name = "gnome3";
-      package = pkgs.pinentry-gnome3;
-      packages = with pkgs; [
-        gcr
-        pinentry-qt
-        pinentry-rofi
-        pinentry-gnome3
-      ];
-    }
-    else {
-      name = "curses";
-      package = pkgs.pinentry-curses;
-      packages = with pkgs; [
-        pinentry-curses
-      ];
-    };
+  pinentry = {
+    name = "gnome3";
+    package = pkgs.pinentry-gnome;
+    packages = with pkgs; [
+      pinentry-gnome
+      pinentry-curses
+    ];
+  };
 
   gpgAgentConf = ''
     enable-ssh-support

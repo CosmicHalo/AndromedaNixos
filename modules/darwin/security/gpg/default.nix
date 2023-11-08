@@ -9,7 +9,7 @@ with lib.milkyway; let
   cfg = config.milkyway.security.gpg;
   cfgAgent = config.milkyway.security.gpg-agent;
 
-  gpgConf = "${getSource "gpg-base-conf"}/gpg.conf";
+  gpgConf = "${get-source "gpg-base-conf"}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60
@@ -17,22 +17,14 @@ with lib.milkyway; let
     pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
   '';
 
-  pinentry =
-    if config.home-manager.users.${config.milkyway.user.name}.gtk.enable
-    then {
-      name = "gnome3";
-      package = pkgs.pinentry-gnome3;
-      packages = with pkgs; [
-        pinentry-gnome3
-      ];
-    }
-    else {
-      name = "curses";
-      package = pkgs.pinentry-curses;
-      packages = with pkgs; [
-        pinentry-curses
-      ];
-    };
+  pinentry = {
+    name = "gnome3";
+    package = pkgs.pinentry-gnome;
+    packages = with pkgs; [
+      pinentry-gnome
+      pinentry-curses
+    ];
+  };
 in {
   options.milkyway.security = {
     gpg = {

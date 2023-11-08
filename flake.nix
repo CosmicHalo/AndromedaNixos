@@ -115,8 +115,8 @@
 
     # Andromeda
     andromeda = {
-      url = "git+file:///home/n16hth4wk/dev/nixos/lib";
-      # url = "git+file:///Users/jlecoq@dnanexus.com/dev/nix/lib";
+      # url = "git+file:///home/n16hth4wk/dev/nixos/lib";
+      url = "git+file:///Users/jlecoq@dnanexus.com/dev/nix/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

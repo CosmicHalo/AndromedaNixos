@@ -1,4 +1,6 @@
 {lib, ...}: rec {
-  getSources = import (lib.andromeda.fs.get-file "/nix/sources.nix");
-  getSource = source: getSources.${source};
+  get-sources = import (lib.andromeda.fs.get-file "/nix/sources.nix");
+
+  get-source = source: get-sources.${source};
+  get-source-out = source: (get-source source).outPath;
 }

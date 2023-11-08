@@ -20,38 +20,20 @@ with lib.milkyway; let
     ((inputs.self.nixosConfigurations or {}) // (inputs.self.darwinConfigurations or {}));
 in {
   options.milkyway.services.openssh = with types; {
-    enable = mkBoolOpt false "Whether or not to configure OpenSSH support.";
-
-    ports =
-      mkOpt (listOf port) [2222]
-      "The port to listen on (in addition to 22).";
+    enable = mkEnableOption "Whether or not to configure OpenSSH support.";
 
     authorizedKeys =
       mkOpt (listOf str) []
       "The public keys to apply.";
-
-    authorizedKeyFiles =
-      mkOpt (listOf path) [get-source "my_ssh_keys"]
+    authorizedKeysFiles =
+      mkOpt (listOf str) [(get-source-out "my_ssh_keys")]
       "The public key files to apply.";
   };
 
   config = mkIf cfg.enable {
-    # Enable Mosh, a replacement for OpenSSH
-    programs.mosh.enable = true;
-
-    services.openssh = {
-      enable = true;
-      ports = [22] ++ cfg.ports;
-
-      settings = {
-        PermitRootLogin = "yes";
-        PasswordAuthentication = true;
-        KbdInteractiveAuthentication = true;
-      };
-    };
-
+    services.openssh.authorizedKeysFiles = cfg.authorizedKeysFiles;
     milkyway.user.extraOptions.openssh.authorizedKeys.keys = cfg.authorizedKeys;
-    milkyway.user.extraOptions.openssh.authorizedKeys.keyFiles = cfg.authorizedKeyFiles;
+    milkyway.user.extraOptions.openssh.authorizedKeys.keyFiles = cfg.authorizedKeysFiles;
 
     andromeda.home.extraOptions = {
       programs.zsh.shellAliases =

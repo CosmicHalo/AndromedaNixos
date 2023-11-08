@@ -17,7 +17,7 @@ in {
     milkyway = {
       apps = {
         # IDES
-        neovim = enabled;
+        # neovim = enabled;
         vscode = enabled;
         jetbrains = {
           enable = true;

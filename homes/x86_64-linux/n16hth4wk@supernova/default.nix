@@ -1,15 +1,17 @@
-{lib, ...}:
+{
+  lib,
+  pkgs,
+  ...
+}:
 with lib.milkyway; {
   imports = [
-    ./fonts.nix
-    ./zsh.nix
+    ./programs
   ];
 
   home.stateVersion = "23.11";
 
   milkyway = {
     user = enabled;
-    fonts = enabled;
 
     #*********
     #* Suites
@@ -20,61 +22,61 @@ with lib.milkyway; {
       nix = enabled;
     };
 
+    #*********
+    #* Apps
+    #*********
     apps = {
       bitwarden = enabled;
       floorp = enabled;
     };
 
-    apps.neovim = {
-      lazycfg = {
-        spec = ''
-          { "AstroNvim/AstroNvim", branch = "v4", version = USE_STABLE and "^4" or nil, import = "astronvim.plugins" },
+    #*********
+    #* System
+    #*********
+    fonts = {
+      enable = true;
+      extraFonts = with pkgs; [
+        # Fonts
+        input-fonts
+        martian-mono
+        anonymousPro
 
-          -- pin plugins to known working versions
-          { import = "astronvim.lazy_snapshot", cond = USE_STABLE },
-
-          -- import/override with your plugins
-          { import = "plugins" },
-        '';
-      };
-
-      astronvim = {
-        enable = true;
-
-        astrocore = {
-        };
-
-        astroui = {
-          colorscheme = "catppuccino";
-        };
-
-        astrolsp = {
-          diagnostics = {
-            underline = true;
-            virtual_text = true;
-          };
-
-          formatting = {
-            timeout_ms = 1000;
-            format_on_save = {
-              enabled = true;
-              allow_filetypes = [];
-              ignore_filetypes = [];
-            };
-          };
-
-          servers = ["pyright"];
-
-          mappings = {
-            n = {
-              gl = {
-                desc = "Hover diagnostics";
-                action = ''function() vim.diagnostic.open_float() end'';
-              };
-            };
-          };
-        };
-      };
+        # nerdfonts
+        (pkgs.nerdfonts.override {
+          fonts = [
+            "CascadiaCode"
+            "DaddyTimeMono"
+            "FiraCode"
+            "FiraMono"
+            "Hack"
+            "SourceCodePro"
+            "UbuntuMono"
+            "VictorMono"
+            # "3270"
+            # "Agave"
+            # "BigBlueTerminal"
+            # "DroidSansMono"
+            # "Go-Mono"
+            # "Hermit"
+            # "InconsolataLGC"
+            # "IosevkaTerm"
+            # "JetBrainsMono"
+            # "Lekton"
+            # "Lilex"
+            # "MPlus"
+            # "Meslo"
+            # "Monofur"
+            # "Monoid"
+            # "Mononoki"
+            # "NerdFontsSymbolsOnly"
+            # "OpenDyslexic"
+            # "ProFont"
+            # "RobotoMono"
+            # "SpaceMono"
+            # "iA-Writer"
+          ];
+        })
+      ];
     };
   };
 }
