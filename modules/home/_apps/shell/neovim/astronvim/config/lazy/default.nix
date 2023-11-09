@@ -7,9 +7,9 @@
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.apps.neovim.astronvim;
-  lazyCfg = config.milkyway.apps.neovim.lazycfg;
+  lazyCfg = cfg.lazycfg;
 in {
-  options.milkyway.apps.neovim.lazycfg = with types; {
+  options.milkyway.apps.neovim.astronvim.lazycfg = with types; {
     lazy = mkBoolOpt true "Enable lazy loading of plugins";
 
     colorscheme =

@@ -41,6 +41,7 @@
         chaotic.overlays.default
         devshell.overlays.default
         neovim-nightly-overlay.overlay
+        andromeda-tmux.overlays.default
       ];
 
       ##########
@@ -118,6 +119,11 @@
     andromeda = {
       url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    andromeda-tmux = {
+      url = "github:lecoqjacob/andromeda-tmux";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.andromeda.follows = "andromeda";
     };
   };
 

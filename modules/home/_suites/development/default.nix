@@ -24,8 +24,10 @@ in {
         };
 
         # programs
-        docker = enabled;
+        tmux = enabled;
         kitty = enabled;
+        docker = enabled;
+        alacritty = enabled;
       };
 
       shell = {

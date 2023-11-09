@@ -38,37 +38,70 @@ in
         command = "${pkgs.milkyway.clear-hm}/bin/clear-hm";
       }
 
+      #########
       # Nixos
+      #########
       {
         name = "build-nix";
         category = "milkyway-build";
-        help = "Build the current configuration";
+        help = "Build the current nixos configuration";
         command = "nixos-rebuild build --fast --max-jobs auto";
       }
       {
-        name = "test-nix";
-        help = "Activate the current configuration";
-        command = "sudo nixos-rebuild test --fast --max-jobs auto --cores 0";
+        name = "activate-nix";
+        category = "milkyway-activate";
+        help = "Activate the current nixos configuration";
+        command = "sudo nixos-rebuild test --fast --max-jobs auto";
       }
       {
         name = "switch-nix";
         category = "milkyway-switch";
-        help = "Switch to the current configuration";
-        command = "sudo nixos-rebuild switch --fast --max-jobs auto --cores 0";
+        help = "Switch to the current nixos configuration";
+        command = "sudo nixos-rebuild switch --fast --max-jobs auto";
       }
 
-      # HM
+      #########
+      # Darwin
+      #########
+      {
+        name = "build-darwin";
+        category = "milkyway-build";
+        help = "Build the current darwin configuration";
+        command = "darwin-rebuild build --fast --max-jobs auto";
+      }
+      {
+        name = "activate-darwin";
+        category = "milkyway-activate";
+        help = "Activate the current darwin configuration";
+        command = "sudo darwin-rebuild activate --fast --max-jobs auto";
+      }
+      {
+        name = "switch-darwin";
+        category = "milkyway-switch";
+        help = "Switch to the current darwin configuration";
+        command = "sudo darwin-rebuild switch --fast --max-jobs auto";
+      }
+
+      ############
+      # Home Manager
+      ############
       {
         name = "build-hm";
         category = "milkyway-build";
         help = "Build the current hm configuration";
-        command = "home-manager build --max-jobs auto --cores 0";
+        command = "home-manager build --max-jobs auto";
+      }
+      {
+        name = "activate-hm";
+        category = "milkyway-activate";
+        help = "Activate the current hm configuration";
+        command = "home-manager activate --max-jobs auto";
       }
       {
         name = "switch-hm";
         category = "milkyway-switch";
         help = "Switch to the current hm configuration";
-        command = "home-manager switch --max-jobs auto --cores 0";
+        command = "home-manager switch --max-jobs auto";
       }
 
       #########

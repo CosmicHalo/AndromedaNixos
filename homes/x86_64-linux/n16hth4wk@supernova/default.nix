@@ -32,14 +32,31 @@ with lib.milkyway; {
     #*********
     #* System
     #*********
-    shell.ssh = {
-      enable = true;
-      ssh-agent = enabled;
+    shell = {
+      git = {
+        enable = true;
+        signingKey = "C505 1E8B 06AC 1776 6875  1B60 93AF DAD0 10B3 CB8D";
+      };
 
-      matchBlocks = {
-        "work" = {
-          hostname = "192.168.1.188";
-          user = "jlecoq@dnanexus.com";
+      ssh = {
+        enable = true;
+        ssh-agent = enabled;
+
+        matchBlocks = {
+          "work" = {
+            hostname = "192.168.1.188";
+            user = "jlecoq@dnanexus.com";
+          };
+
+          "builder" = {
+            user = "n16hth4wk";
+            hostname = "74.208.105.72";
+          };
+
+          "builder-root" = {
+            user = "root";
+            hostname = "74.208.105.72";
+          };
         };
       };
     };

@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim;
+  cfg = config.milkyway.apps.neovim.astronvim;
 in {
-  options.milkyway.apps.neovim.polishcfg = with types;
+  options.milkyway.apps.neovim.astronvim.polishcfg = with types;
     mkOpt lines ''''
     ''
       This file is automatically ran last in the setup process and is a good place to configure

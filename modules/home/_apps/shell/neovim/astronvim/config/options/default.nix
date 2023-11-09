@@ -6,9 +6,9 @@
 }:
 with lib;
 with lib.milkyway; let
-  cfg = config.milkyway.apps.neovim;
+  cfg = config.milkyway.apps.neovim.astronvim;
 in {
-  options.milkyway.apps.neovim.optionscfg = with types;
+  options.milkyway.apps.neovim.astronvim.optionscfg = with types;
     mkOpt lines ''''
     ''
       [Options] to be applied to AstroNvim.

@@ -33,6 +33,8 @@ in {
         noto-fonts-cjk-serif
         noto-fonts-emoji
 
+        hackgen-nf-font
+
         # icon fonts
         material-symbols
 
