@@ -12,9 +12,9 @@ in {
     stateVersion =
       mkOpt types.str "23.11"
       "The state version to use for the user account.";
-    sessionPath =
-      mkListOpt types.str ["$HOME/.local/bin"]
-      "The user's session path.";
+    sessionPath = mkListOpt types.str [
+      "$HOME/.local/bin"
+    ] "The user's session path.";
     sessionVariables =
       mkOpt types.attrs {}
       "The user's session variables.";

@@ -25,9 +25,15 @@ in {
       "homebrew/cask-versions"
     ] "Homebrew taps";
 
-    extraBrews = mkOpt (listOf str) [] "Homebrew formulae";
-    extraConfig = mkLinesOpt "" "Extra Homebrew configuration";
-    extraCasks = mkOpt (listOf str) [] "Homebrew cask formulae";
+    extraBrews =
+      mkOpt (listOf str) []
+      "Homebrew formulae";
+    extraCasks =
+      mkOpt (listOf str) []
+      "Homebrew cask formulae";
+    extraConfig =
+      mkLinesOpt ""
+      "Extra Homebrew configuration";
 
     nix-homebrew = {
       enable =

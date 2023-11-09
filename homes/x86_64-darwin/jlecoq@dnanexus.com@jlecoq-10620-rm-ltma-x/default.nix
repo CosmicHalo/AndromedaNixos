@@ -8,13 +8,6 @@ with lib.milkyway; {
     ./programs
   ];
 
-  home = {
-    stateVersion = "23.11";
-    sessionPath = [
-      "$HOME/.local/bin"
-    ];
-  };
-
   milkyway = {
     user = {
       enable = true;
@@ -34,12 +27,19 @@ with lib.milkyway; {
     #* Apps
     #*********
     apps = {
-      # bitwarden = enabled;
-      # floorp = enabled;
+      bitwarden = enabled;
       aws-cli = enabled;
       go-task = enabled;
       zoxide = enabled;
       vscode = enabled;
+
+      kitty = {
+        enable = true;
+        font = {
+          size = 11;
+          name = "Biscuit";
+        };
+      };
 
       nodejs = {
         enable = true;

@@ -8,17 +8,16 @@ with lib.milkyway; let
   cfg = config.milkyway.suites.development;
 in {
   options.milkyway.suites.development = with types; {
-    enable =
-      mkBoolOpt false
-      "Whether or not to enable common development configuration.";
+    enable = mkEnableOption "Whether or not to enable common development configuration.";
   };
 
   config = mkIf cfg.enable {
     milkyway = {
       apps = {
         # IDES
-        # neovim = enabled;
+        neovim = enabled;
         vscode = enabled;
+
         jetbrains = {
           enable = true;
           rider = enabled;
@@ -26,15 +25,7 @@ in {
 
         # programs
         docker = enabled;
-
-        # Terminal Emulators
-        kitty = {
-          enable = true;
-          font = {
-            size = 11;
-            name = "OpenDyslexic";
-          };
-        };
+        kitty = enabled;
       };
 
       shell = {

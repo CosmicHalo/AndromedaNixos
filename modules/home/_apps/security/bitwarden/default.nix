@@ -3,30 +3,34 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
-  inherit (lib.milkyway) mkEnableOpt;
-
+}:
+with lib; let
   cfg = config.milkyway.apps.bitwarden;
+  cfgRbw = config.milkyway.apps.bitwarden.rbw;
 in {
-  options.milkyway.apps.bitwarden = mkEnableOpt "Bitwarden Apps/CLI";
+  options.milkyway.apps.bitwarden = {
+    enable = mkEnableOption "Bitwarden Apps";
+
+    rbw = {
+      enable = mkEnableOption "Unofficial command line client for Bitwarden";
+      settings = {
+        email = mkStrOpt config.milkyway.user.email "Bitwarden email";
+        pinentry = mkStrOpt config.milkyway.user.pinentry "Bitwarden pinentry";
+      };
+    };
+  };
 
   config = mkIf cfg.enable {
-    programs.rbw = {
+    programs.rbw = mkIf cfgRbw.enable {
       enable = true;
-
-      settings = {
-        inherit (config.milkyway.user) email;
-        pinentry = config.services.gpg-agent.pinentryFlavor;
-      };
+      inherit (cfgRbw) settings;
     };
 
     home = {
       packages = with pkgs; [
-        bitwarden
+        # bitwarden
         bitwarden-cli
         bitwarden-menu
-        bws
       ];
     };
   };

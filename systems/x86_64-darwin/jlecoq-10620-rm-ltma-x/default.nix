@@ -17,9 +17,18 @@ with lib.milkyway; {
     homebrew = {
       enable = true;
 
+      onActivation = {
+        upgrade = true;
+        autoUpdate = true;
+      };
+
       extraBrews = [
         # "llvm"
         "pkgxdev/made/pkgx"
+      ];
+
+      extraCasks = [
+        "bitwarden"
       ];
     };
 

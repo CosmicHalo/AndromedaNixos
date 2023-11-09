@@ -22,6 +22,7 @@
 
       channels-config = {
         allowUnfree = true;
+        allowBroken = true;
         allowUnsupportedSystem = true;
 
         allowUnfreePredicate = pkg:
