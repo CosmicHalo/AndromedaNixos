@@ -53,6 +53,8 @@ in {
         # Nix
         "run" = "nix run nixpkgs#";
         "use" = "nix shell nixpkgs#";
+        "hmb" = "home-manager build";
+        "hms" = "home-manager switch";
 
         # Other
         ".." = "cd ..";
@@ -74,7 +76,6 @@ in {
         "g" = "git";
         "gitlog" = "git log --oneline --graph --decorate --all";
         "grep" = "rg";
-        "hms" = "home-manager switch";
         "ip" = "ip --color=auto";
         "jctl" = "journalctl -p 3 -xb";
 

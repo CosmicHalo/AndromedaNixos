@@ -27,12 +27,23 @@ with lib.milkyway; {
     #*********
     apps = {
       bitwarden = enabled;
-      floorp = enabled;
     };
 
     #*********
     #* System
     #*********
+    shell.ssh = {
+      enable = true;
+      ssh-agent = enabled;
+
+      matchBlocks = {
+        "work" = {
+          hostname = "192.168.1.188";
+          user = "jlecoq@dnanexus.com";
+        };
+      };
+    };
+
     fonts = {
       enable = true;
       extraFonts = with pkgs; [

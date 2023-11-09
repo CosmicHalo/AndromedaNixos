@@ -36,7 +36,6 @@ in {
           lua54Packages.luarocks
 
           #Rust
-          toolchain
           rust-analyzer-nightly
         ];
 

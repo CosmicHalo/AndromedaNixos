@@ -1,7 +1,5 @@
 -- You can simply override any internal plugins using Lazy, here are some example operations:
 return {
-	{ "AstroNvim/astrocommunity", branch = "v4" },
-
 	-- customize alpha options
 	{
 		"goolord/alpha-nvim",
@@ -41,4 +39,9 @@ return {
 			},
 		},
 	},
+
+	-- Train your mind
+	{ "tjdevries/train.nvim" },
+	-- Discord Rich Presence
+	{ "andweeb/presence.nvim", event = "VeryLazy", opts = { client_id = "1009122352916857003" } },
 }

@@ -1,5 +1,10 @@
-{lib, ...}:
+{
+  lib,
+  inputs,
+  ...
+}:
 lib.andromeda.module
+// {inherit (inputs.home-manager.lib) hm;}
 // {
   ## Override a package's metadata
   override-meta = meta: package:

@@ -1,3 +1,3 @@
 {
-  "Lua.diagnostics.globals": ["vim", "astronvim"]
+  "Lua.diagnostics.globals": ["vim", "astronvim", "rainbow_delimiters"]
 }

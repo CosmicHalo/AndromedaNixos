@@ -9,12 +9,21 @@ with lib.milkyway; let
   cfg = config.milkyway.security.gpg;
   cfgAgent = config.milkyway.security.gpg-agent;
 
+  pinentry = {
+    name = "qt";
+    package = pkgs.pinentry-qt;
+    packages = with pkgs; [
+      pinentry-qt
+      pinentry-curses
+    ];
+  };
+
   gpgConf = "${get-source "gpg-base-conf"}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60
     max-cache-ttl 120
-    pinentry-program ${pkgs.pinentry-qt}/bin/pinentry-qt
+    pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
   '';
 in {
   options.milkyway.security = {
@@ -31,11 +40,11 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs; [
-        gnupg
-        pinentry-qt
-        pinentry-curses
-      ];
+      environment.systemPackages = with pkgs;
+        [
+          gnupg
+        ]
+        ++ pinentry.packages;
 
       milkyway.home.file = {
         ".gnupg/.keep".text = mkDefault "";

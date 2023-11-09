@@ -12,7 +12,7 @@ with lib.milkyway; let
 in {
   options.milkyway.nix = {
     chaotic = {
-      enable = mkBoolOpt false "chaotic-nyx";
+      enable = mkEnablOption "chaotic-nyx";
       cache = mkEnableOpt "chaotic-nyx cache";
       overlay = mkEnableOpt "chaotic-nyx overlay";
     };

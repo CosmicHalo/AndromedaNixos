@@ -9,6 +9,15 @@ with lib.milkyway; let
   cfg = config.milkyway.security.gpg;
   cfgAgent = config.milkyway.security.gpg-agent;
 
+  pinentry = {
+    name = "gnome3";
+    package = pkgs.pinentry-gnome;
+    packages = with pkgs; [
+      pinentry-gnome
+      pinentry-curses
+    ];
+  };
+
   gpgConf = "${get-source "gpg-base-conf"}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
@@ -16,23 +25,6 @@ with lib.milkyway; let
     max-cache-ttl 120
     pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
   '';
-
-  pinentry =
-    if config.home-manager.users.${config.milkyway.user.name}.gtk.enable
-    then {
-      name = "gnome3";
-      package = pkgs.pinentry-gnome;
-      packages = with pkgs; [
-        pinentry-gnome3
-      ];
-    }
-    else {
-      name = "curses";
-      package = pkgs.pinentry-curses;
-      packages = with pkgs; [
-        pinentry-curses
-      ];
-    };
 in {
   options.milkyway.security = {
     gpg = with types; {
@@ -50,7 +42,11 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       environment.systemPackages = with pkgs;
-        [gnupg] ++ pinentry.packages;
+        [
+          gcr
+          gnupg
+        ]
+        ++ pinentry.packages;
 
       services = {
         pcscd.enable = true;
@@ -67,10 +63,10 @@ in {
       programs = {
         ssh.startAgent = false;
 
-        gnupg.agent = mkIf cfg.gpg-agent.enable {
+        gnupg.agent = mkIf cfgAgent.enable {
           enable = true;
           pinentryFlavor = pinentry.name;
-          inherit (cfg.gpg-agent) enableExtraSocket enableSSHSupport;
+          inherit (cfgAgent) enableExtraSocket enableSSHSupport;
         };
       };
 

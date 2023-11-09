@@ -18,7 +18,6 @@ in {
       docker-ls
       docker-gc
       docker-sync
-      docker-client
     ];
   };
 }

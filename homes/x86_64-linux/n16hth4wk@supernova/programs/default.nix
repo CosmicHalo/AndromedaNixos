@@ -4,6 +4,8 @@ _: {
   ];
 
   milkyway.apps.neovim = {
+    enable = true;
+
     lazycfg = {
       spec = ''
         { "AstroNvim/AstroNvim", branch = "v4", version = USE_STABLE and "^4" or nil, import = "astronvim.plugins" },
