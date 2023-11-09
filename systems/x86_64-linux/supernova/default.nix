@@ -33,6 +33,28 @@ with lib.milkyway; {
   ];
 
   milkyway = {
+    nix = {
+      extraOptions = ''
+        builders = ssh://root@74.208.105.72 x86_64-linux;
+      '';
+
+      distributedBuilds = {
+        enable = true;
+        buildMachines = [
+          {
+            protocol = "ssh-ng";
+            hostName = "74.208.105.72";
+
+            maxJobs = 1;
+            speedFactor = 2;
+            mandatoryFeatures = [];
+            systems = ["x86_64-linux" "x86_64-darwin"];
+            supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+          }
+        ];
+      };
+    };
+
     ### DESKTOP    ###############################################
 
     desktop = {

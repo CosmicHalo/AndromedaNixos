@@ -3,19 +3,22 @@ return {
 	opts = {
 		mappings = {
 			n = {
+				-- ##############
+				-- BUFFER
+				-- ##############
+				["<leader>b"] = { desc = "Buffers" },
 				L = {
 					function()
-						require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1)
+						require("astrocore.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1)
 					end,
 					desc = "Next buffer",
 				},
 				H = {
 					function()
-						require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1))
+						require("astrocore.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1))
 					end,
 					desc = "Previous buffer",
 				},
-
 				["<leader>bD"] = {
 					function()
 						require("astroui.status.heirline").buffer_picker(function(bufnr)
@@ -24,8 +27,12 @@ return {
 					end,
 					desc = "Pick to close",
 				},
-				["<leader>b"] = { desc = "Buffers" },
+
+				-- ############
+				-- MISC
+				-- ############
 				["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
+				["<C-q>"] = { ":q!<cr>", desc = "Quit File" }, -- change description but the same command
 			},
 			t = {},
 		},

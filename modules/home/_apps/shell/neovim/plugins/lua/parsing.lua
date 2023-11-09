@@ -10,24 +10,4 @@ return {
 			})
 		end,
 	},
-
-	-- NONE-LS
-	{
-		"nvimtools/none-ls.nvim",
-		opts = function(_, config)
-			local null_ls = require("null-ls")
-
-			if type(config.sources) == "table" then
-				vim.list_extend(config.sources, {
-					null_ls.builtins.diagnostics.deadnix,
-					null_ls.builtins.code_actions.statix,
-					null_ls.builtins.formatting.alejandra,
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettier,
-				})
-			end
-
-			return config
-		end,
-	},
 }

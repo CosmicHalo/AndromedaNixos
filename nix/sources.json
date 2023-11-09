@@ -48,7 +48,7 @@
     "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
   },
   "my_ssh_keys": {
-    "sha256": "0ripg44mz0zlh29n6nai0srxsass8bqn5ldwp69g2jfgxxi5ny55",
+    "sha256": "sha256:1mp1cmwzankpyxh21gwhwh0gf1yapbssx6cvs8fdasvnj3d0h7g8",
     "type": "file",
     "url": "https://github.com/lecoqjacob.keys",
     "url_template": "https://github.com/lecoqjacob.keys"

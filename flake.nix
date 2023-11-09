@@ -71,6 +71,7 @@
       alias = {
         shells.default = "milkyway-shell";
         packages.setup = "setup-env";
+        packages.default = "clear-hm";
       };
 
       ##########

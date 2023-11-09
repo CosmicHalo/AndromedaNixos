@@ -31,4 +31,34 @@ return {
 			end,
 		},
 	},
+
+	-- NONE-LS
+	{
+		"nvimtools/none-ls.nvim",
+		dependencies = { { "AstroNvim/astrolsp", opts = {} } },
+		opts = function(_, config)
+			local null_ls = require("null-ls")
+
+			if type(config.sources) == "table" then
+				vim.list_extend(config.sources, {
+					-- MISC
+					null_ls.builtins.formatting.prettierd,
+
+					-- NIX
+					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.diagnostics.deadnix,
+					null_ls.builtins.code_actions.statix,
+					null_ls.builtins.formatting.prettier,
+					null_ls.builtins.formatting.alejandra,
+
+					-- LUA
+					null_ls.builtins.formatting.stylua,
+				})
+			end
+
+			config.on_attach = require("astrolsp").on_attach
+
+			return config
+		end,
+	},
 }
