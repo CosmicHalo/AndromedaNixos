@@ -6,14 +6,28 @@
 }:
 with lib;
 with lib.milkyway; let
+  cfg = config.milkyway.tools.rtx;
   tomlFormat = pkgs.formats.toml {};
-  cfg = config.milkyway.apps.rtx;
+
+  defaultTools = {
+    tools = {
+      node = "18";
+      python = ["2.7" "3.11"];
+    };
+
+    settings = {
+      jobs = 16;
+      verbose = true;
+      asdf_compat = true;
+      experimental = true;
+    };
+  };
 in {
-  options.milkyway.apps.rtx = with types; {
+  options.milkyway.tools.rtx = with types; {
     enable = mkEnableOption "RTX";
     package = mkOpt package pkgs.rtx "RTX package to install.";
 
-    settings = mkOpt tomlFormat.type {} ''
+    settings = mkOpt tomlFormat.type defaultTools ''
       Settings written to {file}`$XDG_CONFIG_HOME/rtx/config.toml`.
 
       See <https://github.com/jdxcode/rtx#global-config-configrtxconfigtoml>

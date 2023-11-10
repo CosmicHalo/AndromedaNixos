@@ -28,15 +28,11 @@ in {
           # Needed for neovim
           gcc
           gnumake
-          nodejs_18
           unzip
 
           lua54Packages.lua
           lua54Packages.inspect
           lua54Packages.luarocks
-
-          #Rust
-          rust-analyzer-nightly
         ];
 
         sessionVariables = {

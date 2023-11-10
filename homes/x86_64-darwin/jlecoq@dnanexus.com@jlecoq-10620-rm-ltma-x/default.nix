@@ -45,25 +45,9 @@ with lib.milkyway; {
         enable = true;
         rush = enabled;
       };
-
-      rtx = {
-        enable = true;
-
-        settings = {
-          tools = {
-            node = "18";
-            python = ["2.7" "3.11"];
-          };
-
-          settings = {
-            jobs = 16;
-            verbose = true;
-            asdf_compat = true;
-            experimental = true;
-          };
-        };
-      };
     };
+
+    tools.rtx = enabled;
 
     shell = {
       git = {

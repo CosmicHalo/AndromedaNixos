@@ -15,9 +15,16 @@
 #       // {"${filePath}".text = builtins.readFile luaFile;}) {}
 #     luaFiles;
 #   }
-_: {
-  xdg.configFile."nvim/lua/plugins" = {
-    source = ./lua;
-    recursive = true;
-  };
-}
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.milkyway.apps.neovim.astronvim;
+in
+  lib.mkIf cfg.enable {
+    xdg.configFile."nvim/lua/plugins" = {
+      source = ./lua;
+      recursive = true;
+    };
+  }

@@ -30,6 +30,13 @@ in {
         alacritty = enabled;
       };
 
+      development = {
+        rust = enabled;
+        nodejs = enabled;
+      };
+
+      tools.rtx = enabled;
+
       shell = {
         git = enabled;
         ssh = enabled;
