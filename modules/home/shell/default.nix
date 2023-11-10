@@ -42,6 +42,7 @@ in {
         ripgrep
         rsync
         screen
+        stow
         sysz
         tldr
         ugrep

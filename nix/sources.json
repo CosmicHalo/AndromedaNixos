@@ -41,10 +41,10 @@
     "homepage": "https://brew.sh",
     "owner": "homebrew",
     "repo": "homebrew-cask",
-    "rev": "bb80ea4560c09e6a31fe4b84b4a51b7c8606ea7a",
-    "sha256": "0lw64gjzk4wz5wfxaj14k8kan55wkxpgh2rr3vyymnswvxrrk5jd",
+    "rev": "879510b4bee09ce0243ea23be459b478c0435433",
+    "sha256": "1rvp02axrmz3fvcd2f3q3yvnfq56f1552ss1w4rrq8b7q5rf2dwd",
     "type": "tarball",
-    "url": "https://github.com/homebrew/homebrew-cask/archive/bb80ea4560c09e6a31fe4b84b4a51b7c8606ea7a.tar.gz",
+    "url": "https://github.com/homebrew/homebrew-cask/archive/879510b4bee09ce0243ea23be459b478c0435433.tar.gz",
     "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
   },
   "homebrew-core": {
@@ -53,10 +53,10 @@
     "homepage": "https://brew.sh",
     "owner": "homebrew",
     "repo": "homebrew-core",
-    "rev": "68476ef65824db4518b9613de6c046fd453020af",
-    "sha256": "1fdrz6iys7dd6g174067lqjmfh3rlqrr32rdwisqm4i04plgdf7h",
+    "rev": "e9083dc7af4d9792516345476c56614bf25850e3",
+    "sha256": "1m95phdhlgj3lhk97101nkib82j81k4yczshhp7sdwmfdfsn306c",
     "type": "tarball",
-    "url": "https://github.com/homebrew/homebrew-core/archive/68476ef65824db4518b9613de6c046fd453020af.tar.gz",
+    "url": "https://github.com/homebrew/homebrew-core/archive/e9083dc7af4d9792516345476c56614bf25850e3.tar.gz",
     "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
   },
   "my_ssh_keys": {
