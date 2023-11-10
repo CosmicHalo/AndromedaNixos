@@ -47,7 +47,23 @@ with lib.milkyway; {
       };
     };
 
-    tools.rtx = enabled;
+    tools.rtx = {
+      enable = true;
+
+      settings = {
+        tools = {
+          node = "18";
+          python = ["2.7" "3.11"];
+        };
+
+        settings = {
+          jobs = 16;
+          verbose = true;
+          asdf_compat = true;
+          experimental = true;
+        };
+      };
+    };
 
     shell = {
       git = {
@@ -67,12 +83,12 @@ with lib.milkyway; {
 
           "builder" = {
             user = "n16hth4wk";
-            hostname = "74.208.105.72";
+            hostname = "82.165.211.45";
           };
 
           "builder-root" = {
             user = "root";
-            hostname = "74.208.105.72";
+            hostname = "82.165.211.45";
           };
         };
       };

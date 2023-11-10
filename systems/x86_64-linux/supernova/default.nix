@@ -43,7 +43,7 @@ with lib.milkyway; {
         buildMachines = [
           {
             protocol = "ssh-ng";
-            hostName = "74.208.105.72";
+            hostName = "82.165.211.45";
 
             maxJobs = 1;
             speedFactor = 2;

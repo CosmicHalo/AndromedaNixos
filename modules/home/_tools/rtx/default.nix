@@ -12,7 +12,6 @@ with lib.milkyway; let
   defaultTools = {
     tools = {
       node = "18";
-      python = ["2.7" "3.11"];
     };
 
     settings = {

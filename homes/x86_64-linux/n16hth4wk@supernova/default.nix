@@ -50,12 +50,12 @@ with lib.milkyway; {
 
           "builder" = {
             user = "n16hth4wk";
-            hostname = "74.208.105.72";
+            hostname = "82.165.211.45";
           };
 
           "builder-root" = {
             user = "root";
-            hostname = "74.208.105.72";
+            hostname = "82.165.211.45";
           };
         };
       };
