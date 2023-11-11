@@ -34,6 +34,7 @@ in {
     programs = {
       # Fix (read: workaround) an issue with Sqlite
       command-not-found.enable = mkDefault false;
+
       nix-index-database.comma.enable = mkDefault true;
     };
   };
