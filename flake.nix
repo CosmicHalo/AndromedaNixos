@@ -117,7 +117,8 @@
 
     # Andromeda
     andromeda = {
-      url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
+      url = "git+file:///home/n16hth4wk/dev/nixos/andromeda-lib";
+      # url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     andromeda-tmux = {

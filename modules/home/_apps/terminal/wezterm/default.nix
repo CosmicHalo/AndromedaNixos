@@ -11,8 +11,8 @@ in {
     enable = mkEnableOption "wezterm";
 
     font = {
-      name = mkOpt str "" "Font name to use";
-      size = mkOpt number 12.0 "Font size to use";
+      size = mkOpt number 10.0 "Font size to use";
+      name = mkOpt str "Monaspace Krypton" "Font name to use";
       package = mkOpt (nullOr package) null "Font package to use";
     };
   };

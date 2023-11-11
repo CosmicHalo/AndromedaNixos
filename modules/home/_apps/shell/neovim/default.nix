@@ -31,8 +31,11 @@ in {
           unzip
 
           lua54Packages.lua
-          lua54Packages.inspect
-          lua54Packages.luarocks
+          luajitPackages.inspect
+          luajitPackages.luarocks
+
+          luajitPackages.sqlite
+          # luajitPackages.sqlite
         ];
 
         sessionVariables = {

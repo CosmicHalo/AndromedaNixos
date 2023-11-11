@@ -18,9 +18,9 @@ in {
     '';
 
     font = {
-      name = mkOpt str "" "Font name to use for kitty";
+      size = mkOpt number 10.0 "Font package to use for kitty";
+      name = mkOpt str "Monaspace Krypton" "Font name to use for kitty";
       package = mkOpt (nullOr package) null "Font package to use for kitty";
-      size = mkOpt (nullOr number) null "Font package to use for kitty";
     };
   };
 

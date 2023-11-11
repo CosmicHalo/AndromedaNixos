@@ -98,7 +98,7 @@ in {
           };
 
           General = {
-            Font = mkDefault "Fira Sans";
+            Font = mkDefault "Monaspace Krypton";
             CursorTheme = mkDefault "Sweet-cursors";
           };
         };

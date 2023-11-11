@@ -14,20 +14,21 @@ in {
   config = mkIf cfg.enable {
     milkyway = {
       apps = {
-        # IDES
+        # programs
+        docker = enabled;
+
+        # Editors
         neovim = enabled;
         vscode = enabled;
 
-        jetbrains = {
-          enable = true;
-          rider = enabled;
-        };
-
-        # programs
-        tmux = enabled;
+        # Terminal
         kitty = enabled;
-        docker = enabled;
         alacritty = enabled;
+
+        # Shell
+        tmux = enabled;
+        zoxide = enabled;
+        zellij = enabled;
       };
 
       development = {
@@ -35,7 +36,9 @@ in {
         nodejs = enabled;
       };
 
-      tools.rtx = enabled;
+      tools = {
+        rtx = enabled;
+      };
 
       shell = {
         git = enabled;

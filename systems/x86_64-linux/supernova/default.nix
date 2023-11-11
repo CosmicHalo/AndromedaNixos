@@ -33,21 +33,22 @@ with lib.milkyway; {
   ];
 
   milkyway = {
-    nix = {
+    nix = let
+      builder-ip = "82.165.211.45";
+    in {
       extraOptions = ''
-        builders = ssh://root@74.208.105.72 x86_64-linux;
+        builders = ssh://root@${builder-ip} x86_64-linux;
       '';
 
       distributedBuilds = {
         enable = true;
         buildMachines = [
           {
-            protocol = "ssh-ng";
-            hostName = "82.165.211.45";
-
             maxJobs = 1;
             speedFactor = 2;
+            protocol = "ssh-ng";
             mandatoryFeatures = [];
+            hostName = "${builder-ip}";
             systems = ["x86_64-linux" "x86_64-darwin"];
             supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
           }

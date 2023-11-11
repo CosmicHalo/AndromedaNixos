@@ -36,8 +36,8 @@ with lib.milkyway; {
       kitty = {
         enable = true;
         font = {
-          size = 11;
-          name = "Biscuit";
+          size = 10;
+          name = "Monaspace Krypton";
         };
       };
 

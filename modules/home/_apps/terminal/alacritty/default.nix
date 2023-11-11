@@ -72,9 +72,9 @@ in {
     };
 
     font = {
-      name = mkStrOpt "Hackgen Nerd Font" "Font name to use";
-      size = mkOpt number 12 "Font package to use";
-      package = mkNullOpt package pkgs.hackgen-nf-font "Font package to use";
+      name = mkStrOpt "Monaspace Krypton" "Font name to use";
+      size = mkOpt number 10 "Font package to use";
+      package = mkNullOpt package null "Font package to use";
     };
 
     settings =
