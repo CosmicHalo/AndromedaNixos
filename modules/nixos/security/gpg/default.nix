@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }:
 with lib;
@@ -18,7 +19,7 @@ with lib.milkyway; let
     ];
   };
 
-  gpgConf = "${get-source "gpg-base-conf"}/gpg.conf";
+  gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60

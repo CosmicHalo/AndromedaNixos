@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }:
 with lib;
@@ -104,7 +105,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile."alacritty/theme_catppuccin.yml".source = "${get-source "catppuccin-alacritty"}/catppuccin-mocha.yml";
+    xdg.configFile."alacritty/theme_catppuccin.yml".source = "${inputs.catppuccin-alacritty}/catppuccin-mocha.yml";
 
     programs.alacritty = {
       enable = true;

@@ -117,8 +117,7 @@
 
     # Andromeda
     andromeda = {
-      url = "git+file:///home/n16hth4wk/dev/nixos/andromeda-lib";
-      # url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
+      url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     andromeda-tmux = {
@@ -190,6 +189,16 @@
   #*********
 
   inputs = {
+    gpg-base-conf = {
+      url = "github:drduh/config";
+      flake = false;
+    };
+
+    my-ssh-keys = {
+      url = "https://github.com/lecoqjacob.keys";
+      flake = false;
+    };
+
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       inputs.flake-utils.follows = "flake-utils";
@@ -198,11 +207,34 @@
 
   ##########  HOMEBREW #########################################
   inputs = {
+    brew-src = {
+      url = "github:Homebrew/brew";
+      flake = false;
+    };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nix-darwin.follows = "darwin";
       inputs.flake-utils.follows = "flake-utils";
+    };
+  };
+
+  #***************
+  #* Colorscheme
+  #***************
+
+  inputs = {
+    catppuccin-alacritty = {
+      url = "github:catppuccin/alacritty";
+      flake = false;
     };
   };
 

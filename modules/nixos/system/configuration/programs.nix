@@ -18,6 +18,8 @@ in {
     # Default applications
     environment.systemPackages = with pkgs; [
       autorandr
+      fwupd
+      fwupd-efi
       killall
       nvd
       rsync

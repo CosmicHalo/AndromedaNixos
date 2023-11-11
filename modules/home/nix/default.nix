@@ -35,7 +35,6 @@ in {
   config = {
     home.packages = with pkgs;
       [
-        niv
         nil
         nvd
         nixpkgs-fmt

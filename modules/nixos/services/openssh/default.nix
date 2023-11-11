@@ -31,7 +31,7 @@ in {
       "The public keys to apply.";
 
     authorizedKeyFiles =
-      mkOpt (listOf path) [(get-source "my_ssh_keys")]
+      mkOpt (listOf path) [inputs.my-ssh-keys]
       "The public key files to apply.";
   };
 
