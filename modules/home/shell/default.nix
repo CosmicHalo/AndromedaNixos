@@ -42,6 +42,7 @@ in {
         ripgrep
         rsync
         screen
+        skim
         stow
         sysz
         tldr

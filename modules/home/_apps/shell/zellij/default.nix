@@ -147,10 +147,9 @@ in {
         theme =
           mkStrOpt "dracula"
           "The theme to use.";
-
-        # default_layout =
-        #   mkStrOpt "main"
-        #   "The default layout to use.";
+        default_layout =
+          mkStrOpt "main"
+          "The default layout to use.";
         default_mode =
           mkStrOpt "normal"
           "hoose the mode that zellij uses when starting up.";
@@ -239,7 +238,14 @@ in {
       generatedLayouts =
         generatedDirLayouts
         // (
-          foldl' (acc: layout: acc // genLayout layout) {}
+          foldl' (acc: layout:
+            acc
+            // {
+              "zellij/layouts/${layout.name}".text =
+                if builtins.isString layout.source
+                then layout.source
+                else replaceTextInFile zellij_input zellij_replacements layout.source;
+            }) {}
           cfg.layouts
         );
     in

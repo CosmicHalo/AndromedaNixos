@@ -36,7 +36,7 @@ in {
         mkBoolOpt false
         "Whether or not to enable numlock on boot.";
       theme =
-        mkOpt str "catppuccin"
+        mkOpt str "catppuccin-macchiato"
         "Default SDDM Theme to use.";
       themes =
         mkOpt (listOf package) []

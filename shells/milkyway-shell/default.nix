@@ -7,19 +7,30 @@
   rootDir = "$PRJ_ROOT";
 
   clean-nix = pkgs.writeShellScriptBin "clean-nix" ''
-    echo "[Clearing nix profile]"
+    repeat(){
+      for i in {1..90}; do echo -n "$1"; done
+      echo "\n"
+    }
+
+    title(){
+      repeat "="
+      echo -e "\n$1"
+      repeat "="
+    }
+
+    title "[Clearing nix profile]"
     nix profile wipe-history
 
-    echo "[Clearing home-manager]"
+    title "[Clearing home-manager]"
     clear-hm
 
-    echo "[Clearing nix env]"
+    title "[Clearing nix env]"
     nix-env --delete-generations old
 
-    echo "[Clearing nix store]"
+    title "[Clearing nix store]"
     nix-store --gc --print-dead
 
-    echo "[Clearing nix cache]"
+    title "[Clearing nix cache]"
     sudo nix-collect-garbage -d
   '';
 in
