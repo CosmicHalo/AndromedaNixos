@@ -5,6 +5,23 @@
   ...
 }: let
   rootDir = "$PRJ_ROOT";
+
+  clean-nix = pkgs.writeShellScriptBin "clean-nix" ''
+    echo "[Clearing nix profile]"
+    nix profile wipe-history
+
+    echo "[Clearing home-manager]"
+    clear-hm
+
+    echo "[Clearing nix env]"
+    nix-env --delete-generations old
+
+    echo "[Clearing nix store]"
+    nix-store --gc --print-dead
+
+    echo "[Clearing nix cache]"
+    sudo nix-collect-garbage -d
+  '';
 in
   pkgs.devshell.mkShell {
     devshell.name = "MilkyWay Shell";
@@ -36,6 +53,12 @@ in
         category = "milkyway";
         help = "Clear home-manager";
         command = "${pkgs.milkyway.clear-hm}/bin/clear-hm";
+      }
+      {
+        name = "clean-nix";
+        category = "milkyway";
+        help = "Compeltely clean nix";
+        command = "${clean-nix}/bin/clean-nix";
       }
 
       #########
