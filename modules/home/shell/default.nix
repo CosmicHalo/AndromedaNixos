@@ -49,6 +49,8 @@ in {
         ugrep
         wget
         xorg.xrandr
+
+        milkyway.inshellisense
       ];
 
       milkyway.shell.commonShellAliases = {
@@ -124,9 +126,18 @@ in {
         enableAliases = true;
 
         settings = {
+          header = true;
+          indicators = true;
           symlink-arrow = "->";
-          icons = {when = "never";};
-          color = {theme = "custom";};
+
+          color = {
+            theme = "custom";
+          };
+
+          icons = {
+            when = "auto";
+            theme = "fancy";
+          };
 
           blocks = [
             "permission"

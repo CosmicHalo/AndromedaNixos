@@ -75,8 +75,6 @@
       export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
     '';
 
-    shellFunctionsExtra = '''';
-
     zplug = {
       enable = true;
 
@@ -93,11 +91,10 @@
         "git-extras, defer:2"
         "gitfast, defer:2"
         "github, defer:2"
-        # "gpg-agent"
         "git, defer:2"
         "rbw, defer:2"
-        "ripgrep"
-        "sudo"
+        "ripgrep, defer:2"
+        "sudo, defer:2"
         "zoxide, defer:2"
       ];
     };
