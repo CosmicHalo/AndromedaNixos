@@ -1,5 +1,5 @@
 {lib, ...}:
-lib.andromeda.fs
+{inherit (lib.andromeda) fs;}
 // {
   get-lua-files = path:
     builtins.filter

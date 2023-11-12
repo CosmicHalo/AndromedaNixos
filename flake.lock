@@ -128,6 +128,24 @@
         "url": "https://flakehub.com/f/chaotic-cx/nix-empty-flake/0.1.2.tar.gz"
       }
     },
+    "crane": {
+      "inputs": {
+        "nixpkgs": ["zellij-zjstatus", "nixpkgs"]
+      },
+      "locked": {
+        "lastModified": 1699218802,
+        "narHash": "sha256-5l0W4Q7z7A4BCstaF5JuBqXOVrZ3Vqst5+hUnP7EdUc=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "2d6c2aaff5a05e443eb15efddc21f9c73720340c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": ["nixpkgs"]
@@ -376,6 +394,24 @@
     "flake-utils_4": {
       "inputs": {
         "systems": "systems_6"
+      },
+      "locked": {
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_5": {
+      "inputs": {
+        "systems": "systems_8"
       },
       "locked": {
         "lastModified": 1694529238,
@@ -769,7 +805,10 @@
         "pre-commit-hooks": "pre-commit-hooks_2",
         "systems": "systems_7",
         "unstable": "unstable",
-        "vscode-server": "vscode-server"
+        "vscode-server": "vscode-server",
+        "zellij-forgot": "zellij-forgot",
+        "zellij-room": "zellij-room",
+        "zellij-zjstatus": "zellij-zjstatus"
       }
     },
     "rust-analyzer-src": {
@@ -800,6 +839,25 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "c0df7f2a856b5ff27a3ce314f6d7aacf5fda546f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "flake-utils": ["zellij-zjstatus", "flake-utils"],
+        "nixpkgs": ["zellij-zjstatus", "nixpkgs"]
+      },
+      "locked": {
+        "lastModified": 1699323235,
+        "narHash": "sha256-ZFRItRv0dDSzsfpqSjj9qWM/SA1kRrOk6R04qhBZuxM=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "8a9d6f544c08ee898c7f3761cc9587be7565db5e",
         "type": "github"
       },
       "original": {
@@ -913,6 +971,21 @@
         "type": "github"
       }
     },
+    "systems_8": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "unstable": {
       "locked": {
         "lastModified": 1699099776,
@@ -962,6 +1035,51 @@
       "original": {
         "type": "tarball",
         "url": "https://flakehub.com/f/UbiqueLambda/yafas/0.1.0.tar.gz"
+      }
+    },
+    "zellij-forgot": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-zP7gW4OE6IPHUsSabIcoJ2nvPl5Dx8sq9nrf7/zzz0E=",
+        "type": "file",
+        "url": "https://github.com/karimould/zellij-forgot/releases/latest/download/zellij_forgot.wasm"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/karimould/zellij-forgot/releases/latest/download/zellij_forgot.wasm"
+      }
+    },
+    "zellij-room": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-+crNNkMLlGd8/1i/qG4gzD71B08RV760PqFKrL47V60=",
+        "type": "file",
+        "url": "https://github.com/rvcas/room/releases/latest/download/room.wasm"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/rvcas/room/releases/latest/download/room.wasm"
+      }
+    },
+    "zellij-zjstatus": {
+      "inputs": {
+        "crane": "crane",
+        "flake-utils": "flake-utils_5",
+        "nixpkgs": ["nixpkgs"],
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1699388560,
+        "narHash": "sha256-e4L4jf4eM5apjw1Ltn1IFeWD2Yu2f1tzxZ6ZfmXkDWk=",
+        "owner": "dj95",
+        "repo": "zjstatus",
+        "rev": "5b656349998c215a8a7e6369697448e79bee1622",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dj95",
+        "repo": "zjstatus",
+        "type": "github"
       }
     }
   },

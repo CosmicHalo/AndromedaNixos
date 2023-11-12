@@ -29,12 +29,14 @@ in
       else if isList x
       then x == []
       else null;
-
     isNotEmpty = x: ! (isEmpty x);
-    ifNonNull' = x: y:
+
+    ifNonNull = default: x: y:
       if (x == null)
-      then null
+      then default
       else y;
+    ifNonNull' = x: y: (ifNonNull null x y);
+    ifNonNullAttr = x: y: ifNonNull {} x y;
 
     mkIfNonNull = x: y: (mkIf (x != null) y);
     mkIfNonNull' = x: (mkIfNonNull x x);

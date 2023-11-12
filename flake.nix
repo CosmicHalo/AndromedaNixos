@@ -203,6 +203,21 @@
       url = "github:nix-community/nixos-vscode-server";
       inputs.flake-utils.follows = "flake-utils";
     };
+
+    zellij-forgot = {
+      url = "https://github.com/karimould/zellij-forgot/releases/latest/download/zellij_forgot.wasm";
+      flake = false;
+    };
+
+    zellij-room = {
+      url = "https://github.com/rvcas/room/releases/latest/download/room.wasm";
+      flake = false;
+    };
+
+    zellij-zjstatus = {
+      url = "github:dj95/zjstatus";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   ##########  HOMEBREW #########################################
