@@ -88,6 +88,7 @@ in {
   options.milkyway.apps.zellij = with types; {
     enable = mkEnableOption "zellij";
     enableZshIntegration = mkEnableOption "zsh integration";
+    package = mkPackageOpt pkgs.zellij "The zellij package to use";
 
     plugins =
       mkSettingsOpt default-plugins
@@ -253,8 +254,7 @@ in {
 
     programs.zellij = {
       enable = true;
-      package = pkgs.milkyway.zellij;
-      inherit (cfg) enableZshIntegration;
+      inherit (cfg) package enableZshIntegration;
     };
   };
 }

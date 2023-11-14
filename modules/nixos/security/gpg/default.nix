@@ -10,21 +10,12 @@ with lib.milkyway; let
   cfg = config.milkyway.security.gpg;
   cfgAgent = config.milkyway.security.gpg-agent;
 
-  pinentry = {
-    name = "gnome3";
-    package = pkgs.pinentry-gnome;
-    packages = with pkgs; [
-      pinentry-gnome
-      pinentry-curses
-    ];
-  };
-
   gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60
     max-cache-ttl 120
-    pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
+    pinentry-program ${pkgs.pinentry}/bin/pinentry
   '';
 in {
   options.milkyway.security = {
@@ -42,13 +33,6 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs;
-        [
-          gcr
-          gnupg
-        ]
-        ++ pinentry.packages;
-
       services = {
         pcscd.enable = true;
         udev.packages = with pkgs; [yubikey-personalization];
@@ -66,7 +50,7 @@ in {
 
         gnupg.agent = mkIf cfgAgent.enable {
           enable = true;
-          pinentryFlavor = pinentry.name;
+          pinentryFlavor = "pinentry";
           inherit (cfgAgent) enableExtraSocket enableSSHSupport;
         };
       };

@@ -26,7 +26,7 @@ in {
       mkOpt (listOf str) []
       "The public keys to apply.";
     authorizedKeysFiles =
-      mkOpt (listOf str) [inputs.my-ssh-keys]
+      mkOpt (listOf str) [inputs.my-ssh-keys.outPath]
       "The public key files to apply.";
   };
 

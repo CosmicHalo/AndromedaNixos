@@ -32,15 +32,9 @@ with lib.milkyway; {
       go-task = enabled;
       zoxide = enabled;
       vscode = enabled;
+    };
 
-      kitty = {
-        enable = true;
-        font = {
-          size = 10;
-          name = "Monaspace Krypton";
-        };
-      };
-
+    development = {
       nodejs = {
         enable = true;
         rush = enabled;
@@ -73,7 +67,7 @@ with lib.milkyway; {
 
       ssh = {
         enable = true;
-        ssh-agent = enabled;
+        ssh-agent = disabled;
 
         matchBlocks = {
           "home" = {
@@ -97,6 +91,10 @@ with lib.milkyway; {
     #*********
     #* System
     #*********
+    security = {
+      gpg = enabled;
+    };
+
     fonts = {
       enable = true;
       extraFonts = with pkgs; [

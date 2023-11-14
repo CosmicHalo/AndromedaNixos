@@ -63,27 +63,26 @@ with lib.milkyway; let
     ${pkgs.gnupg}/bin/gpg-connect-agent "scd serialno" "learn --force" /bye
   '';
 
-  pinentry = {
-    name = "gnome3";
-    package = pkgs.pinentry-gnome;
-    packages = with pkgs; [
-      pinentry-gnome
-      pinentry-curses
-    ];
-  };
+  pinentry-packages = with pkgs; [
+    pinentry
+    pinentry-gnome
+    pinentry-curses
+  ];
 
+  # gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60
     max-cache-ttl 120
-    pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
+    pinentry-program ${pkgs.pinentry}/bin/pinentry
   '';
 in {
   options.milkyway.security = with types; {
     gpg = {
       enable = mkEnableOption "Whether or not to enable GPG.";
-      package = mkPackageOpt pkgs.gnupg "The GPG Agent package.";
-
+      package =
+        mkPackageOpt pkgs.gnupg
+        "The GPG Agent package.";
       homedir =
         mkStrOpt "${config.home.homeDirectory}/.gnupg"
         "The GPG home directory.";
@@ -124,7 +123,7 @@ in {
 
       home = {
         packages = with pkgs;
-          pinentry.packages
+          pinentry-packages
           ++ [
             gnupg
             paperkey
@@ -139,6 +138,9 @@ in {
             ${config.programs.gpg.homedir}
             ${config.milkyway.tools.git.signingKey or ""}
           '';
+
+          ".gnupg/.keep".text = mkDefault "";
+          # ".gnupg/gpg.conf".source = mkDefault gpgConf;
         };
       };
     }
@@ -147,7 +149,7 @@ in {
       services.gpg-agent =
         cfgAgent
         // {
-          pinentryFlavor = pinentry.name;
+          pinentryFlavor = "pinentry";
         };
 
       programs = let

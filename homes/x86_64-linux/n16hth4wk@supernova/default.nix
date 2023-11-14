@@ -32,6 +32,10 @@ with lib.milkyway; {
     #*********
     #* System
     #*********
+    security = {
+      gpg = enabled;
+    };
+
     shell = {
       git = {
         enable = true;

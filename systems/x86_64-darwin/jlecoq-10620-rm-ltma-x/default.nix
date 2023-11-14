@@ -13,7 +13,32 @@ with lib.milkyway; {
     ];
   };
 
+  nix.configureBuildUsers = true;
+
   milkyway = {
+    nix = let
+      builder-ip = "82.165.211.45";
+    in {
+      extraOptions = ''
+        builders = ssh://root@${builder-ip} x86_64-linux;
+      '';
+
+      distributedBuilds = {
+        enable = true;
+        buildMachines = [
+          {
+            maxJobs = 1;
+            speedFactor = 2;
+            protocol = "ssh-ng";
+            mandatoryFeatures = [];
+            hostName = "${builder-ip}";
+            systems = ["x86_64-linux" "x86_64-darwin"];
+            supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+          }
+        ];
+      };
+    };
+
     homebrew = {
       enable = true;
 

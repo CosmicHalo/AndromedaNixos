@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 with lib;
@@ -10,21 +9,12 @@ with lib.milkyway; let
   cfg = config.milkyway.security.gpg;
   cfgAgent = config.milkyway.security.gpg-agent;
 
-  pinentry = {
-    name = "qt";
-    package = pkgs.pinentry-qt;
-    packages = with pkgs; [
-      pinentry-qt
-      pinentry-curses
-    ];
-  };
-
-  gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
+  # gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60
     max-cache-ttl 120
-    pinentry-program ${pinentry.package}/bin/pinentry-${pinentry.name}
+    pinentry-program ${pkgs.pinentry}/bin/pinentry
   '';
 in {
   options.milkyway.security = {
@@ -41,23 +31,18 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      environment.systemPackages = with pkgs;
-        [
-          gnupg
-        ]
-        ++ pinentry.packages;
-
-      milkyway.home.file = {
-        ".gnupg/.keep".text = mkDefault "";
-        ".gnupg/gpg.conf".source = mkDefault gpgConf;
+      milkyway.home.extraOptions = {
+        milkyway.security.gpg = enabled;
       };
     }
 
     (mkIf cfgAgent.enable {
       programs.gnupg.agent = cfgAgent;
 
-      milkyway.home.file = {
-        ".gnupg/gpg-agent.conf".text = gpgAgentConf;
+      milkyway.home = {
+        file = {
+          ".gnupg/gpg-agent.conf".text = gpgAgentConf;
+        };
       };
 
       environment.shellInit = ''
