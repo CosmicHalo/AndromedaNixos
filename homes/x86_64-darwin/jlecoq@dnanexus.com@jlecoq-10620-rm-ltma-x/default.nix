@@ -75,6 +75,11 @@ with lib.milkyway; {
             hostname = "supernova";
           };
 
+          "vdev" = {
+            user = "jlecoq";
+            hostname = "home.vdev.internal.dnanexus.com";
+          };
+
           "builder" = {
             user = "n16hth4wk";
             hostname = "82.165.211.45";

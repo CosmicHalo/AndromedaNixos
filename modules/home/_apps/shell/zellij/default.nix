@@ -3,6 +3,7 @@
   pkgs,
   config,
   inputs,
+  isDarwin,
   ...
 }:
 with lib;
@@ -187,12 +188,17 @@ in {
         scroll_buffer_size =
           mkIntOpt 1000
           "Configure the scroll back buffer size";
-        copy_command = mkStrOpt "xclip -selection clipboard" ''
-          The command to use to copy text to the clipboard.
+        copy_command =
+          mkStrOpt (
+            if isDarwin
+            then "pbcopy"
+            else "xclip -selection clipboard"
+          ) ''
+            The command to use to copy text to the clipboard.
 
-          This command is run in a shell, so you can use pipes
-          and other shell features.
-        '';
+            This command is run in a shell, so you can use pipes
+            and other shell features.
+          '';
         copy_clipboard =
           mkEnumOpt ["system" "primary"] "system"
           ''Choose the destination for copied text'';
