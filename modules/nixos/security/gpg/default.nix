@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 with lib;
@@ -10,7 +9,7 @@ with lib.milkyway; let
   cfg = config.milkyway.security.gpg;
   cfgAgent = config.milkyway.security.gpg-agent;
 
-  gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
+  # gpgConf = "${inputs.gpg-base-conf}/gpg.conf";
   gpgAgentConf = ''
     enable-ssh-support
     default-cache-ttl 60
@@ -38,9 +37,10 @@ in {
         udev.packages = with pkgs; [yubikey-personalization];
       };
 
-      milkyway.home.file = {
-        ".gnupg/.keep".text = "";
-        ".gnupg/gpg.conf".source = gpgConf;
+      milkyway.home = {
+        extraOptions = {
+          milkyway.security.gpg = enabled;
+        };
       };
     }
 
@@ -50,7 +50,6 @@ in {
 
         gnupg.agent = mkIf cfgAgent.enable {
           enable = true;
-          pinentryFlavor = "pinentry";
           inherit (cfgAgent) enableExtraSocket enableSSHSupport;
         };
       };
@@ -72,6 +71,7 @@ in {
           fi
         '';
       };
+
       milkyway.home.file = {
         ".gnupg/gpg-agent.conf".text = gpgAgentConf;
       };

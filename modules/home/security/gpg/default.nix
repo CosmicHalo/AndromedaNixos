@@ -65,7 +65,6 @@ with lib.milkyway; let
 
   pinentry-packages = with pkgs; [
     pinentry
-    pinentry-gnome
     pinentry-curses
   ];
 
@@ -146,11 +145,7 @@ in {
     }
 
     (mkIf cfgAgent.enable {
-      services.gpg-agent =
-        cfgAgent
-        // {
-          pinentryFlavor = "pinentry";
-        };
+      services.gpg-agent = cfgAgent;
 
       programs = let
         fixGpg = ''gpgconf --launch gpg-agent'';
