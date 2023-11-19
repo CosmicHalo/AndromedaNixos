@@ -71,12 +71,12 @@ in {
           layan-kde
           layan-gtk-theme
 
+          sddm-catppuccin
           catppuccin-cursors
           catppuccin-gtk
           catppuccin-papirus-folders
           catppuccin-kde
           catppuccin-kvantum
-          catppuccin-sddm-corners
 
           libsForQt5.kde-cli-tools
           libsForQt5.kdebugsettings

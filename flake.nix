@@ -199,6 +199,11 @@
       flake = false;
     };
 
+    sddm-catppuccin = {
+      url = "github:khaneliman/sddm-catppuccin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       inputs.flake-utils.follows = "flake-utils";

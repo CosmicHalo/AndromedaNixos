@@ -36,7 +36,7 @@ in {
         mkBoolOpt false
         "Whether or not to enable numlock on boot.";
       theme =
-        mkOpt str "catppuccin-macchiato"
+        mkOpt str "catppuccin"
         "Default SDDM Theme to use.";
       themes =
         mkOpt (listOf package) []
@@ -98,7 +98,7 @@ in {
           };
 
           General = {
-            Font = mkDefault "Monaspace Krypton";
+            Font = mkDefault "DaddyTimeMono Nerd Font";
             CursorTheme = mkDefault "Sweet-cursors";
           };
         };

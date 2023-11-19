@@ -28,6 +28,7 @@ in {
           # Needed for neovim
           gcc
           gnumake
+          neovide
           unzip
 
           lua54Packages.lua
