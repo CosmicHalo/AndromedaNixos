@@ -71,7 +71,7 @@ with lib.milkyway; {
 
       audio = {
         enable = true;
-        pipewire = disabled;
+        pipewire = enabled;
       };
 
       # Hostname & hostId for ZFS
