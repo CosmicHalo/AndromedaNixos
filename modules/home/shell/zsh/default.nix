@@ -16,19 +16,21 @@ in {
 
   options.milkyway.shell.zsh = with types; {
     enable = mkBoolOpt false "Whether to enable zsh shell environement.";
-    profileExtra = mkOpt lines "" "Extra commands that should be added to {file}`.zprofile`.";
-    extraShellAliases = mkOpt (attrsOf (nullOr (either str path))) {} "Extra shell aliases to add.";
+    powerlevel10k = mkEnableOpt' "powerlevel10k";
+
+    profileExtra =
+      mkOpt lines ""
+      "Extra commands that should be added to {file}`.zprofile`.";
+    extraShellAliases =
+      mkOpt (attrsOf (nullOr (either str path))) {}
+      "Extra shell aliases to add.";
   };
 
   config = mkIf cfg.enable {
+    # Set ZSH Powerlevel10k theme
+    xdg.configFile."zsh".source = ./config;
+
     programs = {
-      skim.enable = false;
-
-      zoxide = {
-        enable = true;
-        enableZshIntegration = true;
-      };
-
       atuin = {
         enable = true;
 
@@ -40,6 +42,13 @@ in {
           sync_frequency = "1h";
         };
       };
+
+      skim.enable = false;
+
+      zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+      };
     };
 
     programs.zsh = {
@@ -47,7 +56,7 @@ in {
 
       enable = true;
       enableCompletion = true;
-      enableAutosuggestions = false;
+      enableAutosuggestions = true;
       syntaxHighlighting.enable = true;
 
       shellAliases =

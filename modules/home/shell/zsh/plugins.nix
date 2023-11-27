@@ -11,8 +11,8 @@ with lib.milkyway; let
   pluginModule = with types;
     types.submodule {
       options = {
-        src = mkOpt path null "Path to the plugin folder.";
         name = mkOpt str null "The name of the plugin.";
+        src = mkOpt path null "Path to the plugin folder.";
         file = mkOpt str null "The plugin script to source.";
       };
     };

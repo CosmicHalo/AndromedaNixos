@@ -63,8 +63,6 @@
         }
 
         ${pkgs.toilet}/bin/toilet -f future "Milky Way" --metal
-
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '';
 
       zexportsExtra = ''
