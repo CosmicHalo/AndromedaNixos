@@ -19,8 +19,6 @@ with lib.milkyway; let
 
   powerlevelSource = ''
     [ -f ~/.config/zsh/p10k.zsh ] && source ~/.config/zsh/p10k.zsh
-    [ -f ~/.config/zsh/powerlevel2k.zsh ] && source ~/.config/zsh/powerlevel2k.zsh
-    [ -f ~/.config/zsh/p10k.rtx.zsh ] && source ~/.config/zsh/p10k.rtx.zsh
   '';
 in {
   options.milkyway.shell.zsh = with types; {

@@ -28,7 +28,10 @@ in {
 
   config = mkIf cfg.enable {
     # Set ZSH Powerlevel10k theme
-    xdg.configFile."zsh".source = ./config;
+    xdg.configFile."zsh" = {
+      source = ./config;
+      recursive = true;
+    };
 
     programs = {
       atuin = {
