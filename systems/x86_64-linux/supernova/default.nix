@@ -30,6 +30,7 @@ with lib.milkyway; {
   programs.nix-ld.enable = true;
   environment.systemPackages = with pkgs; [
     sqlite
+    python3
   ];
 
   milkyway = {
