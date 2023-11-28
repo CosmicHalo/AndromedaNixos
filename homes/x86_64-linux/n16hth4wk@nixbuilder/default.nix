@@ -102,19 +102,6 @@ with lib.milkyway; {
       };
     };
 
-    fonts = {
-      enable = true;
-      extraFonts = [
-        # nerdfonts
-        (pkgs.nerdfonts.override {
-          fonts = [
-            "FiraCode"
-            "FiraMono"
-            "Hack"
-            "UbuntuMono"
-          ];
-        })
-      ];
-    };
+    fonts = enabled;
   };
 }

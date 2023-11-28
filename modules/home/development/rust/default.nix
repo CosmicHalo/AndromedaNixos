@@ -13,6 +13,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    milkyway.home.sessionPath = ["$HOME/.cargo/bin"];
+
     home.packages = with pkgs; [
       fenix.default.toolchain
 

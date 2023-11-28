@@ -53,10 +53,5 @@ in {
         xdg-dbus-proxy
       ];
     };
-
-    andromeda.home.extraOptions.home.sessionPath = [
-      "$HOME/.local/bin"
-      "/usr/local/bin"
-    ];
   };
 }

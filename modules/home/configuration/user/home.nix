@@ -34,7 +34,14 @@ in {
     xdg.configFile = mkAliasDefinitions options.milkyway.home.configFile;
 
     home = {
-      inherit (cfg) sessionPath sessionVariables stateVersion;
+      inherit (cfg) sessionVariables stateVersion;
+
+      sessionPath =
+        cfg.sessionPath
+        ++ [
+          "/usr/local/bin"
+          "$HOME/.local/bin"
+        ];
     };
   };
 }

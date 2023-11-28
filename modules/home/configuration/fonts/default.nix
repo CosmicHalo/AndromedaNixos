@@ -62,17 +62,7 @@ in {
         material-symbols
 
         # nerdfonts
-        (pkgs.nerdfonts.override {
-          fonts = [
-            "CascadiaCode"
-            "FiraCode"
-            "FiraMono"
-            "Hack"
-            "SourceCodePro"
-            "UbuntuMono"
-            "VictorMono"
-          ];
-        })
+        nerdfonts
       ]
       ++ cfg.extraFonts;
 

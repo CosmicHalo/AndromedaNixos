@@ -73,7 +73,7 @@ in {
     };
 
     font = {
-      name = mkStrOpt "DaddyTimeMono Nerd Font" "Font name to use";
+      name = mkStrOpt "Caskaydia Cove Nerd Font" "Font name to use";
       size = mkOpt number 10 "Font package to use";
       package = mkNullOpt package null "Font package to use";
     };

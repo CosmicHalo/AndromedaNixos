@@ -29,9 +29,6 @@ in {
       packages = with pkgs;
         [
           # Fonts
-          anonymousPro
-          input-fonts
-          martian-mono
           noto-fonts
           noto-fonts
           noto-fonts-cjk
@@ -41,42 +38,6 @@ in {
 
           # icon fonts
           material-symbols
-
-          # nerdfonts
-          (pkgs.nerdfonts.override {
-            fonts = [
-              # "3270"
-              # "Agave"
-              # "BigBlueTerminal"
-              "CascadiaCode"
-              "DaddyTimeMono"
-              # "DroidSansMono"
-              "FiraCode"
-              "FiraMono"
-              # "Go-Mono"
-              # "Hack"
-              # "Hermit"
-              # "InconsolataLGC"
-              # "IosevkaTerm"
-              # "JetBrainsMono"
-              # "Lekton"
-              # "Lilex"
-              # "MPlus"
-              # "Meslo"
-              # "Monofur"
-              # "Monoid"
-              # "Mononoki"
-              # "NerdFontsSymbolsOnly"
-              # "OpenDyslexic"
-              # "ProFont"
-              # "RobotoMono"
-              # "SourceCodePro"
-              # "SpaceMono"
-              # "UbuntuMono"
-              # "VictorMono"
-              # "iA-Writer"
-            ];
-          })
         ]
         ++ cfg.fonts;
     };
