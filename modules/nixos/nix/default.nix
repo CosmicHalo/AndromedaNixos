@@ -130,6 +130,8 @@ in {
         "https://nix-community.cachix.org".key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
       } "Extra substituters to configure.";
 
+    sshServe = mkEnableOpt' "Nix store as a remote store via SSH";
+
     optimise = {
       enable = mkBoolOpt true "Whether or not to enable automatic nix store optimiser.";
       dates = mkOpt (listOf str) ["12.00"] "Specification of the time at which the optimiser will run";
@@ -137,7 +139,7 @@ in {
     gc = {
       enable = mkBoolOpt true "Whether or not to enable garbage collection.";
       automatic = mkBoolOpt true "Whether or not to enable automatic garbage collection.";
-      options = mkOpt str "--delete-older-than 3d" "The options to pass to nix-collect-garbage.";
+      options = mkOpt str "--delete-older-than 5d" "The options to pass to nix-collect-garbage.";
       dates = mkOpt (enum ["daily" "weekly" "monthly"]) "daily" "The frequency of garbage collection.";
     };
 
@@ -204,7 +206,7 @@ in {
       environment.systemPackages = cfg.extraNixPackages;
 
       nix = {
-        inherit (cfg) package extraOptions;
+        inherit (cfg) package extraOptions sshServe;
 
         optimise = mkIf cfg.optimise.enable {
           automatic = true;

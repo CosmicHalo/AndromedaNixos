@@ -136,7 +136,7 @@ in {
     gc = {
       enable = mkBoolOpt true "Whether or not to enable garbage collection.";
       automatic = mkBoolOpt true "Whether or not to enable automatic garbage collection.";
-      options = mkOpt str "--delete-older-than 3d" "The options to pass to nix-collect-garbage.";
+      options = mkOpt str "--delete-older-than 5d" "The options to pass to nix-collect-garbage.";
       interval = mkOpt attrs {
         Hour = 3;
         Minute = 15;
