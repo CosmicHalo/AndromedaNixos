@@ -15,11 +15,6 @@ with lib.milkyway; {
     ./hardware.nix
   ];
 
-  services.xserver.enable = true;
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
   ### MISC    ###############################################
 
   system.stateVersion = mkDefault "23.11";
@@ -101,6 +96,7 @@ with lib.milkyway; {
     services = {
       btrfs-maintenance = enabled;
       openssh = enabled;
+      tailscale = enabled;
       vscode-server = enabled;
     };
 

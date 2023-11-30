@@ -80,7 +80,8 @@ in {
       * MANAGERS *
       ***********
       */
-      desktopManager.plasma5.enable = true;
+      desktopManager.plasma5.enable = false;
+      desktopManager.plasma6.enable = true;
       displayManager.defaultSession = mkIf cfg.wayland "plasmawayland";
 
       displayManager.sddm = {

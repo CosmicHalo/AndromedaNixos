@@ -52,6 +52,7 @@
 
         modules.nixos = with inputs; [
           chaotic.nixosModules.default
+          kde2nix.nixosModules.plasma6
           vscode-server.nixosModules.default
           nix-index-database.nixosModules.nix-index
         ];
@@ -136,6 +137,13 @@
       url = "https://flakehub.com/f/chaotic-cx/nyx/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+    };
+
+    # KDE pre-release packages
+    kde2nix = {
+      url = "github:nix-community/kde2nix";
+      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     # Hardware Configuration
