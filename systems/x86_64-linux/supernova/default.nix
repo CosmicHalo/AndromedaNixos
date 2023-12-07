@@ -97,7 +97,7 @@ with lib.milkyway; {
       btrfs-maintenance = enabled;
       openssh = enabled;
       tailscale = enabled;
-      vscode-server = enabled;
+      # vscode-server = enabled;g
     };
 
     ### SYSTEM    ###############################################

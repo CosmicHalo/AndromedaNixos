@@ -19,7 +19,6 @@ in {
 
         # Editors
         neovim = enabled;
-        vscode = enabled;
 
         # Terminal
         kitty = enabled;

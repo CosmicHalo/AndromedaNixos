@@ -36,8 +36,6 @@ in {
 
       variables = {
         RADV_VIDEO_DECODE = "1";
-        # Make some programs "XDG" compliant.
-        WGETRC = "$XDG_CONFIG_HOME/wgetrc";
         LESSHISTFILE = "$XDG_CACHE_HOME/less.history";
       };
 

@@ -25,6 +25,7 @@ in {
       alejandra = mkEnableOpt' "alejandra formatter";
       direnv = mkEnableOpt' "Direnv";
       statix = mkEnableOpt' "statix";
+      nil = mkEnableOpt' "nil";
 
       cachix = mkEnableOpt "cachix";
       deadnix = mkEnableOpt "deadnix";
@@ -35,10 +36,10 @@ in {
   config = {
     home.packages = with pkgs;
       [
-        nil
         nvd
         nixpkgs-fmt
       ]
+      ++ lib.optional cfgTools.nil.enable nil
       ++ lib.optional cfgTools.cachix.enable cachix
       ++ lib.optional cfgTools.direnv.enable direnv
       ++ lib.optional cfgTools.statix.enable statix

@@ -4,12 +4,14 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+with lib.milkyway; let
   cfg = config.milkyway.apps.neovim;
 in {
   options.milkyway.apps.neovim = {
     enable = mkEnableOption "Neovim";
-    astronvim.enable = mkEnableOption "Astronvim";
+    neovide = mkEnableOpt "Neovide";
+    astronvim = mkEnableOpt "Astronvim";
   };
 
   config = mkMerge [
@@ -21,23 +23,21 @@ in {
       };
 
       home = {
-        packages = with pkgs; [
-          vim
-          neovim
+        packages = with pkgs;
+          [
+            vim
+            neovim
 
-          # Needed for neovim
-          gcc
-          gnumake
-          neovide
-          unzip
+            # Needed for neovim
+            gcc
+            gnumake
+            unzip
 
-          lua54Packages.lua
-          luajitPackages.inspect
-          luajitPackages.luarocks
-
-          luajitPackages.sqlite
-          # luajitPackages.sqlite
-        ];
+            lua54Packages.lua
+            luajitPackages.inspect
+            luajitPackages.luarocks
+          ]
+          ++ lib.optional cfg.neovide.enable neovide;
 
         sessionVariables = {
           EDITOR = "nvim";

@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -21,24 +20,10 @@ in {
       LOG_ICONS = "true";
     };
 
-    fonts = {
-      fontDir = enabled;
+    fonts.fontDir = enabled;
 
-      fonts = with pkgs;
-        [
-          # Fonts
-          noto-fonts
-          noto-fonts
-          noto-fonts-cjk
-          noto-fonts-cjk-sans
-          noto-fonts-cjk-serif
-          noto-fonts-emoji
-          open-dyslexic
-
-          # icon fonts
-          material-symbols
-        ]
-        ++ cfg.fonts;
+    milkyway.home.extraOptions = {
+      milkyway.fonts = enabled;
     };
   };
 }

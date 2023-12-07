@@ -22,9 +22,6 @@ in {
     environment = {
       variables = {
         RADV_VIDEO_DECODE = "1";
-        # Make some programs "XDG" compliant.
-        WGETRC = "$XDG_CONFIG_HOME/wgetrc";
-        LESSHISTFILE = "$XDG_CACHE_HOME/less.history";
 
         # To prevent firefox from creating ~/Desktop.
         XDG_DESKTOP_DIR = "$HOME";
@@ -33,6 +30,10 @@ in {
         XDG_BIN_HOME = "$HOME/.local/bin";
         XDG_DATA_HOME = "$HOME/.local/share";
         XDG_STATE_HOME = "$HOME/.local/state";
+
+        # Make some programs "XDG" compliant.
+        # WGETRC = "$XDG_CONFIG_HOME/wgetrc";
+        LESSHISTFILE = "$XDG_CACHE_HOME/less.history";
       };
 
       extraInit =

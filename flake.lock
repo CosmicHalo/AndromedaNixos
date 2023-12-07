@@ -17,15 +17,14 @@
       "locked": {
         "lastModified": 1701109544,
         "narHash": "sha256-O7BTkR3DDDZ7v6Gl6WpkDa+b1Hjz8iD8b7aM/K2ETUY=",
-        "ref": "refs/heads/main",
         "rev": "f13c35fad736405bcabac76f583b98c7fe1f1f65",
         "revCount": 69,
-        "type": "git",
-        "url": "file:///home/n16hth4wk/dev/nixos/andromeda-lib"
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/milkyway-org/andromeda-lib/0.1.69%2Brev-f13c35fad736405bcabac76f583b98c7fe1f1f65/018c1208-3a33-760c-88a8-cd56f77be406/source.tar.gz"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/n16hth4wk/dev/nixos/andromeda-lib"
+        "type": "tarball",
+        "url": "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.%2A.tar.gz"
       }
     },
     "andromeda-tmux": {
@@ -803,20 +802,6 @@
         "url": "https://flakehub.com/f/NixOS/nixpkgs/%2A.tar.gz"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1682134069,
-        "narHash": "sha256-TnI/ZXSmRxQDt2sjRYK/8j8iha4B4zP2cnQCZZ3vp7k=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "fd901ef4bf93499374c5af385b2943f5801c0833",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": [
@@ -915,7 +900,6 @@
         "sddm-catppuccin": "sddm-catppuccin",
         "systems": "systems_7",
         "unstable": "unstable",
-        "vscode-server": "vscode-server",
         "zellij-forgot": "zellij-forgot",
         "zellij-room": "zellij-room",
         "zellij-zjstatus": "zellij-zjstatus"
@@ -1141,27 +1125,6 @@
       "original": {
         "type": "tarball",
         "url": "https://flakehub.com/f/NixOS/nixpkgs/0.1.%2A.tar.gz"
-      }
-    },
-    "vscode-server": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1684517665,
-        "narHash": "sha256-SaAr66uCQ8CF75jIr23FZjk1+9Kfwm5sQnwV25206Gs=",
-        "owner": "nix-community",
-        "repo": "nixos-vscode-server",
-        "rev": "1e1358493df6529d4c7bc4cc3066f76fd16d4ae6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixos-vscode-server",
-        "type": "github"
       }
     },
     "yafas": {

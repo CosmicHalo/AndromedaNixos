@@ -49,16 +49,15 @@ in {
       [
         # Noto fonts
         noto-fonts
-        noto-fonts
         noto-fonts-cjk
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
-        noto-fonts-emoji
+        # noto-fonts-emoji
 
-        # Hack font
+        # # Hack font
         hackgen-nf-font
 
-        # icon fonts
+        # # icon fonts
         material-symbols
 
         # nerdfonts

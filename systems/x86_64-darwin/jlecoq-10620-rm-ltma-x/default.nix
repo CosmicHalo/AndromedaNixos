@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   inputs,
   ...
 }:
@@ -10,6 +11,12 @@ with lib.milkyway; {
     systemPath = [
       "/usr/bin"
       "/opt/homebrew/bin"
+    ];
+
+    systemPackages = with pkgs; [
+      # darwin.objc4.all
+      darwin.apple_sdk.frameworks.Cocoa
+      darwin.apple_sdk.frameworks.CoreServices
     ];
   };
 
@@ -49,6 +56,7 @@ with lib.milkyway; {
 
       extraBrews = [
         # "llvm"
+        "opam"
         "pkgxdev/made/pkgx"
       ];
 
@@ -63,10 +71,11 @@ with lib.milkyway; {
 
     services = {
       openssh = enabled;
+      # tailscale = enabled;
     };
 
     system = {
-      fonts = enabled;
+      #     fonts = enabled;
       input = enabled;
       interface = enabled;
     };

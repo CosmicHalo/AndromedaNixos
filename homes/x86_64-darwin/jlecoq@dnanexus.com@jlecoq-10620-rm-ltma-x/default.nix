@@ -31,10 +31,10 @@ with lib.milkyway; {
       aws-cli = enabled;
       go-task = enabled;
       zoxide = enabled;
-      vscode = enabled;
     };
 
     development = {
+      ocaml = enabled;
       nodejs = {
         enable = true;
         rush = enabled;

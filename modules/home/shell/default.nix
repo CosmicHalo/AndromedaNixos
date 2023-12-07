@@ -41,6 +41,7 @@ in {
         nvd
         ripgrep
         rsync
+        safe-rm
         screen
         skim
         stow

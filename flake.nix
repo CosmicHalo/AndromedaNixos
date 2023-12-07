@@ -52,7 +52,7 @@
 
         modules.nixos = with inputs; [
           chaotic.nixosModules.default
-          vscode-server.nixosModules.default
+          # vscode-server.nixosModules.default
           nix-index-database.nixosModules.nix-index
         ];
 
@@ -117,8 +117,8 @@
 
     # Andromeda
     andromeda = {
-      url = "git+file:///home/n16hth4wk/dev/nixos/andromeda-lib";
-      # url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
+      # url = "git+file:///home/n16hth4wk/dev/nixos/andromeda-lib";
+      url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     andromeda-tmux = {
@@ -205,10 +205,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vscode-server = {
-      url = "github:nix-community/nixos-vscode-server";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    # vscode-server = {
+    #   url = "github:nix-community/nixos-vscode-server";
+    #   inputs.flake-utils.follows = "flake-utils";
+    # };
 
     zellij-forgot = {
       url = "https://github.com/karimould/zellij-forgot/releases/latest/download/zellij_forgot.wasm";
