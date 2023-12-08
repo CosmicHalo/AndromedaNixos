@@ -11,6 +11,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.vscode-server.enable = true;
+    # services.vscode-server.enable = true;
   };
 }

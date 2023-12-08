@@ -2,25 +2,30 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 with lib;
 with lib.milkyway; let
   cfg = config.milkyway.apps.alacritty;
+
   yamlFormat = pkgs.formats.yaml {};
   isWayland = config.wayland.windowManager.hyprland.enable;
 
   defaultSettings = {
-    cursor.style = "Beam";
     live_config_reload = true;
     env.TERM = "xterm-256color";
+    selection.save_to_clipboard = true;
+
+    bell = {
+      duration = 300;
+      animation = "EaseOutExpo";
+    };
 
     window = {
+      opacity = 0.95;
       decorations = "full";
       dynamic_padding = true;
       decorations_theme_variant = "Dark";
-
       padding = {
         x = 8;
         y = 8;
@@ -35,17 +40,20 @@ with lib.milkyway; let
         style = "Light";
         family = fontName;
       };
+
       bold = {
         style = "Medium";
         family = fontName;
       };
+
       italic = {
         style = "Italic";
         family = fontName;
       };
+
       bold_italic = {
-        style = "bold_italic";
         family = fontName;
+        style = "bold_italic";
       };
 
       # Weird, but it works...
@@ -54,12 +62,6 @@ with lib.milkyway; let
         then fontSize * 1.05
         else fontSize;
     };
-
-    extraConfig = ''
-      # all alacritty themes can be found at
-      #    https://github.com/alacritty/alacritty-theme
-      - ~/.config/alacritty/theme_catppuccin.yml
-    '';
   };
 in {
   options.milkyway.apps.alacritty = with types; {
@@ -72,10 +74,15 @@ in {
       description = "The Alacritty package to install.";
     };
 
+    theme = mkStrOpt "argonaut" ''
+      The Alacritty theme to use.
+      # See https://github.com/alacritty/alacritty-theme/tree/master/themes
+    '';
+
     font = {
-      name = mkStrOpt "Caskaydia Cove Nerd Font" "Font name to use";
       size = mkOpt number 10 "Font package to use";
       package = mkNullOpt package null "Font package to use";
+      name = mkStrOpt "ComicShannsMono Nerd Font" "Font name to use";
     };
 
     settings =
@@ -105,15 +112,27 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile."alacritty/theme_catppuccin.yml".source = "${inputs.catppuccin-alacritty}/catppuccin-mocha.yml";
-
-    programs.alacritty = {
-      enable = true;
-      inherit (cfg) package settings;
-    };
+    programs.alacritty = {inherit (cfg) package enable;};
 
     home.packages =
       optional (cfg.font.package != null)
       cfg.font.package;
+
+    xdg.configFile."alacritty/alacritty.yml".source = ./alacritty.yml;
+    xdg.configFile."alacritty/alacritty.yml".text =
+      replaceTextInFile ["theme" "font"]
+      [cfg.theme cfg.font.name]
+      ./alacritty.yml;
+
+    # xdg.configFile."alacritty/alacritty.yml" = mkIf (cfg.settings != {}) {
+    #   text = let
+    #     config = yamlFormat.generate "alacritty.yml" cfg.settings;
+    #   in
+    #     ''
+    #       import:
+    #         - "~/.config/alacritty/themes/${cfg.theme}.yaml"
+    #     ''
+    #     + builtins.readFile config;
+    # };
   };
 }

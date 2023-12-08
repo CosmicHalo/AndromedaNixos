@@ -98,7 +98,7 @@ in {
           };
 
           General = {
-            Font = mkDefault "Caskaydia Cove Nerd Font";
+            Font = mkDefault "ComicShannsMono Nerd Font";
             CursorTheme = mkDefault "Sweet-cursors";
           };
         };
