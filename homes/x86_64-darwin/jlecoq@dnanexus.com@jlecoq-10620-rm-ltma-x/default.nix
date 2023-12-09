@@ -27,7 +27,6 @@ with lib.milkyway; {
     #* Apps
     #*********
     apps = {
-      # bitwarden = enabled;
       aws-cli = enabled;
       go-task = enabled;
       zoxide = enabled;
