@@ -190,11 +190,6 @@
   #*********
 
   inputs = {
-    alacritty-themes = {
-      url = "https://github.com/alacritty/alacritty-theme?rev=808b81b2e88884e8eca5d951b89f54983fa6c237";
-      flake = false;
-    };
-
     gpg-base-conf = {
       url = "github:drduh/config";
       flake = false;

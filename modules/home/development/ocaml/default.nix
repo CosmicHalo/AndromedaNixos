@@ -16,7 +16,7 @@ in {
     milkyway.home.sessionPath = ["$HOME/.opam"];
 
     home.packages = with pkgs; [
-      # opam
+      opam
       ocaml
       dune_3
       ocamlPackages.ocaml-lsp

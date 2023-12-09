@@ -1,19 +1,5 @@
 {
   "nodes": {
-    "alacritty-themes": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-q7GLtlElYwGTYHUtnOrbA5KJ0hKgbB/jYO++PcPSkH8=",
-        "rev": "808b81b2e88884e8eca5d951b89f54983fa6c237",
-        "type": "file",
-        "url": "https://github.com/alacritty/alacritty-theme"
-      },
-      "original": {
-        "rev": "808b81b2e88884e8eca5d951b89f54983fa6c237",
-        "type": "file",
-        "url": "https://github.com/alacritty/alacritty-theme"
-      }
-    },
     "andromeda": {
       "inputs": {
         "devshell": "devshell",
@@ -618,11 +604,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1702078477,
-        "narHash": "sha256-JQDCHdOtdvqQ2FcWuWUSfaTsbx58mYfxyQfhg6WaTqg=",
+        "lastModified": 1702083940,
+        "narHash": "sha256-0UkPccTiso4xyozci1VB3/oX9rsekgz1YUdgaVBHTX8=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "359991a4326a4cfdb7133b50206068917efabda0",
+        "rev": "046b2a8312a03863c3081aa4bcd6cd02ba2ca746",
         "type": "github"
       },
       "original": {
@@ -887,7 +873,6 @@
     },
     "root": {
       "inputs": {
-        "alacritty-themes": "alacritty-themes",
         "andromeda": "andromeda",
         "andromeda-tmux": "andromeda-tmux",
         "brew-src": "brew-src",

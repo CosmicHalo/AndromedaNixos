@@ -30,6 +30,13 @@ with lib.milkyway; {
       vscode = enabled;
     };
 
+    #**************
+    #* Development
+    #**************
+    development = {
+      ocaml = enabled;
+    };
+
     #*********
     #* System
     #*********
