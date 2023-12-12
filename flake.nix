@@ -51,6 +51,7 @@
         inherit specialArgs;
 
         modules.nixos = with inputs; [
+          envfs.nixosModules.envfs
           chaotic.nixosModules.default
           # vscode-server.nixosModules.default
           nix-index-database.nixosModules.nix-index
@@ -181,6 +182,11 @@
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    envfs = {
+      url = "github:Mic92/envfs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -113,6 +113,7 @@ with lib.milkyway; {
     ### SERVICES    ###############################################
 
     services = {
+      envfs = enabled;
       flatpak = enabled;
       openssh = enabled;
       tailscale = enabled;
