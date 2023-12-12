@@ -33,9 +33,11 @@ in {
             gnumake
             unzip
 
-            lua54Packages.lua
+            luajit
+            luajitPackages.stdlib
             luajitPackages.inspect
-            luajitPackages.luarocks
+            luajitPackages.luacheck
+            luajitPackages.luarocks-nix
           ]
           ++ lib.optional cfg.neovide.enable neovide;
 

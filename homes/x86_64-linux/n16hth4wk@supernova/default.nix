@@ -26,8 +26,8 @@ with lib.milkyway; {
     #* Apps
     #*********
     apps = {
-      bitwarden = enabled;
       vscode = enabled;
+      bitwarden = enabled;
     };
 
     #**************
@@ -35,6 +35,28 @@ with lib.milkyway; {
     #**************
     development = {
       ocaml = enabled;
+      nodejs = {
+        enable = true;
+        rush = enabled;
+      };
+    };
+
+    tools.rtx = {
+      enable = true;
+
+      settings = {
+        tools = {
+          node = "18";
+          python = ["2.7" "3.11"];
+        };
+
+        settings = {
+          jobs = 16;
+          verbose = true;
+          asdf_compat = true;
+          experimental = true;
+        };
+      };
     };
 
     #*********

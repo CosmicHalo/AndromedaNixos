@@ -95,6 +95,7 @@ with lib.milkyway; {
 
     services = {
       btrfs-maintenance = enabled;
+      flatpak = enabled;
       openssh = enabled;
       tailscale = enabled;
       # vscode-server = enabled;g
@@ -104,6 +105,12 @@ with lib.milkyway; {
     system = {
       boot.systemd-boot = enabled;
       fonts = enabled;
+    };
+
+    ### VIRTUALIZATION    ###############################################
+    virtualisation = {
+      docker = enabled;
+      # podman = enabled;
     };
   };
 }

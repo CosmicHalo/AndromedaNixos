@@ -14,10 +14,11 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      docker
+      # docker
       docker-ls
       docker-gc
       docker-sync
+      docker-client
     ];
   };
 }
