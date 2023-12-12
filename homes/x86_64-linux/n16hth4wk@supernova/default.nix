@@ -35,6 +35,7 @@ with lib.milkyway; {
     #**************
     development = {
       ocaml = enabled;
+      python = enabled;
       nodejs = {
         enable = true;
         rush = enabled;
@@ -47,7 +48,6 @@ with lib.milkyway; {
       settings = {
         tools = {
           node = "18";
-          python = ["2.7" "3.11"];
         };
 
         settings = {
