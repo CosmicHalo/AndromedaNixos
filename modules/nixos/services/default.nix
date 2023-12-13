@@ -22,7 +22,7 @@ in {
 
         avahi = {
           enable = mkDefault true;
-          nssmdns = mkDefault true;
+          nssmdns4 = mkDefault true;
         };
 
         # Discard blocks that are not in use by the filesystem
