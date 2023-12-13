@@ -67,6 +67,7 @@ in {
 
   config = {
     programs.${cfg.shell}.enable = true;
+
     environment.systemPackages = with pkgs; [
       cowsay
       lolcat

@@ -65,12 +65,9 @@ with lib.milkyway; let
   };
 
   alacritty-theme = pkgs.fetchgit {
-    # owner = "alacritty";
-    # repo = "alacritty-theme";
     rev = "808b81b2e88884e8eca5d951b89f54983fa6c237";
     url = "https://github.com/alacritty/alacritty-theme";
     hash = "sha256-g5tM6VBPLXin5s7X0PpzWOOGTEwHpVUurWOPqM/O13A=";
-    # sha256 = "149zh2rm59blr2q458a5irkfh82y3dwdich60s9670kl3cl5h2m1";
   };
 in {
   options.milkyway.apps.alacritty = with types; {

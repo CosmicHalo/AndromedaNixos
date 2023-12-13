@@ -71,21 +71,21 @@ scrolling:
 font:
   normal:
     style: Regular
-    family: ComicShannsMono Nerd Font Mono
+    family: @font@
 
   # Bold font face
   bold:
     style: Bold
-    family: ComicShannsMono Nerd Font Mono
+    family: @font@
 
   # Italic font face
   italic:
     style: Italic
-    family: ComicShannsMono Nerd Font Mono
+    family: @font@
 
   # Bold italic font face
   bold_italic:
-    family: ComicShannsMono Nerd Font Mono
+    family: @font@
     style: Bold Italic
 
   # Point size
