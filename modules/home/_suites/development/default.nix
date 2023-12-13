@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -12,6 +13,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      commitizen
+    ];
+
     milkyway = {
       apps = {
         # programs
