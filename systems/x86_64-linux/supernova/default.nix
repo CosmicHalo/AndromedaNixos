@@ -25,6 +25,8 @@ with lib.milkyway; {
   programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
+    google-chrome
+
     cosmic-applets
     cosmic-comp
     cosmic-edit

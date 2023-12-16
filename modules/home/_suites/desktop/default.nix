@@ -15,6 +15,7 @@ in {
     milkyway = {
       apps = {
         discord = enabled;
+        # slack = enabled;
       };
     };
   };
