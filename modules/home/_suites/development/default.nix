@@ -36,6 +36,7 @@ in {
       };
 
       development = {
+        go = enabled;
         rust = enabled;
         nodejs = enabled;
       };
