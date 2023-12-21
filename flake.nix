@@ -53,7 +53,7 @@
         modules.nixos = with inputs; [
           envfs.nixosModules.envfs
           chaotic.nixosModules.default
-          # vscode-server.nixosModules.default
+          hyprland.nixosModules.default
           nix-index-database.nixosModules.nix-index
         ];
 
@@ -200,6 +200,8 @@
       url = "github:drduh/config";
       flake = false;
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
 
     my-ssh-keys = {
       url = "https://github.com/lecoqjacob.keys";

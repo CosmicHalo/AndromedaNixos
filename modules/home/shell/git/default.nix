@@ -13,6 +13,7 @@
 in {
   options.milkyway.shell.git = with types; {
     enable = mkEnableOption "Git";
+    enableGraphite = mkEnableOption "Graphite";
 
     userEmail = mkOpt str user.email "The email to configure git with.";
     userName = mkOpt str user.fullName "The name to configure git with.";
@@ -30,6 +31,8 @@ in {
       rm -f ~/.gitconfig
       rm -rf ~/.config/gh/config.yml
     '';
+
+    milkyway.apps.graphite.enable = cfg.enableGraphite;
 
     home.packages = with pkgs; [
       github-copilot-cli
