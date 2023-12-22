@@ -48,7 +48,6 @@ in {
         ++ [
           ffmpegthumbnailer
           jamesdsp
-          kwalletcli
           libinput-gestures
           ocs-url
           partition-manager
@@ -78,6 +77,11 @@ in {
           catppuccin-kde
           catppuccin-kvantum
 
+          kwalletcli
+          libsForQt5.kwallet
+          libsForQt5.kwalletmanager
+          libsForQt5.kwallet-pam
+
           libsForQt5.kde-cli-tools
           libsForQt5.kdebugsettings
           libsForQt5.kdeconnect-kde
@@ -85,7 +89,6 @@ in {
           libsForQt5.kimageformats
           libsForQt5.krdc
           libsForQt5.ksshaskpass
-          libsForQt5.kwalletmanager
           libsForQt5.plasma-workspace
 
           libsForQt5.applet-window-buttons
@@ -93,6 +96,8 @@ in {
           libsForQt5.qtstyleplugin-kvantum
           libsForQt5.qtstyleplugin-kvantum
           qt6Packages.qtstyleplugin-kvantum
+
+          gnome.gnome-keyring
         ]
         ++ cfg.extraPackages;
     };
