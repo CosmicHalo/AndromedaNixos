@@ -19,7 +19,7 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "zellij-org";
     repo = "zellij";
-    rev = "9a38ad2e152b914c75f0156e5a9985fe22013346";
+    rev = "0b32c7e169201f841eb1a21a322e4f72a3e45bf0";
     hash = "sha256-ZKtYXUNuBwQtEHTaPlptiRncFWattkkcAGGzbKalJZE=";
   };
 
