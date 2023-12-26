@@ -203,6 +203,7 @@ in {
         })
         cfg.extra-substituters;
 
+      programs.nix-ld.enable = true;
       environment.systemPackages = cfg.extraNixPackages;
 
       nix = {

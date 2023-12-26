@@ -28,6 +28,7 @@ with lib.milkyway; {
     apps = {
       vscode = enabled;
       bitwarden = enabled;
+      google-chrome = enabled;
     };
 
     #**************
