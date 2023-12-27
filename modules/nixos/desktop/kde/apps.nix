@@ -77,11 +77,18 @@ in {
           catppuccin-kde
           catppuccin-kvantum
 
+          libsForQt5.applet-window-buttons
+          libsForQt5.dragon
+          libsForQt5.plasma-workspace
+          libsForQt5.yakuake
+
+          # KWALLET
           kwalletcli
           libsForQt5.kwallet
-          libsForQt5.kwalletmanager
           libsForQt5.kwallet-pam
+          libsForQt5.kwalletmanager
 
+          # KDE
           libsForQt5.kde-cli-tools
           libsForQt5.kdebugsettings
           libsForQt5.kdeconnect-kde
@@ -89,10 +96,8 @@ in {
           libsForQt5.kimageformats
           libsForQt5.krdc
           libsForQt5.ksshaskpass
-          libsForQt5.plasma-workspace
 
-          libsForQt5.applet-window-buttons
-          libsForQt5.dragon
+          # Kvantum
           libsForQt5.qtstyleplugin-kvantum
           libsForQt5.qtstyleplugin-kvantum
           qt6Packages.qtstyleplugin-kvantum

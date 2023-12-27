@@ -31,10 +31,11 @@ in {
         bat
         btop
         curl
-        fzf
         fd
+        fzf
         gh
         git
+        guake
         killall
         lsd
         micro

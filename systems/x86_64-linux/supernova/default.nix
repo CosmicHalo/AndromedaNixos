@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   inputs,
   ...
 }:
@@ -24,6 +25,10 @@ with lib.milkyway; {
   services.xrdp.defaultWindowManager = "startplasma-x11";
 
   ### CONFIG    #############################################
+
+  environment.systemPackages = with pkgs; [
+    tdrop
+  ];
 
   milkyway = {
     nix = let

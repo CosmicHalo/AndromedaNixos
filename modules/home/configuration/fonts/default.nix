@@ -78,6 +78,7 @@ in {
         "${localDir}/BerkleyMono".source = ./fontDir/berkley;
         "${localDir}/PragmataPro".source = ./fontDir/pragmata;
         "${localDir}/OpenDyslexic".source = ./fontDir/open-dyslexic;
+        "${localDir}/CartographyCF".source = ./fontDir/cartography_cf;
       };
   };
 }
