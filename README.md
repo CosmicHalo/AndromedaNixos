@@ -1,3 +1,3 @@
 # Andromeda NixOS
 
-![Alt](https://repobeats.axiom.co/api/embed/5046092ddb8c0451cda880f18c1708babc839224.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/8d33474f5b8d6ff74d64c7e5cef249e6d9db9631.svg "Repobeats analytics image")
