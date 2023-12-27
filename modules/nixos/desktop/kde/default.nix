@@ -98,7 +98,7 @@ in {
           };
 
           General = {
-            Font = mkDefault "Cartograph CF Nerd Font";
+            Font = mkDefault "CartographCF Nerd Font";
             CursorTheme = mkDefault "Sweet-cursors";
           };
         };

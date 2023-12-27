@@ -12,7 +12,7 @@ in {
 
     font = {
       size = mkOpt number 10.0 "Font size to use";
-      name = mkOpt str "Cartograph CF Nerd Font" "Font name to use";
+      name = mkOpt str "CartographCF Nerd Font" "Font name to use";
       package = mkOpt (nullOr package) null "Font package to use";
     };
   };

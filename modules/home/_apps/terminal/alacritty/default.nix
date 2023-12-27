@@ -88,7 +88,7 @@ in {
     font = {
       size = mkOpt number 10 "Font package to use";
       package = mkNullOpt package null "Font package to use";
-      name = mkStrOpt "Cartograph CF Nerd Font" "Font name to use";
+      name = mkStrOpt "CartographCF Nerd Font" "Font name to use";
     };
 
     settings =
