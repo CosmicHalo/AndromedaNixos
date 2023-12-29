@@ -15,7 +15,7 @@ in {
     milkyway = {
       programs = {
         discord = enabled;
-        slack = enabled;
+        # slack = enabled;
       };
     };
   };
