@@ -90,12 +90,6 @@ in {
             # edit the current command line in $EDITOR
             bindkey -M vicmd v edit-command-line
 
-            # zsh-history-substring-search
-            # historySubstringSearch.{searchUpKey,searchDownKey} does not work with
-            # vicmd, this is why we have this here
-            bindkey -M vicmd 'k' history-substring-search-up
-            bindkey -M vicmd 'j' history-substring-search-down
-
             # allow ad-hoc scripts to be add to PATH locally
             export PATH="$HOME/.local/bin:$PATH"
 

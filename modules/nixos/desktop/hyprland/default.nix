@@ -6,7 +6,7 @@ with lib.milkyway; {
 
   milkyway.home.extraOptions = {
     milkyway.desktop.hyprland = enabled;
-    milkyway.apps = {
+    milkyway.programs = {
       dunst = enabled;
       rofi = enabled;
       waybar = enabled;

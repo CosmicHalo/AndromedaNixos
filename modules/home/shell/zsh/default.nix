@@ -88,31 +88,6 @@ in {
         expireDuplicatesFirst = true;
       };
 
-      historySubstringSearch = {
-        enable = true;
-        searchUpKey = ["$terminfo[kcuu1]"];
-        searchDownKey = ["$terminfo[kcud1]"];
-      };
-
-      shellAliases =
-        mapAttrs (_n: v: lib.mkForce v) commonShellAliases
-        // mapAttrs (_n: v: lib.mkForce v) cfg.extraShellAliases
-        // {
-          # General useful things & theming
-          "cls" = "clear";
-          "gcommit" = "git commit -m";
-          "glcone" = "git clone";
-          "gpr" = "git pull --rebase";
-          "gpull" = "git pull";
-          "gpush" = "git push";
-          "say" = "${pkgs.toilet}/bin/toilet -f pagga";
-          "su" = "sudo su -";
-          "tarnow" = "tar acf ";
-          "untar" = "tar zxvf ";
-        };
-
-      envExtra = (builtins.readFile ./env/zshenv.zsh) + cfg.envExtra;
-
       profileExtra =
         ''
           # Source .profile
@@ -130,6 +105,25 @@ in {
           ulimit -Sn 524288
         ''
         + cfg.profileExtra;
+
+      envExtra = (builtins.readFile ./env/zshenv.zsh) + cfg.envExtra;
+
+      shellAliases =
+        mapAttrs (_n: v: lib.mkForce v) commonShellAliases
+        // mapAttrs (_n: v: lib.mkForce v) cfg.extraShellAliases
+        // {
+          # General useful things & theming
+          "cls" = "clear";
+          "gcommit" = "git commit -m";
+          "glcone" = "git clone";
+          "gpr" = "git pull --rebase";
+          "gpull" = "git pull";
+          "gpush" = "git push";
+          "say" = "${pkgs.toilet}/bin/toilet -f pagga";
+          "su" = "sudo su -";
+          "tarnow" = "tar acf ";
+          "untar" = "tar zxvf ";
+        };
     };
   };
 }

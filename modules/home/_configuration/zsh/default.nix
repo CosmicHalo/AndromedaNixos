@@ -15,6 +15,8 @@ in {
       ENHANCD_COMMAND = "ecd";
     };
 
+    milkyway.programs.starship = enabled;
+
     milkyway.shell.zsh = {
       enable = true;
 

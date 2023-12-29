@@ -44,7 +44,7 @@ in {
           applet-window-title
           blurredwallpaper
         ]
-        # Base apps
+        # Base programs
         ++ [
           ffmpegthumbnailer
           jamesdsp

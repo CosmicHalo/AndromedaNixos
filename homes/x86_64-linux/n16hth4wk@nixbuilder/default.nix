@@ -18,9 +18,16 @@ with lib.milkyway; {
     #*********
     #* Apps
     #*********
-    apps = {
+    programs = {
       tmux = enabled;
       neovim = enabled;
+    };
+
+    tools = {
+      git = {
+        enable = true;
+        signingKey = "C505 1E8B 06AC 1776 6875  1B60 93AF DAD0 10B3 CB8D";
+      };
     };
 
     shell.zsh = {
@@ -82,11 +89,6 @@ with lib.milkyway; {
     #* System
     #*********
     shell = {
-      git = {
-        enable = true;
-        signingKey = "C505 1E8B 06AC 1776 6875  1B60 93AF DAD0 10B3 CB8D";
-      };
-
       ssh = {
         enable = true;
         ssh-agent = enabled;

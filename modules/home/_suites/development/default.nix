@@ -18,7 +18,7 @@ in {
     ];
 
     milkyway = {
-      apps = {
+      programs = {
         # programs
         docker = enabled;
 
@@ -42,13 +42,12 @@ in {
       };
 
       tools = {
+        git = enabled;
         rtx = enabled;
       };
 
       shell = {
-        git = enabled;
         ssh = enabled;
-        # starship = enabled;
         zsh = enabled;
       };
     };

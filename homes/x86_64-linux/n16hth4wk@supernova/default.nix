@@ -28,7 +28,7 @@ with lib.milkyway; {
     #*********
     #* Apps
     #*********
-    apps = {
+    programs = {
       vscode = enabled;
       bitwarden = enabled;
       google-chrome = enabled;
@@ -46,19 +46,26 @@ with lib.milkyway; {
       };
     };
 
-    tools.rtx = {
-      enable = true;
+    tools = {
+      git = {
+        enable = true;
+        signingKey = "C505 1E8B 06AC 1776 6875  1B60 93AF DAD0 10B3 CB8D";
+      };
 
-      settings = {
-        tools = {
-          node = "18";
-        };
+      rtx = {
+        enable = true;
 
         settings = {
-          jobs = 16;
-          verbose = true;
-          asdf_compat = true;
-          experimental = true;
+          tools = {
+            node = "18";
+          };
+
+          settings = {
+            jobs = 16;
+            verbose = true;
+            asdf_compat = true;
+            experimental = true;
+          };
         };
       };
     };
@@ -71,11 +78,6 @@ with lib.milkyway; {
     };
 
     shell = {
-      git = {
-        enable = true;
-        signingKey = "C505 1E8B 06AC 1776 6875  1B60 93AF DAD0 10B3 CB8D";
-      };
-
       ssh = {
         enable = true;
         ssh-agent = enabled;

@@ -13,9 +13,9 @@ in {
 
   config = mkIf cfg.enable {
     milkyway = {
-      apps = {
+      programs = {
         discord = enabled;
-        # slack = enabled;
+        slack = enabled;
       };
     };
   };

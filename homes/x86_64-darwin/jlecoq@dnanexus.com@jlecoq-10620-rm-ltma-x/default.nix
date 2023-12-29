@@ -26,7 +26,7 @@ with lib.milkyway; {
     #*********
     #* Apps
     #*********
-    apps = {
+    programs = {
       aws-cli = enabled;
       go-task = enabled;
       zoxide = enabled;
@@ -40,30 +40,32 @@ with lib.milkyway; {
       };
     };
 
-    tools.rtx = {
-      enable = true;
-
-      settings = {
-        tools = {
-          node = "18";
-          python = ["2.7" "3.11"];
-        };
-
-        settings = {
-          jobs = 16;
-          verbose = true;
-          asdf_compat = true;
-          experimental = true;
-        };
-      };
-    };
-
-    shell = {
+    tools = {
       git = {
         enable = true;
         signingKey = "C505 1E8B 06AC 1776 6875  1B60 93AF DAD0 10B3 CB8D";
       };
 
+      rtx = {
+        enable = true;
+
+        settings = {
+          tools = {
+            node = "18";
+            python = ["2.7" "3.11"];
+          };
+
+          settings = {
+            jobs = 16;
+            verbose = true;
+            asdf_compat = true;
+            experimental = true;
+          };
+        };
+      };
+    };
+
+    shell = {
       ssh = {
         enable = true;
         ssh-agent = disabled;
