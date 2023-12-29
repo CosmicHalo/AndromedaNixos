@@ -1,4 +1,0 @@
-{
-  "Lua.diagnostics.globals": ["vim", "astronvim", "rainbow_delimiters"],
-  "Lua.diagnostics.disable": ["undefined-doc-name"]
-}

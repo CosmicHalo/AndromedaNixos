@@ -36,18 +36,13 @@ in {
         source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
 
         # Enable the auto-suggestions plugin
-        source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        # source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
         # Enable the fast-syntax-highlighting plugin
-        source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+        # source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
 
         # zsh-history-substring-search
-        source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-        ${lib.optionalString config.services.gpg-agent.enable ''
-          gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
-          export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/$gnupg_path/S.gpg-agent.ssh"
-        ''}
+        # source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
         # run programs that are not in PATH with comma
         command_not_found_handler() {
@@ -56,12 +51,10 @@ in {
 
         ${pkgs.toilet}/bin/toilet -f future "Milky Way" --metal
 
-        # Fix an issue with tmux.
-        export KEYTIMEOUT=1
-
-        export LC_CTYPE=en_US.UTF-8
-        export LC_ALL=en_US.UTF-8
-        export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+        ${lib.optionalString config.services.gpg-agent.enable ''
+          gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
+          export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/$gnupg_path/S.gpg-agent.ssh"
+        ''}
       '';
 
       # zplug = {

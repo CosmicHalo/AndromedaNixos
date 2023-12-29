@@ -10,7 +10,7 @@ buildNpmPackage rec {
   src = fetchFromGitHub {
     owner = "microsoft";
     repo = pname;
-    rev = "refs/tags/${version}";
+    rev = "c42b6da63f8b33999c064b3bec0b4f4c767c46ce";
     hash = "sha256-PYSonVyclGSH3ArbqJuKrBNGbJaQEp6XemwnHboVwPk=";
   };
 
