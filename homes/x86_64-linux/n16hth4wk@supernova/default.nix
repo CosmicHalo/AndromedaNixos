@@ -4,14 +4,17 @@
   ...
 }:
 with lib.milkyway; {
-  imports = [
-    ./programs
-  ];
-
   home.stateVersion = "23.11";
 
   milkyway = {
     user = enabled;
+
+    #*****************
+    #* Shared Configs
+    #*****************
+    configurations = {
+      zsh = enabled;
+    };
 
     #*********
     #* Suites

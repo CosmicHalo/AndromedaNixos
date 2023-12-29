@@ -18,14 +18,11 @@ with lib.milkyway; let
   '';
 
   powerlevelSource = ''
-    [ -f ~/.config/zsh/p10k.zsh ] && source ~/.config/zsh/p10k.zsh
+    [[ -f ~/.config/zsh/p10k/p10k.zsh ]] && source ~/.config/zsh/p10k/p10k.zsh
+    [[ -f ~/.config/zsh/p10k/p10k.rtx.zsh ]] && source ~/.config/zsh/p10k/p10k.rtx.zsh
   '';
 in {
   options.milkyway.shell.zsh = with types; {
-    shellFunctionsExtra =
-      mkOpt lines ""
-      "Extra shell functions to add.";
-
     initExtraFirst =
       mkOpt lines ""
       "Extra commands that should be added to  top zshrc`.";
@@ -41,38 +38,74 @@ in {
     zstyleExtra =
       mkOpt lines ''''
       "Extra zstyle commands that should be added to zshrc`.";
-
-    zsourceExtra =
-      mkOpt lines ''''
-      "Commands to be source that shoukld be added to zshrc`.";
-
-    zexportsExtra =
-      mkOpt lines ''''
-      "Commands to be source that shoukld be added to zshrc`.";
   };
 
   config = lib.mkIf cfg.enable {
     programs.zsh = {
-      inherit (cfg) initExtraBeforeCompInit;
-
       initExtraFirst =
-        strings.concatStrings
+        strings.concatStringsSep " "
         [
           (optionalString powerlevelEnabled powerlevelInit)
           cfg.initExtraFirst
         ];
 
+      initExtraBeforeCompInit = strings.concatStringsSep " " [
+        (builtins.readFile ./config/zstyle.zsh)
+        cfg.initExtraBeforeCompInit
+        cfg.zstyleExtra
+      ];
+
       initExtra =
-        strings.concatStrings
-        [
-          cfg.shellFunctionsExtra
-          cfg.zstyleExtra
-          cfg.zexportsExtra
+        strings.concatStringsSep " " [
+          (builtins.readFile ./config/ziminit.zsh)
+          (optionalString powerlevelEnabled powerlevelSource)
+          /*
+          bash
+          */
+          ''
+            # avoid duplicated entries in PATH
+            typeset -U PATH
 
-          (strings.concatStrings [cfg.zsourceExtra (optionalString powerlevelEnabled powerlevelSource)])
+            # Remove older command from the history if a duplicate is to be added.
+            setopt HIST_IGNORE_ALL_DUPS
 
-          cfg.initExtra
-        ];
+            # try to correct the spelling of commands
+            setopt CORRECT
+
+            # disable C-S/C-Q
+            setopt noflowcontrol
+
+            # Customize spelling correction prompt.
+            SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+            # Remove path separator from WORDCHARS.
+            WORDCHARS=$\{WORDCHARS//[\/]}
+
+            # disable "no matches found" check
+            unsetopt nomatch
+
+            # Set editor default keymap to emacs (`-e`) or vi (`-v`)
+            bindkey -e
+
+            # edit the current command line in $EDITOR
+            bindkey -M vicmd v edit-command-line
+
+            # zsh-history-substring-search
+            # historySubstringSearch.{searchUpKey,searchDownKey} does not work with
+            # vicmd, this is why we have this here
+            bindkey -M vicmd 'k' history-substring-search-up
+            bindkey -M vicmd 'j' history-substring-search-down
+
+            # allow ad-hoc scripts to be add to PATH locally
+            export PATH="$HOME/.local/bin:$PATH"
+
+            # source contents from ~/.zshrc.d/*.zsh
+            for file in "$HOME/.zshrc.d/"*.zsh; do
+              [[ -f "$file" ]] && source "$file"
+            done
+          ''
+        ]
+        + cfg.initExtra;
     };
   };
 }

@@ -68,6 +68,7 @@ in {
     };
 
     programs = {
+      thunar.enable = mkDefault true;
       kdeconnect.enable = mkDefault true;
       partition-manager.enable = mkDefault true;
     };

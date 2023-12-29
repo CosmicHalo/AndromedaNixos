@@ -26,13 +26,21 @@ in {
       milkyway.shell.lsd = enabled;
       milkyway.shell.eza = disabled;
 
+      programs = {
+        fzf = {
+          enable = true;
+          historyWidgetOptions = ["--sort"];
+          fileWidgetOptions = ["--preview 'head {}'"];
+        };
+      };
+
       home.packages = with pkgs; [
         autorandr
         bat
         btop
+        conky
         curl
         fd
-        fzf
         gh
         git
         guake

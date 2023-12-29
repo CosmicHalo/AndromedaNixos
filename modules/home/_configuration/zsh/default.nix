@@ -3,32 +3,22 @@
   pkgs,
   config,
   ...
-}: {
-  home.sessionVariables = {
-    ENHANCD_COMMAND = "ecd";
-  };
+}:
+with lib;
+with lib.milkyway; let
+  cfg = config.milkyway.configurations.zsh;
+in {
+  options.milkyway.configurations.zsh = mkEnableOpt "Shared ZSH configuration";
 
-  milkyway = {
-    shell.zsh = {
+  config = mkIf cfg.enable {
+    home.sessionVariables = {
+      ENHANCD_COMMAND = "ecd";
+    };
+
+    milkyway.shell.zsh = {
       enable = true;
 
-      initExtraBeforeCompInit = ''
-        # search history based on what's typed in the prompt
-        autoload -U history-search-end
-        zle -N history-beginning-search-backward-end history-search-end
-        zle -N history-beginning-search-forward-end history-search-end
-        bindkey "^[OA" history-beginning-search-backward-end
-        bindkey "^[OB" history-beginning-search-forward-end
-        bindkey "\e[3~" delete-char
-
-        ZSH_AUTOSUGGEST_USE_ASYNC='true'
-        ZSH_AUTOSUGGEST_MANUAL_REBIND='true'
-        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE='20'
-        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-      '';
-
       zstyleExtra = ''
-        # case insensitive tab completion
         zstyle ':completion:*' completer _complete _ignored _approximate
         zstyle ':completion:*' list-colors '\'
         zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -39,7 +29,7 @@
         _comp_options+=(globdots)
       '';
 
-      zsourceExtra = ''
+      initExtra = ''
         # Source Command Not Found
         source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
 
@@ -63,9 +53,7 @@
         }
 
         ${pkgs.toilet}/bin/toilet -f future "Milky Way" --metal
-      '';
 
-      zexportsExtra = ''
         # Fix an issue with tmux.
         export KEYTIMEOUT=1
 
@@ -74,32 +62,29 @@
         export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
       '';
 
-      shellFunctionsExtra = '''';
+      # zplug = {
+      #   enable = true;
 
-      zplug = {
-        enable = true;
+      #   plugins = [
+      #     "b4b4r07/enhancd"
+      #   ];
 
-        plugins = [
-          "b4b4r07/enhancd"
-        ];
+      #   theme-plugins = [
+      #     "romkatv/powerlevel10k, depth:1"
+      #   ];
 
-        theme-plugins = [
-          "romkatv/powerlevel10k, depth:1"
-        ];
-
-        # oh-my-zsh-plugins = [
-        #   "command-not-found, defer:2"
-        #   "git-extras, defer:2"
-        #   "gitfast, defer:2"
-        #   "github, defer:2"
-        #   # "gpg-agent"
-        #   "git, defer:2"
-        #   "rbw, defer:2"
-        #   "ripgrep"
-        #   "sudo"
-        #   "zoxide, defer:2"
-        # ];
-      };
+      #   oh-my-zsh-plugins = [
+      #     "command-not-found, defer:2"
+      #     "git-extras, defer:2"
+      #     "gitfast, defer:2"
+      #     "github, defer:2"
+      #     "git, defer:2"
+      #     "rbw, defer:2"
+      #     "ripgrep, defer:2"
+      #     "sudo, defer:2"
+      #     "zoxide, defer:2"
+      #   ];
+      # };
     };
   };
 }

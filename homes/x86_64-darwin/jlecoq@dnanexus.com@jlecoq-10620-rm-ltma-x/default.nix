@@ -5,7 +5,7 @@
 }:
 with lib.milkyway; {
   imports = [
-    ./programs
+    ./shared/zsh.nix
   ];
 
   milkyway = {

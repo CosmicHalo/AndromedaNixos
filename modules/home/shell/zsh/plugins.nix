@@ -18,18 +18,7 @@ with lib.milkyway; let
     };
 in {
   options.milkyway.shell.zsh = with types; {
-    plugins = mkOpt (listOf pluginModule) [
-      {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "406ce293f5302fdebca56f8c59ec615743260604";
-          sha256 = "149zh2rm59blr2q458a5irkfh82y3dwdich60s9670kl3cl5h2m1";
-        };
-      }
-    ] "List of zsh plugins to install.";
+    plugins = mkOpt (listOf pluginModule) [] "List of zsh plugins to install.";
 
     zplug = {
       enable = mkBoolOpt true "zplug - a zsh plugin manager";
@@ -41,7 +30,20 @@ in {
 
   config = mkIf cfg.enable {
     programs.zsh = {
-      inherit (cfg) plugins;
+      plugins =
+        [
+          {
+            name = "zsh-nix-shell";
+            file = "nix-shell.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "chisui";
+              repo = "zsh-nix-shell";
+              rev = "406ce293f5302fdebca56f8c59ec615743260604";
+              sha256 = "149zh2rm59blr2q458a5irkfh82y3dwdich60s9670kl3cl5h2m1";
+            };
+          }
+        ]
+        ++ cfg.plugins;
 
       zplug = let
         generate-plugins = zsh-fn:

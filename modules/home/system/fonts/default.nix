@@ -50,18 +50,19 @@ in {
         # Noto fonts
         noto-fonts
         noto-fonts-cjk
+        noto-fonts-emoji
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
-        # noto-fonts-emoji
 
-        # # Hack font
-        hackgen-nf-font
-
-        # # icon fonts
+        # icon fonts
         material-symbols
 
         # nerdfonts
         nerdfonts
+
+        # Others
+        maple-mono-NF
+        hackgen-nf-font # Hack font
       ]
       ++ cfg.extraFonts;
 

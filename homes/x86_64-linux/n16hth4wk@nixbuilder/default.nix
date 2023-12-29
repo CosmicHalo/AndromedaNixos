@@ -52,15 +52,6 @@ with lib.milkyway; {
         ${pkgs.toilet}/bin/toilet -f future "Milky Way" --metal
       '';
 
-      zexportsExtra = ''
-        # Fix an issue with tmux.
-        export KEYTIMEOUT=1
-
-        export LC_CTYPE=en_US.UTF-8
-        export LC_ALL=en_US.UTF-8
-        export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
-      '';
-
       zplug = {
         enable = true;
 
