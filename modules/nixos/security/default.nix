@@ -50,7 +50,7 @@ in {
           extraConfig = concatStrings [
             ''
               Defaults env_reset
-              Defaults pwfeedback, insults
+              # Defaults pwfeedback, insults
               Defaults timestamp_timeout=15
             ''
 

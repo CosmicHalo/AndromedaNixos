@@ -38,7 +38,7 @@ in {
       inherit (cfg) theme font;
 
       shellIntegration = {
-        enableZshIntegration = true;
+        enableZshIntegration = false;
         enableBashIntegration = true;
         enableFishIntegration = true;
       };

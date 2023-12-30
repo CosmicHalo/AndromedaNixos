@@ -64,8 +64,8 @@ with lib.milkyway; {
 
     hardware = {
       amd = enabled;
-      bluetooth = enabled;
       btrfs = enabled;
+      bluetooth = enabled;
 
       audio = {
         enable = true;
@@ -91,6 +91,10 @@ with lib.milkyway; {
       acme = enabled;
       gpg = enabled;
       keyring = enabled;
+
+      sudo = {
+        sudo-rs = enabled;
+      };
     };
 
     ### SERVICES    ###############################################
@@ -101,7 +105,7 @@ with lib.milkyway; {
       openssh = enabled;
       tailscale = enabled;
       btrfs-maintenance = enabled;
-      # vscode-server = enabled;g
+      # vscode-server = enabled;
     };
 
     ### SYSTEM    ###############################################

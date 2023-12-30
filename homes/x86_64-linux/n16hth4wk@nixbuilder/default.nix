@@ -55,8 +55,6 @@ with lib.milkyway; {
         command_not_found_handler() {
           ${pkgs.comma}/bin/comma "$@"
         }
-
-        ${pkgs.toilet}/bin/toilet -f future "Milky Way" --metal
       '';
 
       zplug = {

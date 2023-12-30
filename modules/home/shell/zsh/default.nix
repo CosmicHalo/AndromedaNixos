@@ -10,21 +10,13 @@ with lib.milkyway; let
   inherit (config.milkyway.shell) commonShellAliases;
 in {
   imports = [
-    ./init.nix
-    ./plugins.nix
+    ./env.zsh.nix
+    ./plugins.zsh.nix
+    ./zshrc.nix
   ];
 
   options.milkyway.shell.zsh = with types; {
-    enable = mkBoolOpt false "Whether to enable zsh shell environement.";
-    powerlevel10k = mkEnableOpt' "powerlevel10k";
-
-    envExtra =
-      mkOpt lines ""
-      "Extra environment variables that should be added to {file}`.zshenv`.";
-
-    profileExtra =
-      mkOpt lines ""
-      "Extra commands that should be added to {file}`.zprofile`.";
+    enable = mkEnableOption "ZShell";
 
     extraShellAliases =
       mkOpt (attrsOf (nullOr (either str path))) {}
@@ -32,54 +24,23 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Set ZSH Powerlevel10k theme
-    xdg.configFile."zsh/p10k" = {
-      source = ./p10k;
-      recursive = true;
-    };
-
-    programs = {
-      atuin = {
-        enable = true;
-
-        enableBashIntegration = true;
-        enableNushellIntegration = true;
-
-        settings = {
-          auto_sync = true;
-          sync_frequency = "1h";
-        };
-      };
-
-      skim.enable = false;
-    };
-
-    home.file = let
-      compileZshConfig = filename:
-        pkgs.runCommand filename
-        {
-          name = "${filename}-zwc";
-          nativeBuildInputs = [pkgs.zsh];
-        } ''
-          cp "${config.home.file.${filename}.source}" "${filename}"
-          zsh -c 'zcompile "${filename}"'
-          cp "${filename}.zwc" "$out"
-        '';
-    in {
-      # ".zimrc".source = ./env/zimrc.zsh;
-      ".zshrc.zwc".source = compileZshConfig ".zshrc";
-      ".zshenv.zwc".source = compileZshConfig ".zshenv";
-      ".zprofile.zwc".source = compileZshConfig ".zprofile";
-    };
-
     programs.zsh = {
       enable = true;
-      autocd = true;
-      defaultKeymap = "viins";
 
+      # zproof.enable = false;
+      defaultKeymap = "emacs";
       enableCompletion = true;
+      enableVteIntegration = true;
       enableAutosuggestions = true;
-      syntaxHighlighting.enable = true;
+
+      historySubstringSearch = {
+        enable = false;
+      };
+
+      # syntaxHighlighting = {
+      #   enable = false;
+      #   highlighters = ["main" "brackets" "cursor"];
+      # };
 
       history = {
         share = true;
@@ -87,26 +48,6 @@ in {
         ignoreSpace = true;
         expireDuplicatesFirst = true;
       };
-
-      profileExtra =
-        ''
-          # Source .profile
-          [[ -e ~/.profile ]] && emulate sh -c '. ~/.profile'
-        ''
-        + lib.optionalString pkgs.stdenv.isDarwin ''
-          # Source nix-daemon profile since macOS updates can remove it from /etc/zshrc
-          # https://github.com/NixOS/nix/issues/3616
-          if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-            source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-          fi
-
-          # Set the soft ulimit to something sensible
-          # https://developer.apple.com/forums/thread/735798
-          ulimit -Sn 524288
-        ''
-        + cfg.profileExtra;
-
-      envExtra = (builtins.readFile ./env/zshenv.zsh) + cfg.envExtra;
 
       shellAliases =
         mapAttrs (_n: v: lib.mkForce v) commonShellAliases
@@ -124,6 +65,36 @@ in {
           "tarnow" = "tar acf ";
           "untar" = "tar zxvf ";
         };
+    };
+
+    programs = {
+      # Atuin - shell history
+      atuin = {
+        enable = true;
+        settings = {
+          auto_sync = true;
+          sync_frequency = "1h";
+        };
+      };
+    };
+
+    # Compile ZSH config files
+    home.file = let
+      compileZshConfig = filename:
+        pkgs.runCommand filename
+        {
+          name = "${filename}-zwc";
+          nativeBuildInputs = [pkgs.zsh];
+        } ''
+          cp "${config.home.file.${filename}.source}" "${filename}"
+          zsh -c 'zcompile "${filename}"'
+          cp "${filename}.zwc" "$out"
+        '';
+    in {
+      ".p10k.zwc".source = compileZshConfig ".p10k.zsh";
+      ".zshrc.zwc".source = compileZshConfig ".zshrc";
+      ".zshenv.zwc".source = compileZshConfig ".zshenv";
+      ".zprofile.zwc".source = compileZshConfig ".zprofile";
     };
   };
 }

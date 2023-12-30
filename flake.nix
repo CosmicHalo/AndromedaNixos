@@ -102,9 +102,9 @@
   #* CORE
   #**********
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
-    unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
-    nixpkgs-stable.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     darwin = {
       url = "github:LnL7/nix-darwin";
@@ -112,16 +112,17 @@
     };
 
     home-manager = {
-      url = "https://flakehub.com/f/nix-community/home-manager/0.1.*.tar.gz";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Andromeda
     andromeda = {
       # url = "git+file:///home/n16hth4wk/dev/nixos/andromeda-lib";
-      url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
+      url = "github:CosmicHalo/andromeda-lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     andromeda-tmux = {
       url = "github:lecoqjacob/andromeda-tmux";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -134,13 +135,13 @@
   #**********
   inputs = {
     chaotic = {
-      url = "https://flakehub.com/f/chaotic-cx/nyx/0.1.*.tar.gz";
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
 
     # Hardware Configuration
-    nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/*.tar.gz";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Have a local index of nixpkgs for fast launching of apps
     nix-index-database = {
@@ -176,7 +177,7 @@
   #*********
   inputs = {
     fenix = {
-      url = "https://flakehub.com/f/nix-community/fenix/*.tar.gz";
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -277,9 +278,9 @@
       inputs.systems.follows = "systems";
     };
 
-    flake-utils.url = "https://flakehub.com/f/numtide/flake-utils/*.tar.gz";
+    flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
-      url = "https://flakehub.com/f/edolstra/flake-compat/*.tar.gz";
+      url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
       flake = false;
     };
 

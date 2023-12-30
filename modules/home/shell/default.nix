@@ -95,8 +95,16 @@ in {
         then "${pkgs.eza}/bin/eza"
         else "ls -F --color=auto";
 
+      ll =
+        if hasLSD
+        then "${pkgs.lsd}/bin/lsd -gFlh --sort=extension --color=auto"
+        else if hasEza
+        then "${pkgs.eza}/bin/eza -l"
+        else "ls -Flh --color=auto";
+
       "md" = "mkdir -p";
       "micro" = "micro -colorscheme geany -autosu true -mkparents true";
+      "nix" = "noglob nix";
       "psmem" = "ps auxf | sort -nr -k 4";
       "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
       "rs" = "sudo systemctl";
