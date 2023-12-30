@@ -39,7 +39,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Compile ZSH config files
     home.file.".p10k.zsh".source = ./config/p10k.zsh;
 
     programs.zsh = {

@@ -31,16 +31,13 @@ in {
       defaultKeymap = "emacs";
       enableCompletion = true;
       enableVteIntegration = true;
+
       enableAutosuggestions = true;
-
-      historySubstringSearch = {
+      historySubstringSearch.enable = false;
+      syntaxHighlighting = {
         enable = false;
+        highlighters = ["main" "brackets" "cursor"];
       };
-
-      # syntaxHighlighting = {
-      #   enable = false;
-      #   highlighters = ["main" "brackets" "cursor"];
-      # };
 
       history = {
         share = true;
